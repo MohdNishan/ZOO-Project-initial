@@ -1,0 +1,6 @@
+
+FROM python:3.9
+WORKDIR /app
+COPY . .
+RUN pip install requests
+CMD ["python", "testing/test_zoo_api.py"]
