@@ -441,9 +441,3 @@ RUN mkdir -p /opt/zooservices_namespaces && chmod -R 700 /opt/zooservices_namesp
 # remember to also change the ports in docker-compose.yml
 EXPOSE 80
 CMD /usr/sbin/apache2ctl -D FOREGROUND
-
-FROM python:3.9
-WORKDIR /app
-COPY . .
-RUN pip install requests
-CMD ["python", "testing/test_zoo_api.py"]
