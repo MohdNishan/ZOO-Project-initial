@@ -1,0 +1,26 @@
+* Host localhost:80 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying [::1]:80...
+* Connected to localhost (::1) port 80
+> GET /cgi-bin/zoo_loader.cgi?request=DescribeProcess&service=WPS&version=2.0.0&Identifier=Buffer&VERSION=2.0.0 HTTP/1.1
+> Host: localhost
+> User-Agent: curl/8.5.0
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Date: Wed, 12 Feb 2025 10:30:32 GMT
+< Server: Apache/2.4.29 (Ubuntu)
+< Vary: Accept-Encoding
+< Transfer-Encoding: chunked
+< Content-Type: text/xml; charset=utf-8
+< 
+{ [3003 bytes data]
+Warning: Failed to open the file tmp/outputDP.xml: No such file or directory
+* Failure writing output to destination
+* Failed reading the chunked-encoded stream
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+* Closing connection
+curl: (23) Failure writing output to destination

@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY testing/ /app/testing/
 
-RUN pip install requests
+RUN pip install requests &&\
+apt-get update &&\
+apt-get install -y libxml2-utils 
 
 CMD ["python", "/app/testing/test_zoo.py"]

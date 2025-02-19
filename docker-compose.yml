@@ -120,6 +120,19 @@ services:
         ipv4_address: 172.16.238.16
     volumes:
       - ./docker/definitions.json:/etc/rabbitmq/definitions.json
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    container_name: zoo-tests
+    networks:
+      front-tier:
+        ipv4_address: 172.16.238.17
+
+    depends_on:
+      - zookernel
+    volumes:
+      - .:/app
 
 networks:
   front-tier:
@@ -127,3 +140,4 @@ networks:
       driver: default
       config:
         - subnet: "172.16.238.0/24"
+
