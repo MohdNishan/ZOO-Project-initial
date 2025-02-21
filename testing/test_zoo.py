@@ -7,6 +7,7 @@ logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
 URL = "http://zookernel/cgi-bin/zoo_loader.cgi"
 SERVICE_NAME = "Buffer"
 
+
 # ✅ SUCCESSFUL TESTS
 def test_get_capabilities_success():
     """Test successful GetCapabilities request."""
