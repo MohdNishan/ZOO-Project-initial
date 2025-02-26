@@ -34,6 +34,14 @@ def modify_xml(file_path, replacements):
 
 
 # ✅ SUCCESSFUL TESTS
+def test_new_functionality():
+    """Test new API functionality."""
+    response = requests.get("http://zookernel/cgi-bin/zoo_loader.cgi?request=NewRequest&service=WPS")
+    assert response.status_code == 200, "NewRequest failed"
+    assert "expected_response_content" in response.text, "Invalid response content"
+    logger.success("✅ Test Passed: NewRequest successful")
+
+
 def test_get_capabilities_success():
     """Test successful GetCapabilities request."""
     response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
@@ -135,6 +143,7 @@ if __name__ == "__main__":
     test_get_capabilities_success()
     test_describe_process_success()
     test_execute_process_success()
+    test_new_functionality
 
     # ❌ Erroneous tests
     test_get_capabilities_missing_service()
