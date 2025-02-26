@@ -128,11 +128,11 @@ services:
     networks:
       front-tier:
         ipv4_address: 172.16.238.17
-
     depends_on:
       - zookernel
     volumes:
       - .:/app
+    command: [ "tail", "-f", "/dev/null" ]
 
 networks:
   front-tier:

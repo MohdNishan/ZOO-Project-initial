@@ -2,7 +2,7 @@ import requests
 import xml.etree.ElementTree as ET
 from loguru import logger
 
-logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
+# logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
 
 URL = "http://zookernel/cgi-bin/zoo_loader.cgi"
 SERVICE_NAME = "Buffer"
@@ -11,6 +11,33 @@ SERVICE_NAME = "Buffer"
 def load_xml(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
         return file.read()
+
+
+def modify_xml(file_path, replacements):
+    """
+    Load an XML file, modify specified values, and return the modified XML as a string.
+    
+    :param file_path: Path to the XML file.
+    :param replacements: Dictionary with {XPath: new_value}.
+    :return: Modified XML as a string.
+    """
+    tree = ET.parse(file_path)
+    root = tree.getroot()
+
+    namespaces = {
+        "wps": "http://www.opengis.net/wps/1.0.0",
+        "ows": "http://www.opengis.net/ows/1.1"
+    }
+
+    for xpath, new_value in replacements.items():
+        element = root.find(xpath, namespaces=namespaces)
+        if element is not None:
+            element.text = new_value
+        else:
+            print(f"⚠️ Warning: Element '{xpath}' not found in {file_path}")
+
+    return ET.tostring(root, encoding="utf-8").decode("utf-8")
+
 
 # ✅ SUCCESSFUL TESTS
 def test_get_capabilities_success():
@@ -31,8 +58,6 @@ def test_describe_process_success():
 
 def test_execute_process_success():
     """Test successful Execute request with valid inputs."""
- 
-    
     try:
         execute_request = load_xml("testing/requests/execute_valid.xml")
         headers = {"Content-Type": "text/xml"}
@@ -84,26 +109,21 @@ def test_execute_process_missing_inputs():
 
 
 def test_execute_process_invalid_input_format():
-    """Test ExecuteProcess request with invalid input format."""
-    
-    execute_request = load_xml("testing/requests/execute_invalid_format.xml")
-
+    """Test ExecuteProcess request with an invalid input format."""
+    replacements = {
+        ".//ows:Identifier": "Buffer", 
+        ".//wps:LiteralData": "INVALID DATA FORMAT" 
+    }
+    modified_xml = modify_xml("testing/requests/execute_invalid_format.xml", replacements)
+    print(" Modified XML before sending:\n", modified_xml)
     headers = {"Content-Type": "text/xml"}
-
-    response = requests.post(URL, data=execute_request, headers=headers)
-
-
+    response = requests.post(URL, data=modified_xml, headers=headers)
     assert response.status_code in [400, 500], f"Expected 400 or 500 but got {response.status_code}"
-
     root = ET.fromstring(response.text)
     namespace = {"ows": "http://www.opengis.net/ows/1.1"}
     error_message_element = root.find(".//ows:ExceptionText", namespaces=namespace)
-
     assert error_message_element is not None, "Expected an error message but none found"
-
     error_message = error_message_element.text
-
-
     expected_error_keywords = [
         "Invalid input format",
         "parsing error",
@@ -111,10 +131,8 @@ def test_execute_process_invalid_input_format():
         "unrecognized value",
         "Unable to open datasource"
     ]
-
     assert any(keyword in error_message for keyword in expected_error_keywords), \
         f"Expected an error message related to invalid input but got: {error_message}"
-
     logger.success("❌ Test Passed: ExecuteProcess invalid input format detected")
 
 
