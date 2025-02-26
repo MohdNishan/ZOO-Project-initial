@@ -143,7 +143,6 @@ if __name__ == "__main__":
     test_get_capabilities_success()
     test_describe_process_success()
     test_execute_process_success()
-    test_new_functionality
 
     # ❌ Erroneous tests
     test_get_capabilities_missing_service()
