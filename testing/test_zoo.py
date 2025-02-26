@@ -14,13 +14,7 @@ def load_xml(file_path):
 
 
 def modify_xml(file_path, replacements):
-    """
-    Load an XML file, modify specified values, and return the modified XML as a string.
     
-    :param file_path: Path to the XML file.
-    :param replacements: Dictionary with {XPath: new_value}.
-    :return: Modified XML as a string.
-    """
     tree = ET.parse(file_path)
     root = tree.getroot()
 
