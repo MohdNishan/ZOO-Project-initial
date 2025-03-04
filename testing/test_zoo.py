@@ -2,8 +2,9 @@ import requests
 import xml.etree.ElementTree as ET
 from loguru import logger
 import unittest
+import threading
 
-# logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
+logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
 
 URL = "http://zookernel/cgi-bin/zoo_loader.cgi"
 SERVICE_NAME = "Buffer"
@@ -36,12 +37,43 @@ def modify_xml(file_path, replacements):
 class TestZOOProjectAPI(unittest.TestCase):
 
     # ✅ SUCCESSFUL TESTS
+    
     def test_get_capabilities_success(self):
         """Test successful GetCapabilities request."""
         response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
         self.assertEqual(response.status_code, 200, "GetCapabilities request failed")
         self.assertIn("wps:Capabilities", response.text, "Invalid GetCapabilities response")
         logger.success("✅ Test Passed: GetCapabilities request successful")
+
+    def test_get_capabilities_multiple_services(self):
+        """Test GetCapabilities with multiple service names."""
+        logger.info("Sending GetCapabilities request with multiple services...")
+
+        response = requests.get(f"{URL}?request=GetCapabilities&service=WPS,WFS")
+        logger.info(f"Response Status Code: {response.status_code}")
+        logger.debug(f"Response Text: {response.text[:500]}") 
+
+        self.assertEqual(response.status_code, 400, "Expected failure for multiple services request")
+        self.assertIn("InvalidParameterValue", response.text, "Expected error message missing")
+
+        logger.success("✅ Test Passed: GetCapabilities request with multiple services correctly failed")
+
+    def test_concurrent_requests(self):
+        """Test concurrent execution of GetCapabilities."""
+        def send_request():
+            response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
+            self.assertEqual(response.status_code, 200)
+
+        threads = []
+        for _ in range(5):  # Simulating 5 concurrent requests
+            t = threading.Thread(target=send_request)
+            threads.append(t)
+            t.start()
+
+        for t in threads:
+            t.join()
+
+        logger.success("✅ Test Passed: Concurrent requests handled correctly") 
 
     def test_describe_process_success(self):
         """Test successful DescribeProcess request."""
@@ -131,18 +163,7 @@ class TestZOOProjectAPI(unittest.TestCase):
 
 
 
-
-
-
 if __name__ == "__main__":
-    # ✅ Successful tests
-    unittest.main(verbosity=2)
-    test_get_capabilities_success()
-    test_describe_process_success()
-    test_execute_process_success()
 
-    # ❌ Erroneous tests
-    test_get_capabilities_missing_service()
-    test_describe_process_invalid_identifier()
-    test_execute_process_missing_inputs()
-    test_execute_process_invalid_input_format()
+    unittest.main(verbosity=2)
+    
