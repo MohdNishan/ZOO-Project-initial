@@ -65,7 +65,7 @@ class TestZOOProjectAPI(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
 
         threads = []
-        for _ in range(5):  # Simulating 5 concurrent requests
+        for _ in range(5):
             t = threading.Thread(target=send_request)
             threads.append(t)
             t.start()
@@ -98,6 +98,7 @@ class TestZOOProjectAPI(unittest.TestCase):
             self.fail(f"Unexpected error: {e}")
 
     # ❌ ERROR TESTS
+    
     def test_get_capabilities_missing_service(self):
         """Test GetCapabilities request with missing service parameter."""
         response = requests.get(f"{URL}?request=GetCapabilities")
@@ -157,7 +158,7 @@ class TestZOOProjectAPI(unittest.TestCase):
             "Unable to open datasource"
         ]
         self.assertTrue(any(keyword in error_message for keyword in expected_error_keywords),
-                        f"Expected an error message related to invalid input but got: {error_message}")
+            f"Expected an error message related to invalid input but got: {error_message}")
 
         logger.success("❌ Test Passed: ExecuteProcess invalid input format detected")
 
