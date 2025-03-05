@@ -140,7 +140,7 @@ class TestZOOProjectAPI(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
 
         threads = []
-        for _ in range(50):  # Increase the number for stress testing
+        for _ in range(50):
             t = threading.Thread(target=send_request)
             threads.append(t)
             t.start()
@@ -150,6 +150,14 @@ class TestZOOProjectAPI(unittest.TestCase):
 
         logger.success("✅ Test Passed: High concurrency handled correctly") 
 
+
+    def test_kvp_invalid_request(self):
+        """Test KVP request with invalid parameters."""
+        response = requests.get(f"{URL}?request=DescribeProcess&service=WPS&wrongparam=value")
+        self.assertEqual(response.status_code, 400, "Expected 400 Bad Request for invalid KVP request")
+        self.assertIn("ows:ExceptionReport", response.text, "Expected error response missing")
+        logger.success("❌ Test Passed: KVP invalid request detected")
+    
 
     # ❌ ERROR TESTS
 
