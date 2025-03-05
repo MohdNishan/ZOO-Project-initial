@@ -97,8 +97,57 @@ class TestZOOProjectAPI(unittest.TestCase):
             logger.error(f"❌ Test Failed: {e}")
             self.fail(f"Unexpected error: {e}")
 
+    def test_malformed_xml_request(self):
+        """Test ExecuteProcess request with a malformed XML format."""
+        malformed_xml = "<wps:Execute xmlns:wps='http://www.opengis.net/wps/1.0.0'><wps:InvalidTag></wps:Execute>"
+        headers = {"Content-Type": "text/xml"}
+        response = requests.post(URL, data=malformed_xml, headers=headers)
+        
+        self.assertEqual(response.status_code, 400, "Expected 400 Bad Request for malformed XML")
+        self.assertIn("ows:ExceptionReport", response.text, "Malformed XML should return an error")
+        logger.success("❌ Test Passed: Malformed XML detected")        
+
+    def test_missing_parameter_in_kvp(self):
+        """Test KVP request with a missing required parameter."""
+        response = requests.get(f"{URL}?request=DescribeProcess&version=1.0.0") 
+        self.assertEqual(response.status_code, 400, "Expected 400 Bad Request for missing parameters")
+        logger.success("❌ Test Passed: Missing parameter detected")
+
+    def test_execute_process_async(self):
+        """Test asynchronous ExecuteProcess request."""
+        try:
+            execute_request = load_xml("testing/requests/execute_valid_async.xml")
+            headers = {"Content-Type": "text/xml"}
+            response = requests.post(URL, data=execute_request, headers=headers)
+
+            self.assertEqual(response.status_code, 200, "ExecuteProcess async request failed")
+            self.assertIn("<wps:Status", response.text, "Expected asynchronous status response")
+            
+            logger.success("✅ Test Passed: ExecuteProcess async request successful")
+        except Exception as e:
+            logger.error(f"❌ Test Failed: {e}")
+            self.fail(f"Unexpected error: {e}")
+
+    def test_high_concurrency(self):
+        """Test high concurrent execution of GetCapabilities."""
+        def send_request():
+            response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
+            self.assertEqual(response.status_code, 200)
+
+        threads = []
+        for _ in range(50):  # Increase the number for stress testing
+            t = threading.Thread(target=send_request)
+            threads.append(t)
+            t.start()
+
+        for t in threads:
+            t.join()
+
+        logger.success("✅ Test Passed: High concurrency handled correctly") 
+
+
     # ❌ ERROR TESTS
-    
+
     def test_get_capabilities_missing_service(self):
         """Test GetCapabilities request with missing service parameter."""
         response = requests.get(f"{URL}?request=GetCapabilities")
@@ -167,4 +216,3 @@ class TestZOOProjectAPI(unittest.TestCase):
 if __name__ == "__main__":
 
     unittest.main(verbosity=2)
-    
