@@ -1,4 +1,4 @@
-version: '3'
+
 services:
   zookernel:
     platform: linux/amd64
