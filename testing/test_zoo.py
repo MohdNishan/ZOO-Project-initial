@@ -45,18 +45,17 @@ class TestZOOProjectAPI(unittest.TestCase):
         self.assertIn("wps:Capabilities", response.text, "Invalid GetCapabilities response")
         logger.success("✅ Test Passed: GetCapabilities request successful")
 
+
     def test_get_capabilities_multiple_services(self):
         """Test GetCapabilities with multiple service names."""
         logger.info("Sending GetCapabilities request with multiple services...")
-
         response = requests.get(f"{URL}?request=GetCapabilities&service=WPS,WFS")
         logger.info(f"Response Status Code: {response.status_code}")
         logger.debug(f"Response Text: {response.text[:500]}") 
-
         self.assertEqual(response.status_code, 400, "Expected failure for multiple services request")
         self.assertIn("InvalidParameterValue", response.text, "Expected error message missing")
-
         logger.success("✅ Test Passed: GetCapabilities request with multiple services correctly failed")
+
 
     def test_concurrent_requests(self):
         """Test concurrent execution of GetCapabilities."""
@@ -75,12 +74,14 @@ class TestZOOProjectAPI(unittest.TestCase):
 
         logger.success("✅ Test Passed: Concurrent requests handled correctly") 
 
+
     def test_describe_process_success(self):
         """Test successful DescribeProcess request."""
         response = requests.get(f"{URL}?request=DescribeProcess&service=WPS&version=1.0.0&Identifier={SERVICE_NAME}")
         self.assertEqual(response.status_code, 200, "DescribeProcess request failed")
         self.assertIn("wps:ProcessDescriptions", response.text, "Invalid DescribeProcess response")
         logger.success("✅ Test Passed: DescribeProcess request successful")
+
 
     def test_execute_process_success(self):
         """Test successful Execute request with valid inputs."""
@@ -97,6 +98,7 @@ class TestZOOProjectAPI(unittest.TestCase):
             logger.error(f"❌ Test Failed: {e}")
             self.fail(f"Unexpected error: {e}")
 
+
     def test_malformed_xml_request(self):
         """Test ExecuteProcess request with a malformed XML format."""
         malformed_xml = "<wps:Execute xmlns:wps='http://www.opengis.net/wps/1.0.0'><wps:InvalidTag></wps:Execute>"
@@ -107,11 +109,13 @@ class TestZOOProjectAPI(unittest.TestCase):
         self.assertIn("ows:ExceptionReport", response.text, "Malformed XML should return an error")
         logger.success("❌ Test Passed: Malformed XML detected")        
 
+
     def test_missing_parameter_in_kvp(self):
         """Test KVP request with a missing required parameter."""
         response = requests.get(f"{URL}?request=DescribeProcess&version=1.0.0") 
         self.assertEqual(response.status_code, 400, "Expected 400 Bad Request for missing parameters")
         logger.success("❌ Test Passed: Missing parameter detected")
+
 
     def test_execute_process_async(self):
         """Test asynchronous ExecuteProcess request."""
@@ -127,6 +131,7 @@ class TestZOOProjectAPI(unittest.TestCase):
         except Exception as e:
             logger.error(f"❌ Test Failed: {e}")
             self.fail(f"Unexpected error: {e}")
+
 
     def test_high_concurrency(self):
         """Test high concurrent execution of GetCapabilities."""
@@ -154,12 +159,14 @@ class TestZOOProjectAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 400, "Expected 400 Bad Request for missing service parameter")
         logger.success("❌ Test Passed: GetCapabilities missing service detected")
 
+
     def test_describe_process_invalid_identifier(self):
         """Test DescribeProcess request with an invalid process identifier."""
         response = requests.get(f"{URL}?request=DescribeProcess&service=WPS&version=1.0.0&Identifier=InvalidProcess")
         self.assertEqual(response.status_code, 400, "Expected 400 Bad Request for invalid process identifier")
         self.assertIn("InvalidProcess", response.text, "Expected error message for invalid process identifier")
         logger.success("❌ Test Passed: DescribeProcess invalid identifier detected")
+
 
     def test_execute_process_missing_inputs(self):
         """Test ExecuteProcess request with missing required inputs."""
@@ -179,6 +186,7 @@ class TestZOOProjectAPI(unittest.TestCase):
         self.assertIn(expected_message, error_message, f"Expected error message '{expected_message}' but got '{error_message}'")
 
         logger.success("❌ Test Passed: ExecuteProcess missing inputs detected")
+
 
     def test_execute_process_invalid_input_format(self):
         """Test ExecuteProcess request with an invalid input format."""
