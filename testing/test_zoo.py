@@ -3,6 +3,8 @@ import xml.etree.ElementTree as ET
 from loguru import logger
 import unittest
 import threading
+from lxml import etree
+
 
 logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
 
@@ -158,6 +160,77 @@ class TestZOOProjectAPI(unittest.TestCase):
         self.assertIn("ows:ExceptionReport", response.text, "Expected error response missing")
         logger.success("❌ Test Passed: KVP invalid request detected")
     
+
+    def test_kvp_high_load(self):
+        """Test KVP requests under high load."""
+        def send_request():
+            response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
+            self.assertEqual(response.status_code, 200)
+    
+        threads = []
+        for _ in range(50):
+            t = threading.Thread(target=send_request)
+            threads.append(t)
+            t.start()
+
+        for t in threads:
+            t.join()
+
+        logger.success("✅ Test Passed: High load KVP requests handled correctly")
+
+
+    def test_post_async_high_load(self):
+        """Test asynchronous POST ExecuteProcess requests under high load."""
+        execute_request = load_xml("testing/requests/execute_valid_async.xml")
+        headers = {"Content-Type": "text/xml"}
+
+        def send_request():
+            response = requests.post(URL, data=execute_request, headers=headers)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn("<wps:Status", response.text, "Expected async status response")
+
+        threads = []
+        for _ in range(50):
+            t = threading.Thread(target=send_request)
+            threads.append(t)
+            t.start()
+
+        for t in threads:
+            t.join()
+
+        logger.success("✅ Test Passed: POST async requests under load handled correctly")
+
+
+    # def test_execute_with_dynamic_input(self):
+    #     """Test ExecuteProcess with dynamic input handling."""
+    #     with open("testing/tmp/inputName.txt", "r") as file:
+    #         input_name = file.read().strip()
+
+    #     replacements = {".//wps:LiteralData": input_name}
+    #     modified_xml = modify_xml("testing/requests/execute_dynamic_input.xml", replacements)
+
+    #     headers = {"Content-Type": "text/xml"}
+    #     response = requests.post(URL, data=modified_xml, headers=headers)
+
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertIn('"type": "FeatureCollection"', response.text, "Invalid ExecuteProcess response")
+
+    #     logger.success("✅ Test Passed: Dynamic input handling successful")
+
+
+    def validate_xml_schema(xml_content, schema_url):
+        """Validate XML content against a given schema."""
+        schema = etree.XMLSchema(etree.parse(schema_url))
+        parser = etree.XMLParser(schema=schema)
+        
+        try:
+            etree.fromstring(xml_content.encode("utf-8"), parser)
+            logger.success(f"✅ XML validated successfully against schema: {schema_url}")
+        except etree.XMLSyntaxError as e:
+            logger.error(f"❌ XML Validation Failed: {e}")
+            self.fail(f"XML validation error: {e}")
+
+
 
     # ❌ ERROR TESTS
 
