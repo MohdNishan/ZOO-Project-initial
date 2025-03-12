@@ -4,7 +4,7 @@ from loguru import logger
 import unittest
 import threading
 from lxml import etree
-
+import os
 
 logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
 
@@ -202,17 +202,26 @@ class TestZOOProjectAPI(unittest.TestCase):
 
 
     # def test_execute_with_dynamic_input(self):
-    #     """Test ExecuteProcess with dynamic input handling."""
-    #     with open("testing/tmp/inputName.txt", "r") as file:
+    #     """Test ExecuteProcess with dynamic input handling."""  
+    #     assert os.path.exists("tmp/inputName.txt"), "Error: inputName.txt not found!"
+
+    #     with open("tmp/inputName.txt", "r") as file:
     #         input_name = file.read().strip()
+
+    #     assert input_name, "Error: inputName.txt is empty!"
 
     #     replacements = {".//wps:LiteralData": input_name}
     #     modified_xml = modify_xml("testing/requests/execute_dynamic_input.xml", replacements)
 
-    #     headers = {"Content-Type": "text/xml"}
+    #     logger.debug(f"Final Modified XML:\n{modified_xml}")
+
+    #     headers = {"Content-Type": "application/xml"}
     #     response = requests.post(URL, data=modified_xml, headers=headers)
 
-    #     self.assertEqual(response.status_code, 200)
+    #     logger.error(f"Response Status Code: {response.status_code}")
+    #     logger.error(f"Response Text: {response.text}")
+
+    #     self.assertEqual(response.status_code, 200, "Error: Expected HTTP 200 but got {response.status_code}")
     #     self.assertIn('"type": "FeatureCollection"', response.text, "Invalid ExecuteProcess response")
 
     #     logger.success("✅ Test Passed: Dynamic input handling successful")
@@ -230,6 +239,13 @@ class TestZOOProjectAPI(unittest.TestCase):
             logger.error(f"❌ XML Validation Failed: {e}")
             self.fail(f"XML validation error: {e}")
 
+    def test_get_process_list(self):  # Add 'self' here
+        """Fetch available processes from GetCapabilities."""
+        response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
+        self.assertEqual(response.status_code, 200, "GetCapabilities request failed")
+        self.assertIn("wps:Capabilities", response.text, "Invalid GetCapabilities response")
+        # print(response.text)
+        logger.success("✅ Test Passed: GetCapabilities request successful")
 
 
     # ❌ ERROR TESTS
