@@ -201,6 +201,19 @@ class TestZOOProjectAPI(unittest.TestCase):
         logger.success("✅ Test Passed: POST async requests under load handled correctly")
 
 
+    def validate_xml_schema(xml_content, schema_url):
+        """Validate XML content against a given schema."""
+        schema = etree.XMLSchema(etree.parse(schema_url))
+        parser = etree.XMLParser(schema=schema)
+        
+        try:
+            etree.fromstring(xml_content.encode("utf-8"), parser)
+            logger.success(f"✅ XML validated successfully against schema: {schema_url}")
+        except etree.XMLSyntaxError as e:
+            logger.error(f"❌ XML Validation Failed: {e}")
+            self.fail(f"XML validation error: {e}")
+
+
     # def test_execute_with_dynamic_input(self):
     #     """Test ExecuteProcess with dynamic input handling."""  
     #     with open("tmp/inputName.txt", "r") as file:
@@ -219,20 +232,7 @@ class TestZOOProjectAPI(unittest.TestCase):
     #     logger.success("✅ Test Passed: Dynamic input handling successful")
 
 
-    def validate_xml_schema(xml_content, schema_url):
-        """Validate XML content against a given schema."""
-        schema = etree.XMLSchema(etree.parse(schema_url))
-        parser = etree.XMLParser(schema=schema)
-        
-        try:
-            etree.fromstring(xml_content.encode("utf-8"), parser)
-            logger.success(f"✅ XML validated successfully against schema: {schema_url}")
-        except etree.XMLSyntaxError as e:
-            logger.error(f"❌ XML Validation Failed: {e}")
-            self.fail(f"XML validation error: {e}")
-
-
-    def test_get_process_list(self):  # Add 'self' here
+    def test_get_process_list(self):
         """Fetch available processes from GetCapabilities."""
         response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
         self.assertEqual(response.status_code, 200, "GetCapabilities request failed")
