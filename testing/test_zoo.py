@@ -203,25 +203,17 @@ class TestZOOProjectAPI(unittest.TestCase):
 
     # def test_execute_with_dynamic_input(self):
     #     """Test ExecuteProcess with dynamic input handling."""  
-    #     assert os.path.exists("tmp/inputName.txt"), "Error: inputName.txt not found!"
-
     #     with open("tmp/inputName.txt", "r") as file:
     #         input_name = file.read().strip()
 
-    #     assert input_name, "Error: inputName.txt is empty!"
-
     #     replacements = {".//wps:LiteralData": input_name}
     #     modified_xml = modify_xml("testing/requests/execute_dynamic_input.xml", replacements)
+    #     logger.debug(f"Modified XML Request: {modified_xml}")
 
-    #     logger.debug(f"Final Modified XML:\n{modified_xml}")
-
-    #     headers = {"Content-Type": "application/xml"}
+    #     assert os.path.exists("tmp/inputName.txt"), "Error: inputName.txt not found!"
+    #     headers = {"Content-Type": "text/xml"}
     #     response = requests.post(URL, data=modified_xml, headers=headers)
-
-    #     logger.error(f"Response Status Code: {response.status_code}")
-    #     logger.error(f"Response Text: {response.text}")
-
-    #     self.assertEqual(response.status_code, 200, "Error: Expected HTTP 200 but got {response.status_code}")
+    #     self.assertEqual(response.status_code, 200)
     #     self.assertIn('"type": "FeatureCollection"', response.text, "Invalid ExecuteProcess response")
 
     #     logger.success("✅ Test Passed: Dynamic input handling successful")
@@ -238,6 +230,7 @@ class TestZOOProjectAPI(unittest.TestCase):
         except etree.XMLSyntaxError as e:
             logger.error(f"❌ XML Validation Failed: {e}")
             self.fail(f"XML validation error: {e}")
+
 
     def test_get_process_list(self):  # Add 'self' here
         """Fetch available processes from GetCapabilities."""
