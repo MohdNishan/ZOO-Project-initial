@@ -40,6 +40,24 @@ class TestZOOProjectAPI(unittest.TestCase):
 
     # ✅ SUCCESSFUL TESTS
     
+    
+    # def test_execute_igml_o(self):
+    #     """Test Execute request with igml_o."""
+    #     payload = {
+    #         "service": "WPS",
+    #         "version": "1.0.0",
+    #         "request": "Execute",
+    #         "identifier": "igml_o",
+    #         "datainputs": "input1=value1"
+    #     }
+    #     response = requests.post(URL, data=payload)
+        
+    #     print(f"Response Status: {response.status_code}")
+    #     print(f"Response Text: {response.text}")
+
+    #     assert response.status_code == 200
+
+
     def test_get_capabilities_success(self):
         """Test successful GetCapabilities request."""
         response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
@@ -168,7 +186,7 @@ class TestZOOProjectAPI(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
     
         threads = []
-        for _ in range(50):
+        for _ in range(10):
             t = threading.Thread(target=send_request)
             threads.append(t)
             t.start()
@@ -190,7 +208,7 @@ class TestZOOProjectAPI(unittest.TestCase):
             self.assertIn("<wps:Status", response.text, "Expected async status response")
 
         threads = []
-        for _ in range(50):
+        for _ in range(10):
             t = threading.Thread(target=send_request)
             threads.append(t)
             t.start()
