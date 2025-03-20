@@ -38,26 +38,18 @@ def modify_xml(file_path, replacements):
 
 class TestZOOProjectAPI(unittest.TestCase):
 
+
+    def send_execute_request(self, file_path):
+        """Helper function to send an Execute request"""
+        execute_request = load_xml(file_path)
+        headers = {"Content-Type": "text/xml"}
+        response = requests.post(URL, data=execute_request, headers=headers)
+        return response
+
     # ✅ SUCCESSFUL TESTS
     
     
-    # def test_execute_igml_o(self):
-    #     """Test Execute request with igml_o."""
-    #     payload = {
-    #         "service": "WPS",
-    #         "version": "1.0.0",
-    #         "request": "Execute",
-    #         "identifier": "igml_o",
-    #         "datainputs": "input1=value1"
-    #     }
-    #     response = requests.post(URL, data=payload)
-        
-    #     print(f"Response Status: {response.status_code}")
-    #     print(f"Response Text: {response.text}")
-
-    #     assert response.status_code == 200
-
-
+    
     def test_get_capabilities_success(self):
         """Test successful GetCapabilities request."""
         response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
@@ -68,10 +60,7 @@ class TestZOOProjectAPI(unittest.TestCase):
 
     def test_get_capabilities_multiple_services(self):
         """Test GetCapabilities with multiple service names."""
-        logger.info("Sending GetCapabilities request with multiple services...")
         response = requests.get(f"{URL}?request=GetCapabilities&service=WPS,WFS")
-        logger.info(f"Response Status Code: {response.status_code}")
-        logger.debug(f"Response Text: {response.text[:500]}") 
         self.assertEqual(response.status_code, 400, "Expected failure for multiple services request")
         self.assertIn("InvalidParameterValue", response.text, "Expected error message missing")
         logger.success("✅ Test Passed: GetCapabilities request with multiple services correctly failed")
@@ -232,24 +221,6 @@ class TestZOOProjectAPI(unittest.TestCase):
             self.fail(f"XML validation error: {e}")
 
 
-    # def test_execute_with_dynamic_input(self):
-    #     """Test ExecuteProcess with dynamic input handling."""  
-    #     with open("tmp/inputName.txt", "r") as file:
-    #         input_name = file.read().strip()
-
-    #     replacements = {".//wps:LiteralData": input_name}
-    #     modified_xml = modify_xml("testing/requests/execute_dynamic_input.xml", replacements)
-    #     logger.debug(f"Modified XML Request: {modified_xml}")
-
-    #     assert os.path.exists("tmp/inputName.txt"), "Error: inputName.txt not found!"
-    #     headers = {"Content-Type": "text/xml"}
-    #     response = requests.post(URL, data=modified_xml, headers=headers)
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertIn('"type": "FeatureCollection"', response.text, "Invalid ExecuteProcess response")
-
-    #     logger.success("✅ Test Passed: Dynamic input handling successful")
-
-
     def test_get_process_list(self):
         """Fetch available processes from GetCapabilities."""
         response = requests.get(f"{URL}?request=GetCapabilities&service=WPS")
@@ -257,6 +228,44 @@ class TestZOOProjectAPI(unittest.TestCase):
         self.assertIn("wps:Capabilities", response.text, "Invalid GetCapabilities response")
         # print(response.text)
         logger.success("✅ Test Passed: GetCapabilities request successful")
+
+
+
+    def test_execute_process_ir_or(self):
+        """Test successful Execute request for ir_or."""
+        response = self.send_execute_request("testing/requests/execute_ir_or.xml")
+        self.assertEqual(response.status_code, 200, "ExecuteProcess ir_or request failed")
+        logger.success("✅ Test Passed: ExecuteProcess ir_or request successful")
+    
+    def test_execute_process_irb_o(self):
+        """Test successful Execute request for irb_o."""
+        response = self.send_execute_request("testing/requests/execute_irb_o.xml")
+        self.assertEqual(response.status_code, 200, "ExecuteProcess irb_o request failed")
+        logger.success("✅ Test Passed: ExecuteProcess irb_o request successful")
+
+    def test_execute_process_irb_or(self):
+        """Test successful Execute request for irb_or."""
+        response = self.send_execute_request("testing/requests/execute_irb_or.xml")
+        self.assertEqual(response.status_code, 200, "ExecuteProcess irb_or request failed")
+        logger.success("✅ Test Passed: ExecuteProcess irb_or request successful")
+
+    def test_execute_process_ir_or_async(self):
+        """Test successful asynchronous Execute request for ir_or_async."""
+        response = self.send_execute_request("testing/requests/execute_ir_or_async.xml")
+        self.assertEqual(response.status_code, 200, "ExecuteProcess ir_or_async request failed")
+        logger.success("✅ Test Passed: ExecuteProcess ir_or_async request successful")
+
+    def test_execute_process_irb_o_async(self):
+        """Test successful asynchronous Execute request for irb_o_async."""
+        response = self.send_execute_request("testing/requests/execute_irb_o_async.xml")
+        self.assertEqual(response.status_code, 200, "ExecuteProcess irb_o_async request failed")
+        logger.success("✅ Test Passed: ExecuteProcess irb_o_async request successful")
+
+    def test_execute_process_irb_or_async(self):
+        """Test successful asynchronous Execute request for irb_or_async."""
+        response = self.send_execute_request("testing/requests/execute_irb_or_async.xml")
+        self.assertEqual(response.status_code, 200, "ExecuteProcess irb_or_async request failed")
+        logger.success("✅ Test Passed: ExecuteProcess irb_or_async request successful")
 
 
     # ❌ ERROR TESTS
@@ -330,4 +339,28 @@ class TestZOOProjectAPI(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main(verbosity=2)
+    runner = unittest.TextTestRunner()
+    result = runner.run(unittest.defaultTestLoader.loadTestsFromTestCase(TestZOOProjectAPI))
+
+    total_tests = result.testsRun
+    failed_tests = len(result.failures) + len(result.errors)
+    successful_tests = total_tests - failed_tests
+
+    GREEN = "\033[92m"
+    RED = "\033[91m"
+    RESET = "\033[0m"
+
+    print("\n======================== TEST REPORT ========================")
+    print(f"✅ Successful Tests: {successful_tests}{RESET}")
+    print(f"❌ Failed Tests: {failed_tests}{RESET}")
+    print(f"📊 Total Tests Ran: {total_tests}")
+    print("=============================================================\n")
+
+    # Print details of failed tests
+    if failed_tests > 0:
+        print(f"{RED}❗ Some tests failed. Check logs above for details.{RESET}")
+        print("\nFailed Tests:")
+        for failed_test, traceback in result.failures + result.errors:
+            print(f"🔴 {failed_test.id()}")
+    else:
+        print(f"{GREEN}🎉 All tests passed successfully!{RESET}")
