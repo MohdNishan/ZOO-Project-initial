@@ -1,70 +1,51 @@
-# ZOO-Project
-[![Docker Image CI](https://github.com/ZOO-Project/ZOO-Project/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ZOO-Project/ZOO-Project/actions/workflows/docker-image.yml)
-[![DOI](https://zenodo.org/badge/353351321.svg)](https://zenodo.org/badge/latestdoi/353351321)
 
+## Documentation of Adding a New Test
 
-[ZOO-Project](http://www.zoo-project.org) ♥️ [Open Geospatial Consortium (OGC)](https://www.ogc.org/) Standards
+### 1. Identify the API request type (GET or POST)
+Determine whether the new test requires a GET or POST request based on the API's expected input and response structure. Ensure that the correct request method is used to communicate with the API.
 
-## Summary
+### 2. Create a new file in `requests/` for storing XML requests
+For tests requiring XML payloads, store the request data in a separate file within the `requests/` directory. This approach keeps the test data organized, reusable, and easy to modify.
 
-The **ZOO-Project** is an open source processing platform, released under MIT/X11 Licence.
-It provides the polyglot **ZOO-Kernel**, a server implementation of the **Web Processing Service (WPS)** (1.0.0 and 2.0.0) and the **OGC API - Processes** standards published by the OGC. 
-It contains **ZOO-Services**, a minimal set of ready-to-use services that can be used as a base to create more usefull services.
-It provides the **ZOO-API**, initially only available from the JavaScript service implementation, which exposes ZOO-Kernel variables and functions to the language used to implement the service.
-It contains the **ZOO-Client**, a JavaScript API which can be used from a client application to interact with a WPS server.
+### 3. Modify XML dynamically if needed
+If the XML request requires customization, use the `modify_xml` function. This function allows dynamic updates to XML elements, making tests flexible and adaptable to different scenarios. Example usage:
+```python
+replacements = {".//ows:Identifier": "NewProcess", ".//wps:LiteralData": "UpdatedValue"}
+modified_xml = modify_xml("requests/execute_template.xml", replacements)
+```
 
-### ZOO-Kernel
+### 4. Implement the test function in `test_zoo.py`
+Write a structured test function in `test_zoo.py` that sends the request, verifies the response, and includes assertions to check expected results. Example:
+```python
+def test_new_api_functionality(self):
+    response = requests.get(f"{URL}?request=NewRequestType&service=WPS")
+    self.assertEqual(response.status_code, 200, "Unexpected status code")
+    self.assertIn("ExpectedResponseTag", response.text, "Expected content not found")
+    logger.success("✅ Test Passed: New API functionality works correctly")
+```
 
-The ZOO-Kernel is a powerful processing engine able to handle execution of service that can be implemented in various programming languages: 
- * C/C++,
- * C#,
- * Fortran,
- * Java,
- * JavaScript,
- * Python,
- * PHP,
- * Perl,
- * Ruby,
- * R
- * Node.js
- 
-In addition, the ZOO-Kernel can also support handling existing applications from Geographic Information System (GIS) processing engine such as:
- * [Orfeo ToolBox](https://www.orfeo-toolbox.org/)
- * [SAGA-GIS](http://saga-gis.org)
+### 5. Log important details
+Use `logger.info()` to record key details such as request parameters, response status, and error messages. This enhances traceability and debugging. Example:
+```python
+logger.info(f"Sending request: {URL}?request=NewRequestType&service=WPS")
+logger.debug(f"Response received: {response.text[:500]}")
+```
 
-Also, the ZOO-Kernel can automatically publish data, resulting of a service execution, to [MapServer](http://mapserver.org), making the data available through Open Standards: ***Web Map Service (WMS)***, ***Web Feature Service (WFS)*** and, ***Web Coverage Service (WCS)***.
+### 6. Run the test and validate the response
+Execute the test script using:
+```sh
+python -m unittest test_zoo.py
+```
+Analyze the response and confirm that it meets the expected success or failure conditions. If the test fails, refine the logic or update the request parameters.
 
-### ZOO-Services
+### 7. Debug using Loguru if needed
+If errors occur, leverage Loguru for debugging by capturing response content and failure reasons. Example:
+```python
+except Exception as e:
+    logger.error(f"❌ Test Failed: {e}")
+    self.fail(f"Unexpected error: {e}")
+```
 
-The ZOO-Services are composed of two distinct things. First, the metadata informations which can be stored in an adhoc ZCFG format, YAML or in a dedicated database. 
-Then, the ServiceProvider is the executable version of your service.
-The metadata informations will define every input and output that the service will handle, their type, number and so on.
-The Service Provider will obviously vary in kind from one language to another. It may be, for instance, a shared library for C language or a simple JavaScript file.
+### 8. Commit successful tests to the repository
+Once the test passes, document any necessary changes and commit the updated test files to the repository.
 
-To illustrate the ease of integration of existing code as a service, the first services provided was the commonly used ***Geospatial Data Abstraction Library (GDAL)*** tools like: ogr2ogr, gdal_wrap... Also, some trivial services were implemented using the ***Computational Geometry Algorithms Library (CGAL)***.
-
-### ZOO-API
-
-The ZOO-API is mainly used from the JavaScript language, it gives the capability from a service to invoke other services execution implemented in other lnaguage or running from an existing GIS processing engine.
-The basic ZOO-API is available for every supported programming language.
-
-### ZOO-Client 
-
-The ZOO-Client is a JavaScript API that can be used on client side to interact with a WPS Server.
-
-## License
-
-See [License](./zoo-project/LICENSE)
-
-## Installation
-
-Open a terminal and run the following commands:
-
-````
-git clone https://github.com/ZOO-Project/ZOO-Project.git
-cd ZOO-Project
-mkdir -p docker/tmp && chmod -R 777 docker
-docker-compose up 
-````
-
-Then, from your favorite browser, just load the following URL: http://localhost/ and get immediate access to the 700+ ZOO-Services through WPS and OGC API - Processes depending on your preferences 🎉.
