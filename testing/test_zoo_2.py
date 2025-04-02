@@ -68,7 +68,7 @@ if __name__ == "__main__":
     RED = "\033[91m"
     RESET = "\033[0m"
 
-    print("\n======================== TEST REPORT ========================")
+    print("\\n=================== TEST REPORT WPS 2.0 ===================")
     print(f"✅ Successful Tests: {successful_tests}{RESET}")
     print(f"❌ Failed Tests: {failed_tests}{RESET}")
     print(f"📊 Total Tests Ran: {total_tests}")
