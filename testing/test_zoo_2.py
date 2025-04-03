@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 from loguru import logger
 import unittest
 
-logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
+# logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
 
 URL = "http://zookernel/cgi-bin/zoo_loader.cgi"
 SERVICE_NAME = "Buffer"
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     RED = "\033[91m"
     RESET = "\033[0m"
 
-    print("\\n=================== TEST REPORT WPS 2.0 ===================")
+    print("\n=================== TEST REPORT WPS 2.0 =====================")
     print(f"✅ Successful Tests: {successful_tests}{RESET}")
     print(f"❌ Failed Tests: {failed_tests}{RESET}")
     print(f"📊 Total Tests Ran: {total_tests}")

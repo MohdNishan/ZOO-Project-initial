@@ -9,7 +9,7 @@ import unittest
 import threading
 from lxml import etree
 
-logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
+# logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
 
 URL = "http://zookernel/cgi-bin/zoo_loader.cgi"
 SERVICE_NAME = "Buffer"
