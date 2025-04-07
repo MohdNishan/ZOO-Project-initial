@@ -7,7 +7,6 @@ import xml.etree.ElementTree as ET
 from loguru import logger
 import unittest
 import threading
-from lxml import etree
 
 # logger.add("/app/testing/debug.log", rotation="500 MB", level="DEBUG")
 
