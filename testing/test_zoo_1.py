@@ -97,7 +97,7 @@ class TestZOOProjectAPI(unittest.TestCase):
     def test_execute_process_success(self):
         """Test successful Execute request with valid inputs."""
         try:
-            execute_request = load_xml("testing/requests/execute_valid.xml")
+            execute_request = load_xml("requests/WPS 1.0/execute_valid.xml")
             headers = {"Content-Type": "text/xml"}
             response = requests.post(URL, data=execute_request, headers=headers)
 
@@ -131,7 +131,7 @@ class TestZOOProjectAPI(unittest.TestCase):
     def test_execute_process_async(self):
         """Test asynchronous ExecuteProcess request."""
         try:
-            execute_request = load_xml("testing/requests/execute_valid_async.xml")
+            execute_request = load_xml("requests/WPS 1.0/execute_valid_async.xml")
             headers = {"Content-Type": "text/xml"}
             response = requests.post(URL, data=execute_request, headers=headers)
 
@@ -190,7 +190,7 @@ class TestZOOProjectAPI(unittest.TestCase):
 
     def test_post_async_high_load(self):
         """Test asynchronous POST ExecuteProcess requests under high load."""
-        execute_request = load_xml("testing/requests/execute_valid_async.xml")
+        execute_request = load_xml("requests/WPS 1.0/execute_valid_async.xml")
         headers = {"Content-Type": "text/xml"}
 
         def send_request():
@@ -235,37 +235,37 @@ class TestZOOProjectAPI(unittest.TestCase):
 
     def test_execute_process_ir_or(self):
         """Test successful Execute request for ir_or."""
-        response = self.send_execute_request("testing/requests/execute_ir_or.xml")
+        response = self.send_execute_request("requests/WPS 1.0/execute_ir_or.xml")
         self.assertEqual(response.status_code, 200, "ExecuteProcess ir_or request failed")
         logger.success("✅ Test Passed: ExecuteProcess ir_or request successful")
     
     def test_execute_process_irb_o(self):
         """Test successful Execute request for irb_o."""
-        response = self.send_execute_request("testing/requests/execute_irb_o.xml")
+        response = self.send_execute_request("requests/WPS 1.0/execute_irb_o.xml")
         self.assertEqual(response.status_code, 200, "ExecuteProcess irb_o request failed")
         logger.success("✅ Test Passed: ExecuteProcess irb_o request successful")
 
     def test_execute_process_irb_or(self):
         """Test successful Execute request for irb_or."""
-        response = self.send_execute_request("testing/requests/execute_irb_or.xml")
+        response = self.send_execute_request("requests/WPS 1.0/execute_irb_or.xml")
         self.assertEqual(response.status_code, 200, "ExecuteProcess irb_or request failed")
         logger.success("✅ Test Passed: ExecuteProcess irb_or request successful")
 
     def test_execute_process_ir_or_async(self):
         """Test successful asynchronous Execute request for ir_or_async."""
-        response = self.send_execute_request("testing/requests/execute_ir_or_async.xml")
+        response = self.send_execute_request("requests/WPS 1.0/execute_ir_or_async.xml")
         self.assertEqual(response.status_code, 200, "ExecuteProcess ir_or_async request failed")
         logger.success("✅ Test Passed: ExecuteProcess ir_or_async request successful")
 
     def test_execute_process_irb_o_async(self):
         """Test successful asynchronous Execute request for irb_o_async."""
-        response = self.send_execute_request("testing/requests/execute_irb_o_async.xml")
+        response = self.send_execute_request("requests/WPS 1.0/execute_irb_o_async.xml")
         self.assertEqual(response.status_code, 200, "ExecuteProcess irb_o_async request failed")
         logger.success("✅ Test Passed: ExecuteProcess irb_o_async request successful")
 
     def test_execute_process_irb_or_async(self):
         """Test successful asynchronous Execute request for irb_or_async."""
-        response = self.send_execute_request("testing/requests/execute_irb_or_async.xml")
+        response = self.send_execute_request("requests/WPS 1.0/execute_irb_or_async.xml")
         self.assertEqual(response.status_code, 200, "ExecuteProcess irb_or_async request failed")
         logger.success("✅ Test Passed: ExecuteProcess irb_or_async request successful")
 
@@ -289,7 +289,7 @@ class TestZOOProjectAPI(unittest.TestCase):
 
     def test_execute_process_missing_inputs(self):
         """Test ExecuteProcess request with missing required inputs."""
-        execute_request = load_xml("testing/requests/execute_missing_inputs.xml")
+        execute_request = load_xml("requests/WPS 1.0/execute_missing_inputs.xml")
         headers = {"Content-Type": "text/xml"}
         response = requests.post(URL, data=execute_request, headers=headers)
 
@@ -313,7 +313,7 @@ class TestZOOProjectAPI(unittest.TestCase):
             ".//ows:Identifier": "Buffer",
             ".//wps:LiteralData": "INVALID DATA FORMAT"
         }
-        modified_xml = modify_xml("testing/requests/execute_invalid_format.xml", replacements)
+        modified_xml = modify_xml("requests/WPS 1.0/execute_invalid_format.xml", replacements)
         # print("Modified XML before sending:\n", modified_xml)
         headers = {"Content-Type": "text/xml"}
         response = requests.post(URL, data=modified_xml, headers=headers)
@@ -338,31 +338,3 @@ class TestZOOProjectAPI(unittest.TestCase):
 
         logger.success("❌ Test Passed: ExecuteProcess invalid input format detected")
 
-
-
-if __name__ == "__main__":
-    runner = unittest.TextTestRunner()
-    result = runner.run(unittest.defaultTestLoader.loadTestsFromTestCase(TestZOOProjectAPI))
-
-    total_tests = result.testsRun
-    failed_tests = len(result.failures) + len(result.errors)
-    successful_tests = total_tests - failed_tests
-
-    GREEN = "\033[92m"
-    RED = "\033[91m"
-    RESET = "\033[0m"
-
-    print("\n==================== TEST REPORT WPS 1.0 ====================")
-    print(f"✅ Successful Tests: {successful_tests}{RESET}")
-    print(f"❌ Failed Tests: {failed_tests}{RESET}")
-    print(f"📊 Total Tests Ran: {total_tests}")
-    print("=============================================================\n")
-
-    # Print details of failed tests
-    if failed_tests > 0:
-        print(f"{RED}❗ Some tests failed. Check logs above for details.{RESET}")
-        print("\nFailed Tests:")
-        for failed_test, traceback in result.failures + result.errors:
-            print(f"🔴 {failed_test.id()}")
-    else:
-        print(f"{GREEN}🎉 All tests passed successfully!{RESET}")
