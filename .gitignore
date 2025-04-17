@@ -39,8 +39,9 @@
 debug.log
 
 
-
-*echo "docs/_build/" >> .gitignore
-*echo "testing/__pycache__/" >> .gitignore
-*echo "docker/tmp/" >> .gitignore
-*echo "testing/tmp/" >> .gitignore
+# Build and cache folders
+docs/_build/
+__pycache__/
+docker/tmp/
+testing/tmp/
+.vscode/
