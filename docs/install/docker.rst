@@ -27,32 +27,7 @@ Installation Steps
        git clone https://github.com/ZOO-Project/ZOO-Project.git
        cd ZOO-Project
 
-2. **Set Up Docker Compose Configuration**
-
-   Download the sample Docker Compose file:
-
-   .. code-block:: bash
-
-       curl -o docker-compose.yml https://raw.githubusercontent.com/ZOO-Project/workshops/master/2024/foss4g-europe/files/sample-docker-compose.yml
-
-3. **Download Workshop Data**
-
-   Obtain the necessary workshop data archive:
-
-   .. code-block:: bash
-
-       curl -o zoows2024.tar.bz2 https://www.geolabs.fr/dl/zoows2024.tar.bz2
-       tar -xvf zoows2024.tar.bz2
-
-4. **Configure main.cfg**
-
-   Download the main configuration file:
-
-   .. code-block:: bash
-
-       curl -o docker/main.cfg https://raw.githubusercontent.com/ZOO-Project/workshops/master/2024/foss4g-europe/files/main.cfg
-
-5. **Start the Docker Containers**
+2. **Start the Docker Containers**
 
    Launch the containers in detached mode:
 
