@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Release Procedure &mdash; ZOO-Project 2.0.0 documentation</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet" type="text/css">
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within ZOO-Project 2.0.0 documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ZOO-Project 2.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Contributor Guide" href="index.html"/>
+        <link rel="next" title="Contribute translation" href="translate.html"/>
+        <link rel="prev" title="Committer guidelines" href="dev.html"/> 
+
+  <script src="../_static/jquery.js"></script>
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/documentation_options.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+	  <a class="shrink" href="http://zoo-project.org"><img src="/docs/_static/zoo-sun-logo.png" class="img-responsive sun" style="display: inline;"> ZOO</a>
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-zoo-project">What is ZOO-Project ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#zoo-project-components">ZOO-Project components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#open-source">Open Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">ZOO-Project installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install/prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/download.html">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/installation.html">Installation on Unix/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/debian.html">Installation on Debian / Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/opensuse.html">Install on OpenSUSE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/centos.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/windows.html">Installation on Windows ™</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/docker.html">Installation using Docker ™</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kernel/index.html">ZOO-Kernel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/what.html">What is ZOO-Kernel ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/configuration.html">ZOO-Kernel configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/mapserver.html">Optional MapServer support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/orfeotoolbox.html">Optional Orfeo Toolbox support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/sagagis.html">Optional SAGA GIS support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/hpc.html">Optional HPC support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/dru.html">Optional DRU support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../services/index.html">ZOO-Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../services/what.html">What are ZOO-Services ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zcfg-reference.html">ZOO-Service configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/process-profiles.html">Process profiles registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/howtos.html">Create your own ZOO-Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/translation.html">Translation Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/status.html">ZOO Status Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/debug.html">Debugging ZOO Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zoo-services.html">Available ZOO-Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">ZOO-API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/what.html">What is ZOO-API ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/howto.html">Using ZOO-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/classes.html">ZOO-API Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../client/index.html">ZOO-Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../client/what.html">What is ZOO-Client ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/howto.html">Using ZOO-Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/example.html">Example application</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributor Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="howto.html">How to contribute ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="service_providers.html">Service Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html">Contribute code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html">Contribute documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html">Committer guidelines</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Release Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translate.html">Contribute translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributors.html">List of contributors</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ZOO-Project</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html"> Documentation</a> &#8725; &#160;</li>
+      
+          <li><a href="index.html">Contributor Guide</a> &#8725; &#160;</li>
+      
+    <li>Release Procedure</li>
+      <li class="wy-breadcrumbs-aside">
+       $Date$
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <section id="release-procedure">
+<span id="contribute-release"></span><h1>Release Procedure<a class="headerlink" href="#release-procedure" title="Permalink to this heading">¶</a></h1>
+<p>The ZOO-Project release procedure is commonly defined by the following
+rules:</p>
+<ul class="simple">
+<li><p>Any of the <a class="reference internal" href="contributors.html#zoo-developers"><span class="std std-ref">ZOO-Project Commiters</span></a> can ask for a release by asking the
+<a class="reference internal" href="contributors.html#zoo-psc"><span class="std std-ref">ZOO-Project Project Steering Commitee</span></a> and pointing a release manager. This last will then
+vote for accepting both the manager and the release procedure to
+happen.</p></li>
+<li><p>If not already created, create  a wiki page (like this <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/wiki/Release:-1.8.0:-Notes">one</a> using this
+scheme: Release:-M.m.r:-Notes), summarizing changes from the previous
+release (extracted from the <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/blob/main/zoo-project/HISTORY.txt">revision log</a>).</p></li>
+<li><p>That file should include new features, changed features, and
+deprecated features if any. Changes to the official documentation
+should be specifically noted along with other items that will cause
+breaking changes during upgrades.</p></li>
+<li><p>Read the documentation and remove outdated parts.</p></li>
+<li><p>Create release candidate as .zip and .tar.bz2  then add them on this
+<a class="reference external" href="http://zoo-project.org/new/Code/Download">page</a> (by editing this
+<a class="reference external" href="http://zoo-project.org/trac/wiki/ZooWebSite/2015/Code/Download">wiki page</a>)</p></li>
+<li><p>Cut a release candidate once you think that everything is in
+order. Announce the release candidate for review for at least 1
+week. In this period of time, it is also appropriate for you to
+deploy in production since you are asserting that it is stable and
+(significant) bug free. Publish a specific revision with this.</p></li>
+<li><p>If significant bugs are reported, fix and cut a new release
+candidate. If no major bugs, then announce that the release
+candidate has officially been promoted to the official release (if
+you want, you can do this with a motion and support of the PSC).</p></li>
+<li><p>Update documentation as needed.</p></li>
+<li><p>Ensure that release exactly matches something in git history. Tag and branch
+appropriately.</p></li>
+<li><p>Once the tag is pushed back to GitHub, make sure to use the
+“Create release from tag” button on the tag page (accessible from the
+<a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/tags">Tags list</a>).
+Set the release title to “ZOO-Project X.Y.Z” and you may include the
+release note as the release description. Before publishing the
+release, make sure to upload a copy of the archives stored on
+zoo-project.org/dl.</p></li>
+<li><p>Announce on various email list and other locations
+(<a class="reference external" href="mailto:news_item&#37;&#52;&#48;osgeo&#46;org">news_item<span>&#64;</span>osgeo<span>&#46;</span>org</a>, SlashGeo, etc)</p></li>
+</ul>
+<section id="creating-an-official-release">
+<h2>Creating an Official Release<a class="headerlink" href="#creating-an-official-release" title="Permalink to this heading">¶</a></h2>
+<p>Release versions lead to an update in documentation and standard tarballs. This is to help future administrators repeatably create releases.</p>
+<ul class="simple">
+<li><p>Double check that the pages from <a class="reference external" href="http://zoo-project.org/">the ZOO-Project.org web site</a> match the current version.</p></li>
+<li><p>Double check that the latest build file matches the current revisions number.</p></li>
+<li><p>If this is a new major release create a branch and a tag.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">main</span>
+<span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">main</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">branch</span><span class="o">-</span><span class="mf">1.9</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">branch</span><span class="o">-</span><span class="mf">1.9</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">branch</span><span class="o">-</span><span class="mf">1.9</span>
+<span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">branch</span><span class="o">-</span><span class="mf">1.9</span>
+<span class="n">git</span> <span class="n">tag</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Create tag rel-1.9.0-rc1 &quot;</span> <span class="n">rel</span><span class="o">-</span><span class="mf">1.9.0</span><span class="o">-</span><span class="n">rc1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If this is a major or minor relase, create a tag.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">branch</span><span class="o">-</span><span class="mf">1.9</span>
+<span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">branch</span><span class="o">-</span><span class="mf">1.9</span>
+<span class="n">git</span> <span class="n">tag</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Create tag rel-1.9.1&quot;</span> <span class="n">rel</span><span class="o">-</span><span class="mf">1.9.1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Commit the tags or branches with the version numbers.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">rel</span><span class="o">-</span><span class="mf">1.9.1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create version archives</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export VERSION=2.6.0
+git clone -b branch-1.6 --single-branch git@github.com:ZOO-Project/ZOO-Project.git zoo-src
+cp -r zoo-src zoo-project-$VERSION
+cd zoo-project-$VERSION
+rm -rf $(find ./ -name &quot;.git&quot;)
+cd zoo-project/zoo-kernel
+autoconf
+# In case you did not build ZOO-Kernel
+cd ../../..
+# In case you built ZOO-Kernel, then remove the generated file from the archive
+make clean
+rm -f  {Makefile,ZOOMakefile.opts}
+cd ../../..
+# In case you built one or more ZOO-Services, then remove the generated file from the archive
+rm $(find ./zoo-project-$VERSION/zoo-project/zoo-services -name &quot;*zo&quot;)
+# Remove documentation from the archive
+rm -rf ./zoo-project-$VERSION/docs
+tar -cvjf ./zoo-project-$VERSION.tar.bz2 ./zoo-project-$VERSION
+zip -r ./zoo-project-$VERSION.zip ./zoo-project-$VERSION
+scp -P 1046 ./zoo-project-$VERSION.{zip,tar.bz2} zoo-project.org:/var/www/localhost/htdocs/dl/
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Update the <a class="reference external" href="http://zoo-project.org/new/Code/Download">Downloads page</a> to add the latest release (by editing <a class="reference external" href="http://zoo-project.org/trac/wiki/ZooWebSite/2015/Code/Download">this wiki page</a>).</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="translate.html" class="btn btn-neutral float-right" title="Contribute translation">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dev.html" class="btn btn-neutral" title="Committer guidelines"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+  <div class="pfoot">
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2024, ZOO-Project team. This work is released under a Creative Commons Attribution-ShareAlike 4.0 International Public License.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> inspired by <a href="https://readthedocs.org">Read the Docs</a>.
+</div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+</body>
+</html>

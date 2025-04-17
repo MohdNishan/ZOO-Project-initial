@@ -1,0 +1,892 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ZOO-Kernel configuration &mdash; ZOO-Project 2.0.0 documentation</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet" type="text/css">
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within ZOO-Project 2.0.0 documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ZOO-Project 2.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="ZOO-Kernel" href="index.html"/>
+        <link rel="next" title="Optional MapServer support" href="mapserver.html"/>
+        <link rel="prev" title="What is ZOO-Kernel ?" href="what.html"/> 
+
+  <script src="../_static/jquery.js"></script>
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/documentation_options.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+	  <a class="shrink" href="http://zoo-project.org"><img src="/docs/_static/zoo-sun-logo.png" class="img-responsive sun" style="display: inline;"> ZOO</a>
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-zoo-project">What is ZOO-Project ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#zoo-project-components">ZOO-Project components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#open-source">Open Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">ZOO-Project installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install/prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/download.html">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/installation.html">Installation on Unix/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/debian.html">Installation on Debian / Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/opensuse.html">Install on OpenSUSE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/centos.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/windows.html">Installation on Windows ™</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/docker.html">Installation using Docker ™</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ZOO-Kernel</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="what.html">What is ZOO-Kernel ?</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ZOO-Kernel configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapserver.html">Optional MapServer support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="orfeotoolbox.html">Optional Orfeo Toolbox support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sagagis.html">Optional SAGA GIS support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hpc.html">Optional HPC support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dru.html">Optional DRU support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../services/index.html">ZOO-Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../services/what.html">What are ZOO-Services ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zcfg-reference.html">ZOO-Service configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/process-profiles.html">Process profiles registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/howtos.html">Create your own ZOO-Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/translation.html">Translation Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/status.html">ZOO Status Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/debug.html">Debugging ZOO Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zoo-services.html">Available ZOO-Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">ZOO-API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/what.html">What is ZOO-API ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/howto.html">Using ZOO-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/classes.html">ZOO-API Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../client/index.html">ZOO-Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../client/what.html">What is ZOO-Client ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/howto.html">Using ZOO-Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/example.html">Example application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributor Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/howto.html">How to contribute ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/service_providers.html">Service Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/code.html">Contribute code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/doc.html">Contribute documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/dev.html">Committer guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/release.html">Release Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/translate.html">Contribute translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/contributors.html">List of contributors</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ZOO-Project</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html"> Documentation</a> &#8725; &#160;</li>
+      
+          <li><a href="index.html">ZOO-Kernel</a> &#8725; &#160;</li>
+      
+    <li>ZOO-Kernel configuration</li>
+      <li class="wy-breadcrumbs-aside">
+       $Date$
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <section id="zoo-kernel-configuration">
+<span id="kernel-config"></span><h1>ZOO-Kernel configuration<a class="headerlink" href="#zoo-kernel-configuration" title="Permalink to this heading">¶</a></h1>
+<section id="main-configuration-file">
+<h2>Main configuration file<a class="headerlink" href="#main-configuration-file" title="Permalink to this heading">¶</a></h2>
+<p>ZOO-Kernel general settings are defined in a configuration file called
+<code class="docutils literal notranslate"><span class="pre">main.cfg</span></code>. This file is stored in the same directory as ZOO-Kernel
+(<code class="docutils literal notranslate"><span class="pre">/usr/lib/cgi-bin/</span></code> in most cases). It provides usefull metadata information on your ZOO-Kernel installation.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>ZOO-Kernel (<code class="docutils literal notranslate"><span class="pre">/usr/lib/cgi-bin/zoo_loader.cgi</span></code>) and its
+configuration file (<code class="docutils literal notranslate"><span class="pre">/usr/lib/cgi-bin/main.cfg</span></code>) must be in the
+same directory.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Information contained by <code class="docutils literal notranslate"><span class="pre">/usr/lib/cgi-bin/main.cfg</span></code> is accessible from WPS Services at runtime, so when <em>Execute</em> requests are used.</p>
+</div>
+<section id="default-main-cfg">
+<h3>Default main.cfg<a class="headerlink" href="#default-main-cfg" title="Permalink to this heading">¶</a></h3>
+<p>An example <em>main.cfg</em> file is given here as reference.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">[headers]</span>
+<span class="linenos"> 2</span><span class="na">X-Powered-By</span><span class="o">=</span><span class="s">ZOO@ZOO-Project</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="k">[main]</span>
+<span class="linenos"> 5</span><span class="na">version</span><span class="o">=</span><span class="s">1.0.0</span>
+<span class="linenos"> 6</span><span class="na">encoding</span><span class="o">=</span><span class="s">utf-8</span>
+<span class="linenos"> 7</span><span class="na">dataPath</span><span class="o">=</span><span class="s">/var/data</span>
+<span class="linenos"> 8</span><span class="na">tmpPath</span><span class="o">=</span><span class="s">/var/www/temp</span>
+<span class="linenos"> 9</span><span class="na">cacheDir</span><span class="o">=</span><span class="s">/var/www/cache</span>
+<span class="linenos">10</span><span class="na">sessPath</span><span class="o">=</span><span class="s">/tmp</span>
+<span class="linenos">11</span><span class="na">serverAddress</span><span class="o">=</span><span class="s">http://localhost/cgi-bin/zoo_loader.cgi</span>
+<span class="linenos">12</span><span class="na">lang</span><span class="o">=</span><span class="s">fr-FR,ja-JP</span>
+<span class="linenos">13</span><span class="na">language</span><span class="o">=</span><span class="s">en-US</span>
+<span class="linenos">14</span><span class="na">mapserverAddress</span><span class="o">=</span><span class="s">http://localhost/cgi-bin/mapserv.cgi</span>
+<span class="linenos">15</span><span class="na">msOgcVersion</span><span class="o">=</span><span class="s">1.0.0</span>
+<span class="linenos">16</span><span class="na">tmpUrl</span><span class="o">=</span><span class="s">http:/localhost/temp/</span>
+<span class="linenos">17</span><span class="na">cors</span><span class="o">=</span><span class="s">false</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="k">[identification]</span>
+<span class="linenos">20</span><span class="na">keywords</span><span class="o">=</span><span class="s">t,ZOO-Project, ZOO-Kernel,WPS,GIS</span>
+<span class="linenos">21</span><span class="na">title</span><span class="o">=</span><span class="s">ZOO-Project demo instance</span>
+<span class="linenos">22</span><span class="na">abstract</span><span class="o">=</span><span class="w"> </span><span class="s">This is ZOO-Project, the Open WPS platform.</span>
+<span class="linenos">23</span><span class="na">accessConstraints</span><span class="o">=</span><span class="s">none</span>
+<span class="linenos">24</span><span class="na">fees</span><span class="o">=</span><span class="s">None</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="k">[provider]</span>
+<span class="linenos">27</span><span class="na">positionName</span><span class="o">=</span><span class="s">Developer</span>
+<span class="linenos">28</span><span class="na">providerName</span><span class="o">=</span><span class="s">GeoLabs SARL</span>
+<span class="linenos">29</span><span class="na">addressAdministrativeArea</span><span class="o">=</span><span class="s">False</span>
+<span class="linenos">30</span><span class="na">addressDeliveryPoint</span><span class="o">=</span><span class="s">1280, avenue des Platanes</span>
+<span class="linenos">31</span><span class="na">addressCountry</span><span class="o">=</span><span class="s">fr</span>
+<span class="linenos">32</span><span class="na">phoneVoice</span><span class="o">=</span><span class="s">+33467430995</span>
+<span class="linenos">33</span><span class="na">addressPostalCode</span><span class="o">=</span><span class="s">34970</span>
+<span class="linenos">34</span><span class="na">role</span><span class="o">=</span><span class="s">Dev</span>
+<span class="linenos">35</span><span class="na">providerSite</span><span class="o">=</span><span class="s">http://geolabs.fr</span>
+<span class="linenos">36</span><span class="na">phoneFacsimile</span><span class="o">=</span><span class="s">False</span>
+<span class="linenos">37</span><span class="na">addressElectronicMailAddress</span><span class="o">=</span><span class="s">gerald@geolabs.fr</span>
+<span class="linenos">38</span><span class="na">addressCity</span><span class="o">=</span><span class="s">Lattes</span>
+<span class="linenos">39</span><span class="na">individualName</span><span class="o">=</span><span class="s">Gerald FENOY</span>
+</pre></div>
+</div>
+</section>
+<section id="main-section">
+<h3>Main section<a class="headerlink" href="#main-section" title="Permalink to this heading">¶</a></h3>
+<p>The main.cfg <code class="docutils literal notranslate"><span class="pre">[main]</span></code> section parameters are explained bellow.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code>: Supported WPS version.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encoding</span></code>: Default encoding of WPS Responses.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataPath</span></code>: Path to the directory where data files are stored (used to store mapfiles and data when MapServer support is activated).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tmpPath</span></code>: Path to the directory where temporary files are stored (such as <em>ExecuteResponse</em> when <em>storeExecuteResponse</em> is set to true).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tmpUrl</span></code>: URL to access the temporary files directory (cf. <code class="docutils literal notranslate"><span class="pre">tmpPath</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cacheDir</span></code>: Path to  the directory where cached request files <a class="footnote-reference brackets" href="#f1" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> are stored (optional).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serverAddress</span></code>: URL to the ZOO-Kernel instance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mapservAddress</span></code>: URL to the MapServer instance (optional).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msOgcVersion</span></code>: Version of all supported OGC Web Services output <a class="footnote-reference brackets" href="#f2" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>
+(optional).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lang</span></code>: Supported natural languages separated by a coma (the first is the default one),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cors</span></code>: Define if the ZOO-Kernel should support <a class="reference external" href="https://www.w3.org/TR/cors/">Cross-Origin
+Resource Sharing</a>. If this
+parameter is not defined, then the ZOO-Kernel won’t support CORS.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">servicePath</span></code>: Define a specific location to search for services
+rather than using the ZOO-Kernel directory. If this parameter is
+not defined, then the ZOO-Kernel will search for services using its
+directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">libPath</span></code>: (Optional) Path to a directory where the ZOO-kernel should search for
+service providers, e.g., shared libraries with service implementations
+(the <code class="docutils literal notranslate"><span class="pre">serviceProvider</span></code> parameter in the service configuration (.zcfg) file).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">memory</span></code>: (Optional) can take the value <code class="docutils literal notranslate"><span class="pre">load</span></code> to ensure that
+the value field of the inputs data will be filled by the ZOO-Kernel
+or <code class="docutils literal notranslate"><span class="pre">protected</span></code> to have only the <code class="docutils literal notranslate"><span class="pre">cache_file</span></code> filled.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handleText</span></code>: (Optional) set it to <code class="docutils literal notranslate"><span class="pre">true</span></code> to get your Complex data
+nodes containing text not requiring a single CDATA node. Be aware
+that in case you use any HTML or XML there, you will then need to
+rebuild the string to get the original format of the text from your
+service code. In case you do not add handleText or set its value to
+true, you will simply need to use the value as it was provided in
+a single CDATA node provided in the Execute request.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">extra_supported_codes</span></code>: if this parameter is present in the main
+section, then the response codes list given will be considered as
+valid response code when downloading input data (sample value:
+<code class="docutils literal notranslate"><span class="pre">404,400</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allowedPaths</span></code>: if this parameter is present, then the files using the
+<a class="reference external" href="file://">file://</a> protocol will be checked against the list of allowed paths. The
+list of allowed paths should be separated by a coma.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">libPath</span></code> parameter is currently only recognized by services implemented
+in C/C++ or PHP, and may be moved to another section in future versions.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Depending on the <code class="docutils literal notranslate"><span class="pre">memory</span></code> parameter the WPS Service will receive
+different fields (<code class="docutils literal notranslate"><span class="pre">value</span></code> or <code class="docutils literal notranslate"><span class="pre">cache_file</span></code>).</p>
+</div>
+<p>In case you have activated the MapServer support, please refer to
+<a class="reference internal" href="mapserver.html#kernel-mapserver-main-cfg"><span class="std std-ref">this specific section</span></a>.</p>
+</section>
+<section id="identification-and-provider">
+<h3>Identification and Provider<a class="headerlink" href="#identification-and-provider" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">[identification]</span></code> and <code class="docutils literal notranslate"><span class="pre">[provider]</span></code> sections are not ZOO-Project
+specific. They provide OGC metadata <a class="footnote-reference brackets" href="#f3" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> and should be set according
+to the <a class="reference external" href="http://schemas.opengis.net/ows/1.1.0/ows19115subset.xsd">XML Schema Document</a> which
+encodes the parts of ISO 19115 used by the common
+<em>ServiceIdentification</em> and <em>ServiceProvider</em> sections of the
+<em>GetCapabilities</em> operation response, known as the service metadata
+XML document.</p>
+<p>Details of the common OWS 1.1.0 <em>ServiceIdentification</em> section can be
+found in this <a class="reference external" href="http://schemas.opengis.net/ows/1.1.0/owsServiceIdentification.xsd">XML Schema Document</a>.</p>
+<p>Details of the common OWS 1.1.0 <em>ServiceProvider</em> section can be
+found in this <a class="reference external" href="http://schemas.opengis.net/ows/1.1.0/owsServiceProvider.xsd">XML Schema Document</a>.</p>
+</section>
+</section>
+<section id="additional-sections">
+<h2>Additional sections<a class="headerlink" href="#additional-sections" title="Permalink to this heading">¶</a></h2>
+<p>All the additional sections discribed in the following section are
+optional.</p>
+<section id="headers-section">
+<h3>Headers section<a class="headerlink" href="#headers-section" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">[headers]</span></code> section can be set in order to define a specific HTTP
+Response header, which will be used for every response. As an example,
+you can check <a class="reference external" href="http://zoo-project.org">http://zoo-project.org</a> using <em>curl</em> command line tool
+and notice the specific header <em>X-Powered-By: Zoo-Project&#64;Trac</em>.</p>
+<p>In case you want to allow CORS support for POST requests coming from
+<code class="docutils literal notranslate"><span class="pre">myhost.net</span></code>, then you should define the following minimal
+parameters in this section:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Origin</span><span class="p">=</span><span class="nx">myhost</span><span class="p">.</span><span class="nx">net</span>
+<span class="linenos">2</span><span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Methods</span><span class="p">=</span><span class="nx">POST</span>
+<span class="linenos">3</span><span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Headers</span><span class="p">=</span><span class="nx">content</span><span class="o">-</span><span class="k">type</span>
+</pre></div>
+</div>
+</section>
+<section id="curl-section">
+<h3>curl section<a class="headerlink" href="#curl-section" title="Permalink to this heading">¶</a></h3>
+<p>The <cite>[curl]</cite> section is used on windows platform to specify, using the
+<cite>cainfo</cite> parameter, where is located the
+<a class="reference external" href="https://curl.haxx.se/docs/caextract.html">cacert.pem</a> file on your
+machine. An example bellow is provided to illustrate sur a setting.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">[curl]</span>
+<span class="linenos">2</span><span class="na">cainfo</span><span class="o">=</span><span class="s">./cacert.pem</span>
+</pre></div>
+</div>
+</section>
+<section id="env-section">
+<h3>env section<a class="headerlink" href="#env-section" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">[env]</span></code> section can be used to store specific environment
+variables to be set prior the loading of <em>Services Provider</em> and Service execution.</p>
+<p>A typical example is when a Service requires the access to a X server
+running on <em>framebuffer</em>, which takes to set the DISPLAY environnement
+variable, as follow:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">[env]</span>
+<span class="linenos">2</span><span class="na">DISPLAY</span><span class="o">=</span><span class="s">:1</span>
+</pre></div>
+</div>
+<p>In case you have activated the OTB support, please refer to <a class="reference internal" href="orfeotoolbox.html#kernel-orfeotoolbox-main-cfg"><span class="std std-ref">this
+specific section</span></a>.</p>
+</section>
+<section id="lenv-section">
+<h3>lenv section<a class="headerlink" href="#lenv-section" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">lenv</span></code> section is used by the ZOO-Kernel to store runtime informations
+before the execution of a WPS service, it contains the following
+parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sid</span></code> (r): The WPS Service unique identifier,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code> (rw): The current progress value ( a value between 0 and
+100 in percent (<strong>%</strong>) ),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cwd</span></code> (r): The current working directory of ZOO-Kernel,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">message</span></code> (rw): An error message used when <code class="docutils literal notranslate"><span class="pre">SERVICE_FAILED</span></code> is returned (optional),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cookie</span></code> (rw): The cookie to be returned to the client (for
+example for authentication purpose).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.pid</span></code> (r): The file used by the ZOO-Kernel to store process identifier.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.sid</span></code> (r): The file used by the ZOO-Kernel to store service identifier.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.responseInit</span></code> (r): The file used by the ZOO-Kernel to store
+the initial (then final) WPS response.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file.responseFinal</span></code> (r): The file used by the ZOO-Kernel to
+temporary store the final WPS response.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="renv-section">
+<h3>renv section<a class="headerlink" href="#renv-section" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">renv</span></code> section is automatically created by the ZOO-Kernel before
+the execution of a WPS service, it contains all the environment
+variables available at runtime (so including the header fields in case
+it is used through http, refer to [<a class="reference external" href="https://tools.ietf.org/html/rfc3875">https://tools.ietf.org/html/rfc3875</a>
+rfc3875] for more details).</p>
+</section>
+<section id="senv-section">
+<h3>senv section<a class="headerlink" href="#senv-section" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">senv</span></code> section can be used to store sessions information on the
+server side. Such information can then be accessed automatically from
+the Service if the server is requested using a valid cookie (as
+defined in <code class="docutils literal notranslate"><span class="pre">lenv</span></code> section). ZOO-Kernel will store the values set in the
+<code class="docutils literal notranslate"><span class="pre">senv</span></code> maps on disk, load it and dynamically replace its content to
+the one in the <code class="docutils literal notranslate"><span class="pre">main.cfg</span></code>. The <code class="docutils literal notranslate"><span class="pre">senv</span></code> section must contain the
+following parameter at least:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">XXX</span></code>: The session unique identifier where <code class="docutils literal notranslate"><span class="pre">XXX</span></code> is the name
+included in the cookie which is returned.</p></li>
+</ul>
+</div></blockquote>
+<p id="cookie-example">For instance, adding the following in the Service source code  :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">conf</span><span class="p">[</span><span class="s2">&quot;lenv&quot;</span><span class="p">][</span><span class="s2">&quot;cookie&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;XXX=XXX1000000; path=/&quot;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s2">&quot;senv&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;XXX&quot;</span><span class="p">:</span> <span class="s2">&quot;XXX1000000&quot;</span><span class="p">,</span><span class="s2">&quot;login&quot;</span><span class="p">:</span> <span class="s2">&quot;demoUser&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>means that ZOO-Kernel will create a file named <code class="docutils literal notranslate"><span class="pre">sess_XXX1000000.cfg</span></code>
+in the <code class="docutils literal notranslate"><span class="pre">cacheDir</span></code> directory, and will return the specified cookie to the client. Each time the client will
+request ZOO-Kernel using this cookie, it will automatically load the
+value stored before the Service execution.</p>
+</section>
+<section id="security-section">
+<h3>Security section<a class="headerlink" href="#security-section" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">[security]</span></code> section can be used to define what headers, the
+ZOO-Kernel has initially received in the request, should be passed
+to other servers for accessing resources (such as WMS, WFS, WCS
+or any other file passed as a reference). This section contains two
+parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">attributes</span></code>: The header to pass to other servers (such as
+Authorization, Cookie, User-Agent …),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hosts</span></code>: The host for wich the restriction apply (can be “*” to
+forward header to every server or a coma separated list of host
+names, domain, IP).</p></li>
+</ul>
+</div></blockquote>
+<p>Both parameters are mandatory.</p>
+<p>Suppose you need to share Authorization, Cookie and User-Agent to
+every server for accessing ressources, then yo ucan use the following
+section definition:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">security</span><span class="p">]</span>
+<span class="n">attributes</span><span class="o">=</span><span class="n">Authorization</span><span class="p">,</span><span class="n">Cookie</span><span class="p">,</span><span class="n">User</span><span class="o">-</span><span class="n">Agent</span>
+<span class="n">hosts</span><span class="o">=*</span>
+</pre></div>
+</div>
+<p>In case only local servers require such header forwarding, you may use
+the following definition:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">security</span><span class="p">]</span>
+<span class="n">attributes</span><span class="o">=</span><span class="n">Authorization</span><span class="p">,</span><span class="n">Cookie</span><span class="p">,</span><span class="n">User</span><span class="o">-</span><span class="n">Agent</span>
+<span class="n">hosts</span><span class="o">=</span><span class="n">localhost</span><span class="p">,</span><span class="mf">127.0.0.1</span>
+</pre></div>
+</div>
+<p>Optionaly, you can also define the shared url(s), meaning that even if
+the ressource requires authentication to be accessed, this
+authentifcation won’t be used to define the name for storing the
+file. Hence, two user with different authentication will use the same
+file as it is considerated as shared. You can find bellow a sample
+security section containing the shared parameter. In this example,
+every requests to access the coverage using the url defined in the
+shared parameter (<code class="docutils literal notranslate"><span class="pre">myHost/cgi-bin/WCS_Server</span></code>) will be shared
+between users.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">security</span><span class="p">]</span>
+<span class="n">attributes</span><span class="o">=</span><span class="n">Authorization</span><span class="p">,</span><span class="n">Cookie</span><span class="p">,</span><span class="n">User</span><span class="o">-</span><span class="n">Agent</span>
+<span class="n">hosts</span><span class="o">=</span><span class="n">localhost</span><span class="p">,</span><span class="mf">127.0.0.1</span>
+<span class="n">shared</span><span class="o">=</span><span class="n">myHost</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="nb">bin</span><span class="o">/</span><span class="n">WCS_Server</span>
+</pre></div>
+</div>
+</section>
+<section id="database-section">
+<span id="zoo-activate-db-backend"></span><h3>Database section<a class="headerlink" href="#database-section" title="Permalink to this heading">¶</a></h3>
+<p>The database section allows to configure the
+<a class="reference internal" href="../install/installation.html#zoo-install-db-backend"><span class="std std-ref">ZOO-Kernel optional database support</span></a>.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="k">[database]</span>
+<span class="na">dbname</span><span class="o">=</span><span class="s">zoo_project</span>
+<span class="na">port</span><span class="o">=</span><span class="s">5432</span>
+<span class="na">user</span><span class="o">=</span><span class="s">username</span>
+<span class="na">host</span><span class="o">=</span><span class="s">127.0.0.1</span>
+<span class="na">type</span><span class="o">=</span><span class="s">PG</span>
+<span class="na">schema</span><span class="o">=</span><span class="s">public</span>
+</pre></div>
+</div>
+<p>This will generate strings to be passed to GDAL to connect the
+database server:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="k">type</span><span class="p">&gt;:</span><span class="nx">host</span><span class="p">=&lt;</span><span class="nx">host</span><span class="p">&gt;</span><span class="w"> </span><span class="nx">port</span><span class="p">=&lt;</span><span class="nx">port</span><span class="p">&gt;</span><span class="w">  </span><span class="nx">user</span><span class="p">=&lt;</span><span class="nx">user</span><span class="p">&gt;</span><span class="w"> </span><span class="nx">dbname</span><span class="p">=&lt;</span><span class="nx">dbname</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>With the previous database section, it will give the following:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>PG:&quot;dbname=zoo_project host=127.0.0.1 port=5432 user=username&quot;
+</pre></div>
+</div>
+<p>Please refer to this <a class="reference external" href="zoo_create_db_backend">section</a> to learn how
+to setup the database.</p>
+</section>
+<section id="metadb-section">
+<span id="zoo-activate-metadb"></span><h3>Metadb section<a class="headerlink" href="#metadb-section" title="Permalink to this heading">¶</a></h3>
+<p>The metadb section allows to configure the ZOO-Kernel to access <a class="reference internal" href="../install/installation.html#zoo-create-metadb"><span class="std std-ref">the
+metadata information about WPS Services</span></a> by using
+a PostgreSQL database in addition to the zcfg files.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="k">[metadb]</span>
+<span class="na">dbname</span><span class="o">=</span><span class="s">zoo_metadb</span>
+<span class="na">port</span><span class="o">=</span><span class="s">5432</span>
+<span class="na">user</span><span class="o">=</span><span class="s">username</span>
+<span class="na">host</span><span class="o">=</span><span class="s">127.0.0.1</span>
+<span class="na">type</span><span class="o">=</span><span class="s">PG</span>
+</pre></div>
+</div>
+<p>This will generate strings to be passed to GDAL to connect the
+database server:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="k">type</span><span class="p">&gt;:</span><span class="nx">host</span><span class="p">=&lt;</span><span class="nx">host</span><span class="p">&gt;</span><span class="w"> </span><span class="nx">port</span><span class="p">=&lt;</span><span class="nx">port</span><span class="p">&gt;</span><span class="w">  </span><span class="nx">user</span><span class="p">=&lt;</span><span class="nx">user</span><span class="p">&gt;</span><span class="w"> </span><span class="nx">dbname</span><span class="p">=&lt;</span><span class="nx">dbname</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>With the previous database section, it will give the following:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>PG:&quot;dbname=zoo_metadb host=127.0.0.1 port=5432 user=username&quot;
+</pre></div>
+</div>
+<p>Please refer to this <a class="reference external" href="zoo_create_metadb">section</a> to learn how
+to setup the database.</p>
+</section>
+<section id="include-section">
+<h3>Include section<a class="headerlink" href="#include-section" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">[include]</span></code> section (optional) lists explicitely a set of service configuration files
+the the ZOO-Kernel should parse, e.g.,</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">[include]</span>
+<span class="linenos">2</span><span class="na">servicename1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/my/service/repository/service1.zcfg</span>
+<span class="linenos">3</span><span class="na">servicename2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/my/service/repository/service2.zcfg</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">[include]</span></code> section may be used to control which services are exposed to particular user groups.
+While service configuration files (.zcfg) may be located in a common repository or in arbitrary folders,
+main.cfg files at different URLs may include different subsets of services.</p>
+<p>When the ZOO-Kernel handles a request, it will first check if there is an <code class="docutils literal notranslate"><span class="pre">[include]</span></code>
+section in main.cfg and then search for other .zcfg files in the current working directory (CWD) and
+subdirectories. If an included service happens to be located in a CWD (sub)directory,
+it will be published by its name in the <code class="docutils literal notranslate"><span class="pre">[include]</span></code> section. For example, the service
+<code class="docutils literal notranslate"><span class="pre">/[CWD]/name/space/myService.zcfg</span></code>
+would normally be published as name.space.myService, but if it is listed in the <code class="docutils literal notranslate"><span class="pre">[include]</span></code> section
+it will be published simply as myService:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">[include]</span>
+<span class="linenos">2</span><span class="na">myService</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="s">/[CWD]/name/space/myService.zcfg</span>
+</pre></div>
+</div>
+<p>On the other hand, with</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">[include]</span>
+<span class="linenos">2</span><span class="na">myService</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="s">/some/other/dir/myService.zcfg</span>
+</pre></div>
+</div>
+<p>there would be two distinct services published as myService and name.space.myService, respectively,
+with two different zcfg files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As currently implemented, the ZOO-Kernel searches the CWD for the library files of
+included services if the <code class="docutils literal notranslate"><span class="pre">libPath</span></code> parameter is not set.</p>
+</div>
+</section>
+<section id="rabbitmq-section">
+<h3>RabbitMQ section<a class="headerlink" href="#rabbitmq-section" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">[rabbitmq]</span></code> section may be used to configure how to access the
+RabbitMQ server used for communication between the ZOO-Kernel and the
+ZOO-Kernel Fast Process Manager.</p>
+<p>This optional section is used only in case you have build your
+ZOO-Kernel with the following configure option:
+<code class="docutils literal notranslate"><span class="pre">--with-rabbitmq=yes</span></code>.</p>
+<p>The available parameters are the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">host</span></code>: the hostname or IP adddess of the server</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">port</span></code>: the port used to connect</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: the user name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">passwd</span></code>: the password</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exchange</span></code>: the exchange</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">routingkey</span></code>: the routing key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">queue</span></code>: the ‘queue &lt;<a class="reference external" href="https://www.rabbitmq.com/queues.html">https://www.rabbitmq.com/queues.html</a>&gt;’__ name</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="server-section">
+<h3>Server section<a class="headerlink" href="#server-section" title="Permalink to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">[server]</span></code> section is used by the ZOO-Kernel Fast Process
+Manager which handle execution of services should know how much
+instances you are willing to create to execute services.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">async_worker</span></code>: the number of instances</p></li>
+</ul>
+</div></blockquote>
+<p>To start the ZOO-Kernel Fast Process Manager you can use the following
+commands.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">cd</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="n">bin</span>
+<span class="linenos">2</span><span class="o">./</span><span class="n">zoo_loader_fpm</span><span class="w"> </span><span class="n">main</span><span class="o">.</span><span class="n">cfg</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="openapi-specification-configuration-file">
+<h2>OpenAPI Specification configuration file<a class="headerlink" href="#openapi-specification-configuration-file" title="Permalink to this heading">¶</a></h2>
+<p>Since revision 949 of the ZOO-Kernel, you can now activate the OGC
+API - Processing support. In such a case you will need to have an
+<code class="docutils literal notranslate"><span class="pre">oas.cfg</span></code> file located in the same directory where the <code class="docutils literal notranslate"><span class="pre">main.cfg</span></code> is.</p>
+<p>This <code class="docutils literal notranslate"><span class="pre">oas.cfg</span></code> file gets the same syntactic rules than the
+<code class="docutils literal notranslate"><span class="pre">main.cfg</span></code>. The ZOO-Kernel uses this file to produce information
+about the open API specification it is referring to.</p>
+<p>The first section to be found in the <code class="docutils literal notranslate"><span class="pre">oas.cfg</span></code> file should be the
+<code class="docutils literal notranslate"><span class="pre">[openapi]</span></code>. It contains the following parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">rootUrl</span></code>: the URL to access the ZOO-Kernel using OGC API -
+Processing (in case the <code class="docutils literal notranslate"><span class="pre">rootHost</span></code> and <code class="docutils literal notranslate"><span class="pre">rootPath</span></code> are defined,
+this value will automatically be updated at runtime)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rootHost</span></code>: the host (ie. <a class="reference external" href="http://localhost">http://localhost</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rootPath</span></code>: the root path to the service (ie. ogc-api)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">links</span></code>: the links provided from the root</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paths</span></code>: the full paths list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameters</span></code>: the parameters list defined in paths</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">header_parameters</span></code>: the parameters list client applications can send as header</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code>: the Open API Specification version</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">license_name</span></code>: the license name for the service</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">license_url</span></code>: the license URL</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">full_html_support</span></code>: set it to true to activate support of the
+Accept header to choose between text/html or application/json
+format</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">partial_html_support</span></code>: set it to true in case you have the
+display service from the <a class="reference external" href="http://zoo-project.org/trac/browser/trunk/zoo-project/zoo-services/utils/open-api/cgi-env//cgi-env">open-api directory</a>
+and you want to aknowledge the text/html format in links</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wsUrl</span></code>: the WebSocket URL to subscribe client to redis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">publisherUrl</span></code>: the URL used to publish status updates</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">link_href</span></code>: the url to the links.json schema</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags</span></code>: tags lits in the order they will be defined in the OpenAPI</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examplesPath</span></code>: the full path to the examples files, if any</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">examplesUrl</span></code>: the corresponding URL to access the examples files
+to be exposed within the OpenAPI</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exceptionsUrl</span></code>: root URL to the exception</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ensure_type_validation</span></code>: set it to true to not allow passing
+literal value to a complex input, a complex data in place of a
+literal, respectively</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ensure_type_validation_but_ets</span></code>: set it to true to have the type
+validation as with the previous parameter but on for the literal
+data (not accepting complex data)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default_result_as_document</span></code>: set it to true in case you want to
+use raw as the default value for the response parameter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_problem_exception</span></code>: set any value only in case you are
+willing to use application/problem+json (see. <a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7807">RFC7807</a>).</p></li>
+</ul>
+<p>For any links and paths <code class="docutils literal notranslate"><span class="pre">/A</span></code> defined, you will have a corresponding
+<code class="docutils literal notranslate"><span class="pre">[/A]</span></code> and <code class="docutils literal notranslate"><span class="pre">[A]</span></code> sections. In the <code class="docutils literal notranslate"><span class="pre">[/A]</span></code> section you will define
+the rel, type and title used from the root URL to produce the <a class="reference external" href="https://github.com/opengeospatial/wps-rest-binding/blob/master/core/openapi/schemas/link.yaml">links</a>
+list and the <a class="reference external" href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject">paths object</a>
+from. In the corresponding <code class="docutils literal notranslate"><span class="pre">[A]</span></code> section, you will define the
+following parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code>: the HTTP method to use to access this resource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: resource title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">abstract</span></code>: resource description</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags</span></code>: tags to classify this resource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tags_description</span></code>: the tag description</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">schema</span></code>: the schema specifying the resource</p></li>
+</ul>
+</div></blockquote>
+<p>In case you want to define multiple methods to access a resource,  you
+can then use the length parameter to define the number of parameters
+group to parse, then use <code class="docutils literal notranslate"><span class="pre">method_1</span></code>, <code class="docutils literal notranslate"><span class="pre">title_1</span></code>, <code class="docutils literal notranslate"><span class="pre">abstract_1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tags_1</span></code>, <code class="docutils literal notranslate"><span class="pre">tags_description_1</span></code> and <code class="docutils literal notranslate"><span class="pre">schema_1</span></code> and so on to add
+one or more access method (and other attributes) to this resource.</p>
+<p>When declaring resource access you may want to add a parameter to your
+request. In such a case, you can add a parameter named “parameters”
+which contain the supported parameters list. All parameters defined
+should be rooted in the components field. Parameters which can be used
+in the path will be identified by <code class="docutils literal notranslate"><span class="pre">{NAME}</span></code> and will get a specific
+section for its definition:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: nature of the parameter (i.e. string)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: parameter title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">abstract</span></code>: parameter description</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">in</span></code>: where the parameter can be used (ie. path, header, query)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">required</span></code>: define if the parameter is optional (false) or not (true)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">example</span></code>: (optional) provide an example value / URL</p></li>
+</ul>
+</div></blockquote>
+<p>In addition to the sections defined previously, there are three other
+sections that we did not cover yet. Theses sections are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[requestBody]</span></code>: defining the request body abstract (description), type (application/json) and schema (reference).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[exception]</span></code>: defining the exception bastract (description), type (application/json) and schema (reference).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[conformTo]</span></code>: referring to links list of the requirements classes the server implements and conforms to</p></li>
+</ul>
+</div></blockquote>
+<p>In case you have set <code class="docutils literal notranslate"><span class="pre">partial_html_support</span></code> or
+<code class="docutils literal notranslate"><span class="pre">partial_html_support</span></code> set to true, then you can add a corresponding
+<code class="docutils literal notranslate"><span class="pre">[A.html]</span></code> section providing the link informations. Also, it means
+that you are willing to let the client choose in between
+application/json and text/html format by providing the corresponding
+Accept header in its request, when <code class="docutils literal notranslate"><span class="pre">full_html_support</span></code> is set to
+true or by using the <code class="docutils literal notranslate"><span class="pre">.html</span></code> extension in the URL, in case
+<code class="docutils literal notranslate"><span class="pre">partial_html_support</span></code> was set true. Also, the user interface
+provided in the <a class="reference external" href="http://zoo-project.org/trac/browser/trunk/zoo-project/zoo-services/utils/open-api/cgi-env//cgi-env">open-api directory</a>
+will let the client goes untill the execution of a job. In case you
+want this functionality to be working correctly we invite you to use a
+<code class="docutils literal notranslate"><span class="pre">.htaccess</span></code> equivalent to the one provided <a class="reference external" href="http://zoo-project.org/trac/browser/trunk/zoo-project/zoo-services/utils/open-api/server/.htacess">here</a>. Also
+the WebSocket can be started using websocketd in combinaison with the
+<a class="reference external" href="http://zoo-project.org/trac/browser/trunk/zoo-project/zoo-services/utils/open-api/server/subscriber.py">subscriber.py</a>
+script, finally you will need to add the <a class="reference external" href="http://zoo-project.org/trac/browser/trunk/zoo-project/zoo-services/utils/open-api/server/publish.py">publish.py</a>
+script in the cgi-bin directory of your web server.</p>
+<p>For more information on how to interact with this WPS REST Binding, please refer
+to this <a class="reference external" href="https://github.com/opengeospatial/wps-rest-binding#overview">page</a> or use
+the <a class="reference external" href="https://swagger.io/tools/swagger-ui/">Swagger UI</a>. A live
+instance is available <a class="reference external" href="https://demo.mapmint.com/swagger-ui/dist/">here</a>.</p>
+<section id="hidden-processes-section">
+<h3>hidden_processes section<a class="headerlink" href="#hidden-processes-section" title="Permalink to this heading">¶</a></h3>
+<p>In this section you can set the list of services that should not be listed as avaiable to the processes list.</p>
+<p>You can see below an example of such a section for hidding two services identified as <code class="docutils literal notranslate"><span class="pre">myHiddenService1</span></code> and <code class="docutils literal notranslate"><span class="pre">myHiddenService2</span></code>.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">[hidden_processes]</span>
+<span class="linenos">2</span><span class="na">length</span><span class="o">=</span><span class="s">2</span>
+<span class="linenos">3</span><span class="na">service</span><span class="o">=</span><span class="s">myHiddenService1</span>
+<span class="linenos">4</span><span class="na">service_1</span><span class="o">=</span><span class="s">myHiddenService2</span>
+</pre></div>
+</div>
+</section>
+<section id="openapi-security">
+<h3>OpenAPI Security<a class="headerlink" href="#openapi-security" title="Permalink to this heading">¶</a></h3>
+<p>OpenAPI permits the definition of security restrictions to access a
+given path using a specific request method. For more details, please
+consult the <a class="reference external" href="https://swagger.io/docs/specification/authentication/">OpenAPI Authentication and Authorization</a> section.</p>
+<p>Since revision <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/commit/ae34767ab5f9127ae654980f00a2e79ec94aeb45">ae34767</a>,
+the ZOO-Kernel supports OGC API - Processes request filtering. It can
+invoke the execution of other services before and after handling a
+request. So, you can implement your service for security or other
+purposes.</p>
+<p>To support security from your OpenAPI, you can add an optional section
+<code class="docutils literal notranslate"><span class="pre">osecurity</span></code> to the <code class="docutils literal notranslate"><span class="pre">oas.cfg</span></code> file. It should contain the following keys:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: the name used in the components’ security schemes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">module_path</span></code>: the full path to the location of the service metadata files and processes (can be stored somewhere else to be hidden from the services list)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">module_name_in</span></code>: the process to use before handling the request</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">module_name_out</span></code>: the process to use after having handled the request</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: the <a class="reference external" href="https://swagger.io/docs/specification/authentication/">scheme type</a> (http, apiKey, …)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scheme</span></code>: the scheme name (Basic, Bearer) <a class="reference external" href="https://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml">list of possible values</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">format</span></code>: bearer format (used only in case scheme is set to Bearer, can be JWT, optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">realm</span></code>: the realm to use when returning 401 WWW-Authenticate response header (optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">passwd</span></code>: the htpassword file used to authenticate users (only used for Basic scheme, optional)</p></li>
+</ul>
+</div></blockquote>
+<p>Associated with this <code class="docutils literal notranslate"><span class="pre">osecurity</span></code> section, you can add two optional
+sections, <code class="docutils literal notranslate"><span class="pre">filter_in</span></code> and <code class="docutils literal notranslate"><span class="pre">filter_out</span></code>, to define one or more
+filters to be applied before handling the request and after, respectively.
+You can use an array of filters if you need to execute more than a
+single service before or after the request treatment. The ZOO-Kernel
+will invoke the services in the same order as they are in the array.
+In both <code class="docutils literal notranslate"><span class="pre">filter_in</span></code> and <code class="docutils literal notranslate"><span class="pre">filter_out</span></code> section, you should add the
+<code class="docutils literal notranslate"><span class="pre">path</span></code> and <code class="docutils literal notranslate"><span class="pre">service</span></code> keys used to define the location of the
+service to run.</p>
+<p>Then to secure an operation (meaning a path and request method couple), you should add
+the optional <code class="docutils literal notranslate"><span class="pre">secured</span></code> key and set it to the name used in the
+components’ security schemes.</p>
+<p>Below is an example of <code class="docutils literal notranslate"><span class="pre">oas.cfg</span></code> file for securing the execution of
+the HelloPy processes.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="k">[processes/HelloPy/execution]</span>
+<span class="w"> </span><span class="na">rel</span><span class="o">=</span><span class="s">http://www.opengis.net/def/rel/ogc/1.0/execute</span>
+<span class="w"> </span><span class="na">length</span><span class="o">=</span><span class="s">1</span>
+<span class="w"> </span><span class="na">method</span><span class="o">=</span><span class="s">post</span>
+<span class="w"> </span><span class="na">secured</span><span class="o">=</span><span class="s">BasicAuth</span>
+<span class="w"> </span><span class="na">title</span><span class="o">=</span><span class="s">execute a job</span>
+<span class="w"> </span><span class="na">abstract</span><span class="o">=</span><span class="s">An execute endpoint.</span>
+<span class="w"> </span><span class="na">tags</span><span class="o">=</span><span class="s">ExecuteEndpoint</span>
+<span class="w"> </span><span class="na">tags_description</span><span class="o">=</span>
+<span class="w"> </span><span class="na">schema</span><span class="o">=</span><span class="s">http://schemas.opengis.net/ogcapi/processes/part1/1.0/openapi/responses/ExecuteSync.yaml</span>
+<span class="w"> </span><span class="na">parameters</span><span class="o">=</span><span class="s">/components/parameters/processID,/components/parameters/oas-header1</span>
+<span class="w"> </span><span class="na">ecode</span><span class="o">=</span><span class="s">400,404,500</span>
+<span class="w"> </span><span class="na">eschema</span><span class="o">=</span><span class="s">http://schemas.opengis.net/ogcapi/processes/part1/1.0/openapi/responses/ExecuteAsync.yaml</span>
+
+<span class="w"> </span><span class="k">[osecurity]</span>
+<span class="w"> </span><span class="na">type</span><span class="o">=</span><span class="s">http</span>
+<span class="w"> </span><span class="na">scheme</span><span class="o">=</span><span class="s">basic</span>
+<span class="w"> </span><span class="na">realm</span><span class="o">=</span><span class="s">Secured section</span>
+<span class="w"> </span><span class="na">charset</span><span class="o">=</span><span class="s">utf-8</span>
+<span class="w"> </span><span class="na">passwd</span><span class="o">=</span><span class="s">/tmp/htpasswords</span>
+
+<span class="w"> </span><span class="k">[filter_in]</span>
+<span class="w"> </span><span class="na">path</span><span class="o">=</span><span class="s">/opt/securityServices</span>
+<span class="w"> </span><span class="na">service</span><span class="o">=</span><span class="s">securityIn</span>
+
+<span class="w"> </span><span class="k">[filter_out]</span>
+<span class="w"> </span><span class="na">path</span><span class="o">=</span><span class="s">/opt/securityServices</span>
+<span class="w"> </span><span class="na">service</span><span class="o">=</span><span class="s">securityOut</span>
+</pre></div>
+</div>
+<p>In the example, we used the demonstration <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/blob/main/zoo-project/zoo-services/utils/security/basicAuth/service.c">securityIn and securityOut
+services</a>
+for handling HTTP Basic Authentication.</p>
+<section id="filter-in-and-filter-out">
+<h4>filter_in and filter_out<a class="headerlink" href="#filter-in-and-filter-out" title="Permalink to this heading">¶</a></h4>
+<p>One can use the <code class="docutils literal notranslate"><span class="pre">filter_in</span></code> service to secure an endpoint by verifying that authentication is valid.
+If a service in <code class="docutils literal notranslate"><span class="pre">filter_in</span></code> returns <code class="docutils literal notranslate"><span class="pre">SERVICE_SUCCEEDED</span></code>, the authentication succeeded, and the request handling can continue (ie. <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/blob/main/zoo-project/zoo-services/utils/security/jwt/cgi-env/security_service.py#L129-L131">jwt</a>); if <code class="docutils literal notranslate"><span class="pre">SERVICE_FAILED</span></code>, it didn’t, the handling should stop (ie. <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/blob/main/zoo-project/zoo-services/utils/security/jwt/cgi-env/security_service.py#L132-L140">jwt</a>).</p>
+<p>If endpoints do not require authentication, the sections <code class="docutils literal notranslate"><span class="pre">filter_in</span></code> and <code class="docutils literal notranslate"><span class="pre">filter_out</span></code> can still be activated.
+The services are invoked the same way.
+The only difference is that the ZOO-Kernel won’t consider the value returned by the service when deciding whether to continue handling the request.</p>
+<p>At runtime, the ZOO-Kernel invokes the <code class="docutils literal notranslate"><span class="pre">filter_in</span></code> services, if any, before handling the request in any way.
+This means that the service can stop the request from being processed.
+To achieve this, the service should define in the <code class="docutils literal notranslate"><span class="pre">lenv</span></code> section a <code class="docutils literal notranslate"><span class="pre">response</span></code> key containing the response body to be returned (ie. <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/blob/main/zoo-project/zoo-services/utils/security/eoapi-proxy/eoapi_service.py#L45">eoapi-proxy</a>) or a <code class="docutils literal notranslate"><span class="pre">response_generated_file</span></code> key specifying the full path to the file where the response is stored (ie. <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/blob/main/zoo-project/zoo-services/utils/security/eoapi-proxy/eoapi_service.py#L43">eoapi-proxy</a>).</p>
+<p>On the other hand, the <code class="docutils literal notranslate"><span class="pre">filter_out</span></code> is invoked just before returning the produced response back to the client.
+The service can modify the response to return to the client.
+From the <code class="docutils literal notranslate"><span class="pre">filter_out</span></code> service, the developer can access the current response as a string using the <code class="docutils literal notranslate"><span class="pre">json_response_object</span></code> key from the <code class="docutils literal notranslate"><span class="pre">lenv</span></code> section (ie. <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/blob/main/zoo-project/zoo-services/utils/security/eoapi-proxy/eoapi_service.py#L85-L92">eoapi-proxy</a>).
+One can use this key to update the response’s content.</p>
+<p class="rubric">Footnotes</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>If GET requests are passed through <code class="docutils literal notranslate"><span class="pre">xlink:href</span></code> to the ZOO-Kernel , the latter will execute the request the first time and store the result  on disk. The next time the same request is executed, the cached file will be used and this will make your process run much faster. If <code class="docutils literal notranslate"><span class="pre">cachedir</span></code> was not specified in the <code class="docutils literal notranslate"><span class="pre">main.cfg</span></code> then the <code class="docutils literal notranslate"><span class="pre">tmpPath</span></code> value will be used.</p>
+</aside>
+<aside class="footnote brackets" id="f2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Usefull when the <a class="reference internal" href="mapserver.html#kernel-mapserver"><span class="std std-ref">Optional MapServer support</span></a> is activated (available since ZOO-Project version 1.3.0).</p>
+</aside>
+<aside class="footnote brackets" id="f3" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>ZOO-Kernel and MapServer are sharing the same metadata for OGC Web Services if the <a class="reference internal" href="mapserver.html#kernel-mapserver"><span class="std std-ref">Optional MapServer support</span></a> is activated.</p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+</section>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mapserver.html" class="btn btn-neutral float-right" title="Optional MapServer support">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="what.html" class="btn btn-neutral" title="What is ZOO-Kernel ?"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+  <div class="pfoot">
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2024, ZOO-Project team. This work is released under a Creative Commons Attribution-ShareAlike 4.0 International Public License.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> inspired by <a href="https://readthedocs.org">Read the Docs</a>.
+</div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+</body>
+</html>

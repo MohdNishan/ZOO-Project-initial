@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Contribute code &mdash; ZOO-Project 2.0.0 documentation</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet" type="text/css">
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within ZOO-Project 2.0.0 documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ZOO-Project 2.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Contributor Guide" href="index.html"/>
+        <link rel="next" title="Contribute documentation" href="doc.html"/>
+        <link rel="prev" title="Service Providers" href="service_providers.html"/> 
+
+  <script src="../_static/jquery.js"></script>
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/documentation_options.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+	  <a class="shrink" href="http://zoo-project.org"><img src="/docs/_static/zoo-sun-logo.png" class="img-responsive sun" style="display: inline;"> ZOO</a>
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-zoo-project">What is ZOO-Project ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#zoo-project-components">ZOO-Project components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#open-source">Open Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">ZOO-Project installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install/prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/download.html">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/installation.html">Installation on Unix/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/debian.html">Installation on Debian / Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/opensuse.html">Install on OpenSUSE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/centos.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/windows.html">Installation on Windows ™</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/docker.html">Installation using Docker ™</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kernel/index.html">ZOO-Kernel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/what.html">What is ZOO-Kernel ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/configuration.html">ZOO-Kernel configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/mapserver.html">Optional MapServer support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/orfeotoolbox.html">Optional Orfeo Toolbox support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/sagagis.html">Optional SAGA GIS support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/hpc.html">Optional HPC support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/dru.html">Optional DRU support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../services/index.html">ZOO-Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../services/what.html">What are ZOO-Services ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zcfg-reference.html">ZOO-Service configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/process-profiles.html">Process profiles registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/howtos.html">Create your own ZOO-Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/translation.html">Translation Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/status.html">ZOO Status Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/debug.html">Debugging ZOO Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zoo-services.html">Available ZOO-Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">ZOO-API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/what.html">What is ZOO-API ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/howto.html">Using ZOO-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/classes.html">ZOO-API Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../client/index.html">ZOO-Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../client/what.html">What is ZOO-Client ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/howto.html">Using ZOO-Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/example.html">Example application</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributor Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="howto.html">How to contribute ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="service_providers.html">Service Providers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Contribute code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html">Contribute documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev.html">Committer guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release.html">Release Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translate.html">Contribute translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributors.html">List of contributors</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ZOO-Project</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html"> Documentation</a> &#8725; &#160;</li>
+      
+          <li><a href="index.html">Contributor Guide</a> &#8725; &#160;</li>
+      
+    <li>Contribute code</li>
+      <li class="wy-breadcrumbs-aside">
+       $Date$
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <section id="contribute-code">
+<span id="id1"></span><h1>Contribute code<a class="headerlink" href="#contribute-code" title="Permalink to this heading">¶</a></h1>
+<p>Anybody can take part to the <a class="reference external" href="http://zoo-project.org">ZOO-Project</a> developement and is welcome to:</p>
+<ul class="simple">
+<li><p>Share new source code or correction</p></li>
+<li><p>Create tickets to report bugs</p></li>
+<li><p>Write a new feature request.</p></li>
+</ul>
+<section id="submit-new-code">
+<h2>Submit new code<a class="headerlink" href="#submit-new-code" title="Permalink to this heading">¶</a></h2>
+<section id="for-new-comers">
+<h3>For new comers<a class="headerlink" href="#for-new-comers" title="Permalink to this heading">¶</a></h3>
+<p>New source code or existing source code corrections (patches) should
+be submitted as pull request (PR) using the <a class="reference external" href="http://github.com/ZOO-Project/ZOO-Project">ZOO-Project repository</a> .</p>
+<p>In the PR, describe your code or patch. It will then be checked and
+discussed with the developers, and can potentially be integrated and
+merged with the main branch.</p>
+</section>
+<section id="for-registered-developers">
+<h3>For registered developers<a class="headerlink" href="#for-registered-developers" title="Permalink to this heading">¶</a></h3>
+<p>ZOO-Project registered developers have direct repository access and can:</p>
+<ul class="simple">
+<li><p>Commit fixes, enhancement and new source directly to the main branch</p></li>
+<li><p>Create and commit to a new branch of the <a class="reference external" href="http://github.com/ZOO-Project/ZOO-Project">ZOO-Project repository</a></p></li>
+</ul>
+<p><a class="reference external" href="https://github.com/orgs/ZOO-Project/teams/developer/members">ZOO-Project registered developers</a> must
+accept and respect the <a class="reference internal" href="dev.html#contribute-dev"><span class="std std-ref">Committer guidelines</span></a> when contributing code.</p>
+</section>
+</section>
+<section id="bug-tracking">
+<h2>Bug tracking<a class="headerlink" href="#bug-tracking" title="Permalink to this heading">¶</a></h2>
+<section id="general-information">
+<h3>General information<a class="headerlink" href="#general-information" title="Permalink to this heading">¶</a></h3>
+<p>Bug reports and wishes can be submitted using the <a class="reference external" href="http://github.com/ZOO-Project/ZOO-Project/issues">ZOO-Project issue
+system</a> .</p>
+<p>You can label your issue with one of <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/issues/labels">the available ones</a>.</p>
+<p>The following general labels are available:</p>
+<ul class="simple">
+<li><p><em>bug</em> to report bugs and ‘bad’ features</p></li>
+<li><p><em>enhancement</em> to describe feature wishes</p></li>
+<li><p><em>help wanted</em> to describe any issue your may be facing</p></li>
+<li><p><em>question</em> to describe any different but relevant topic.</p></li>
+</ul>
+<p>The following components specific labels are available:</p>
+<ul class="simple">
+<li><p><em>ZOO-Kernel</em> to report a bug or problem with the ZOO-Project server</p></li>
+<li><p><em>ZOO-Services</em> to report a bug or problem with the ZOO-Project services</p></li>
+<li><p><em>ZOO-API</em> to report a bug or problem with the ZOO-Project API</p></li>
+<li><p><em>ZOO-Client</em> to report a bug or problem with the ZOO-Project Client</p></li>
+<li><p><em>Documentation</em> to report a problem or suggest an enhancement to the documentation</p></li>
+</ul>
+</section>
+<section id="best-practices">
+<h3>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this heading">¶</a></h3>
+<p>Please consider the following when submitting bugs or feature requests:</p>
+<ul class="simple">
+<li><p>Check if the bug is still persistent in main branch before reporting. If you use an older version, please consider upgrading.</p></li>
+<li><p>Before reporting a bug, please search if it is yet unknown in the bug tracking system.</p></li>
+<li><p>Give an appropriate, straightforward and understandable title to your issue</p></li>
+<li><p>Make sure the developers get all the needed information to recreate the bug (e.g. tell about your configuration and explain every step to reproduce the bug).</p></li>
+<li><p>Select at least one label for your issue.</p></li>
+<li><p>Report only one single bug by issue.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="doc.html" class="btn btn-neutral float-right" title="Contribute documentation">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="service_providers.html" class="btn btn-neutral" title="Service Providers"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+  <div class="pfoot">
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2024, ZOO-Project team. This work is released under a Creative Commons Attribution-ShareAlike 4.0 International Public License.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> inspired by <a href="https://readthedocs.org">Read the Docs</a>.
+</div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+</body>
+</html>

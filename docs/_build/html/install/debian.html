@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation on Debian / Ubuntu &mdash; ZOO-Project 2.0.0 documentation</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet" type="text/css">
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within ZOO-Project 2.0.0 documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ZOO-Project 2.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="ZOO-Project installation" href="index.html"/>
+        <link rel="next" title="Install on OpenSUSE" href="opensuse.html"/>
+        <link rel="prev" title="Installation on Unix/Linux" href="installation.html"/> 
+
+  <script src="../_static/jquery.js"></script>
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/documentation_options.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+	  <a class="shrink" href="http://zoo-project.org"><img src="/docs/_static/zoo-sun-logo.png" class="img-responsive sun" style="display: inline;"> ZOO</a>
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-zoo-project">What is ZOO-Project ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#zoo-project-components">ZOO-Project components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#open-source">Open Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ZOO-Project installation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="download.html">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation on Unix/Linux</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation on Debian / Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensuse.html">Install on OpenSUSE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="windows.html">Installation on Windows ™</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker.html">Installation using Docker ™</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kernel/index.html">ZOO-Kernel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/what.html">What is ZOO-Kernel ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/configuration.html">ZOO-Kernel configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/mapserver.html">Optional MapServer support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/orfeotoolbox.html">Optional Orfeo Toolbox support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/sagagis.html">Optional SAGA GIS support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/hpc.html">Optional HPC support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/dru.html">Optional DRU support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../services/index.html">ZOO-Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../services/what.html">What are ZOO-Services ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zcfg-reference.html">ZOO-Service configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/process-profiles.html">Process profiles registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/howtos.html">Create your own ZOO-Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/translation.html">Translation Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/status.html">ZOO Status Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/debug.html">Debugging ZOO Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zoo-services.html">Available ZOO-Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">ZOO-API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/what.html">What is ZOO-API ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/howto.html">Using ZOO-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/classes.html">ZOO-API Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../client/index.html">ZOO-Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../client/what.html">What is ZOO-Client ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/howto.html">Using ZOO-Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/example.html">Example application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributor Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/howto.html">How to contribute ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/service_providers.html">Service Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/code.html">Contribute code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/doc.html">Contribute documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/dev.html">Committer guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/release.html">Release Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/translate.html">Contribute translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/contributors.html">List of contributors</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ZOO-Project</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html"> Documentation</a> &#8725; &#160;</li>
+      
+          <li><a href="index.html">ZOO-Project installation</a> &#8725; &#160;</li>
+      
+    <li>Installation on Debian / Ubuntu</li>
+      <li class="wy-breadcrumbs-aside">
+       $Date$
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <section id="installation-on-debian-ubuntu">
+<span id="install-debian"></span><h1>Installation on Debian / Ubuntu<a class="headerlink" href="#installation-on-debian-ubuntu" title="Permalink to this heading">¶</a></h1>
+<p>Use the following instructions to install <a class="reference external" href="http://zoo-project.org">ZOO-Project</a> on Debian or Ubuntu distributions.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a></h2>
+<section id="using-debian">
+<h3>Using Debian<a class="headerlink" href="#using-debian" title="Permalink to this heading">¶</a></h3>
+<p>The following command should install all the required dependancies on Debian. See the <a class="reference internal" href="prerequisites.html#install-prereq"><span class="std std-ref">Prerequisites</span></a> section for additional information.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>apt-get install flex bison libfcgi-dev libxml2 libxml2-dev curl openssl autoconf apache2 python-software-properties subversion python-dev libgdal1-dev build-essential libmozjs185-dev libxslt1-dev
+</pre></div>
+</div>
+</section>
+<section id="using-ubuntu">
+<h3>Using Ubuntu<a class="headerlink" href="#using-ubuntu" title="Permalink to this heading">¶</a></h3>
+<p>On Ubuntu, use the following command first to install the required dependancies :</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>sudo apt-get install flex bison libfcgi-dev libxml2 libxml2-dev curl openssl autoconf apache2 python-software-properties subversion libmozjs185-dev python-dev build-essential libxslt1-dev
+</pre></div>
+</div>
+<p>Then add the <em>UbuntuGIS</em> repository in order to get the latest versions of libraries</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>sudo add-apt-repository ppa:ubuntugis/ppa
+sudo apt-get update
+</pre></div>
+</div>
+<p>Install the geographic library as follow:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>sudo apt-get install libgdal1-dev
+</pre></div>
+</div>
+</section>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference internal" href="download.html#install-download"><span class="std std-ref">Download</span></a> ZOO-Project latest version from git using the following command:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/ZOO-Project/ZOO-Project.git zoo-project
+</pre></div>
+</div>
+<p>Install the <em>cgic</em> library from packages using the following command:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>cd zoo-project/thirds/cgic206/
+make
+</pre></div>
+</div>
+<p>Head to the <a class="reference internal" href="../kernel/index.html#kernel-index"><span class="std std-ref">ZOO-Kernel</span></a> directory</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>cd ../../zoo-project/zoo-kernel/
+</pre></div>
+</div>
+<p>Create a configure file as follow:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>autoconf
+</pre></div>
+</div>
+<p>Run configure with the desired options, for example with the following command:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>./configure --with-js --with-python
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Refer to the <a class="reference internal" href="installation.html#install-installation"><span class="std std-ref">Installation on Unix/Linux</span></a> section for the full list of available options</p>
+</div>
+<p>Compile ZOO-Kernel as follow:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>make
+</pre></div>
+</div>
+<p>Install the <code class="docutils literal notranslate"><span class="pre">libzoo_service.so.1.5</span></code> by using the following command:</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>sudo make install
+</pre></div>
+</div>
+<p>Copy the necessary files to the <cite>cgi-bin</cite> directory (as administrator
+user):</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span><span class="w"> </span><span class="n">main</span><span class="o">.</span><span class="n">cfg</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="n">bin</span>
+<span class="n">cp</span><span class="w"> </span><span class="n">zoo_loader</span><span class="o">.</span><span class="n">cgi</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="n">bin</span>
+</pre></div>
+</div>
+<p>Install ZOO ServiceProviders, for example the basic Python service (as administrator user)</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>cp ../zoo-services/hello-py/cgi-env/*.zcfg /usr/lib/cgi-bin
+cp ../zoo-services/hello-py/cgi-env/*.py /usr/lib/cgi-bin/
+</pre></div>
+</div>
+<p>Edit the <em>main.cfg</em> file as follow (example configuration):</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>nano /usr/lib/cgi-bin/main.cfg
+- serverAddress = http://127.0.0.1
+</pre></div>
+</div>
+<p>Test the ZOO-Kernel installation with the following requests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://127.0.0.1/cgi-bin/zoo_loader.cgi?ServiceProvider=&amp;metapath=&amp;Service=WPS&amp;Request=GetCapabilities&amp;Version=1.0.0
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://127.0.0.1/cgi-bin/zoo_loader.cgi?ServiceProvider=&amp;metapath=&amp;Service=WPS&amp;Request=DescribeProcess&amp;Version=1.0.0&amp;Identifier=HelloPy
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://127.0.0.1/cgi-bin/zoo_loader.cgi?ServiceProvider=&amp;metapath=&amp;Service=WPS&amp;Request=Execute&amp;Version=1.0.0&amp;Identifier=HelloPy&amp;DataInputs=a=myname
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Such request should return well formed XML documents (OWS documents responses).</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The URLs provided here suppose that you have previously setup a web
+server and defined cgi-bin as a location where you can run cgi
+application.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If ZOO-Kernel returns an error please check the <a class="reference internal" href="../kernel/configuration.html#kernel-config"><span class="std std-ref">ZOO-Kernel configuration</span></a> and beware of the <a class="reference internal" href="prerequisites.html#install-prereq"><span class="std std-ref">Prerequisites</span></a>.</p>
+</div>
+</section>
+</section>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="opensuse.html" class="btn btn-neutral float-right" title="Install on OpenSUSE">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral" title="Installation on Unix/Linux"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+  <div class="pfoot">
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2024, ZOO-Project team. This work is released under a Creative Commons Attribution-ShareAlike 4.0 International Public License.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> inspired by <a href="https://readthedocs.org">Read the Docs</a>.
+</div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+</body>
+</html>

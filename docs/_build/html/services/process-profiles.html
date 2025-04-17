@@ -1,0 +1,467 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Process profiles registry &mdash; ZOO-Project 2.0.0 documentation</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet" type="text/css">
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within ZOO-Project 2.0.0 documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ZOO-Project 2.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="ZOO-Services" href="index.html"/>
+        <link rel="next" title="Create your own ZOO-Services" href="howtos.html"/>
+        <link rel="prev" title="ZOO-Service configuration file" href="zcfg-reference.html"/> 
+
+  <script src="../_static/jquery.js"></script>
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/documentation_options.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+	  <a class="shrink" href="http://zoo-project.org"><img src="/docs/_static/zoo-sun-logo.png" class="img-responsive sun" style="display: inline;"> ZOO</a>
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-zoo-project">What is ZOO-Project ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#zoo-project-components">ZOO-Project components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#open-source">Open Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">ZOO-Project installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install/prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/download.html">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/installation.html">Installation on Unix/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/debian.html">Installation on Debian / Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/opensuse.html">Install on OpenSUSE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/centos.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/windows.html">Installation on Windows ™</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/docker.html">Installation using Docker ™</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kernel/index.html">ZOO-Kernel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/what.html">What is ZOO-Kernel ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/configuration.html">ZOO-Kernel configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/mapserver.html">Optional MapServer support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/orfeotoolbox.html">Optional Orfeo Toolbox support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/sagagis.html">Optional SAGA GIS support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/hpc.html">Optional HPC support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/dru.html">Optional DRU support</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ZOO-Services</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="what.html">What are ZOO-Services ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zcfg-reference.html">ZOO-Service configuration file</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Process profiles registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howtos.html">Create your own ZOO-Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translation.html">Translation Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="status.html">ZOO Status Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debug.html">Debugging ZOO Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zoo-services.html">Available ZOO-Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">ZOO-API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/what.html">What is ZOO-API ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/howto.html">Using ZOO-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/classes.html">ZOO-API Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../client/index.html">ZOO-Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../client/what.html">What is ZOO-Client ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/howto.html">Using ZOO-Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/example.html">Example application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributor Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/howto.html">How to contribute ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/service_providers.html">Service Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/code.html">Contribute code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/doc.html">Contribute documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/dev.html">Committer guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/release.html">Release Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/translate.html">Contribute translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribute/contributors.html">List of contributors</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ZOO-Project</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html"> Documentation</a> &#8725; &#160;</li>
+      
+          <li><a href="index.html">ZOO-Services</a> &#8725; &#160;</li>
+      
+    <li>Process profiles registry</li>
+      <li class="wy-breadcrumbs-aside">
+       $Date$
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <section id="process-profiles-registry">
+<span id="process-profiles"></span><h1>Process profiles registry<a class="headerlink" href="#process-profiles-registry" title="Permalink to this heading">¶</a></h1>
+<p>WPS Services belonging to the same Services provider often share the
+same inputs and outputs. In such a case, every <a class="reference internal" href="zcfg-reference.html#services-zcfg"><span class="std std-ref">ZCFG</span></a> file would contain the same metadata information and
+this may be a waste of time to write them all.</p>
+<p><a class="reference internal" href="../kernel/index.html#kernel-index"><span class="std std-ref">ZOO-Kernel</span></a> is able to handle metadata
+inheritance from <a class="reference external" href="http://www.zoo-project.org/trac/changeset/607">rev. 607</a>, and this solves
+the issue of writing many ZCFG with same input and output. A registry
+can be loaded by the ZOO-Kernel (before any other ZCFG files) and
+contain a set of Process Profiles organized in hierarchic levels
+according to the following rules:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Concept</em>: The higher level in the hierarchy. <em>Concepts</em> are basic
+text files containing an abstract description of a WPS Service
+(see <a class="reference external" href="http://docs.opengeospatial.org/is/14-065/14-065.html#33">the OGC definition</a> for
+more details).</p></li>
+<li><p><em>Generic</em>: A <em>Generic</em> profile can make reference to
+<em>Concepts</em>. It defines inputs and outputs without data format or
+maximum size limitation (see <a class="reference external" href="http://docs.opengeospatial.org/is/14-065/14-065.html#34">the OGC definition</a> for
+more details).</p></li>
+<li><p><em>Implementation</em>: An <em>Implementation</em> profile can inherit from a
+generic profile and make reference to concepts (see <a class="reference external" href="http://docs.opengeospatial.org/is/14-065/14-065.html#35">the OGC definition</a> for
+more details). It contains all the metadata information about a
+particular WPS Service (see <a class="reference internal" href="zcfg-reference.html#services-zcfg"><span class="std std-ref">ZCFG reference</span></a>
+for more information).</p></li>
+</ul>
+</div></blockquote>
+<p>Both <em>Generic</em> and <em>Implementation</em> process profiles are created  from
+<a class="reference internal" href="zcfg-reference.html#services-zcfg"><span class="std std-ref">ZCFG</span></a> files and stored in the registry
+sub-directories according to their level (<em>Concept</em>, <em>Generic</em> or
+<em>Implementation</em>).</p>
+<p>To activate the registry, you have to add a <code class="docutils literal notranslate"><span class="pre">registry</span></code> key to the
+<code class="docutils literal notranslate"><span class="pre">[main]</span></code> section of your <code class="docutils literal notranslate"><span class="pre">main.cfg</span></code> file, and set its value to the
+directory path used to store the profile ZCFG files. Please see
+<a class="reference internal" href="#install-gfr"><span class="std std-ref">Setup registry browser</span></a> for more details about the other services and
+parameters required.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Even if the profile registry was first introduced in WPS 2.0.0, it
+can be also used in the same way for WPS 1.0.0 Services.</p>
+</div>
+<section id="generic-process-profile">
+<h2>Generic Process Profile<a class="headerlink" href="#generic-process-profile" title="Permalink to this heading">¶</a></h2>
+<p>A Generic Process Profile is a ZCFG file located in the <code class="docutils literal notranslate"><span class="pre">generic</span></code>
+sub-directory, it defines <a class="reference external" href="zcfg-reference.html#main-metadata-information">main metadata information</a>, inputs and outputs
+name, basic metadata and multiplicity. It can make reference to a
+concept by defining a <code class="docutils literal notranslate"><span class="pre">concept</span></code> key in the <a class="reference external" href="zcfg-reference.html#main-metadata-information">main metadata
+information</a> part.</p>
+<p>You can find below the <cite>GO.zcfg</cite> file, a typical Generic Process
+Profile for Generic Geographic Operation, taking one InputPolygon
+input parameter and returning a result named Result, it make reference
+to the <code class="docutils literal notranslate"><span class="pre">GOC</span></code> concept:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>[GO]
+<span class="linenos"> 2</span> Title = Geographic Operation
+<span class="linenos"> 3</span> Abstract = Geographic Operation on exactly one input, returning one output
+<span class="linenos"> 4</span> concept = GOC
+<span class="linenos"> 5</span> level = generic
+<span class="linenos"> 6</span> statusSupported = true
+<span class="linenos"> 7</span> storeSupported = true
+<span class="linenos"> 8</span> &lt;DataInputs&gt;
+<span class="linenos"> 9</span>  [InputPolygon]
+<span class="linenos">10</span>   Title = the geographic data
+<span class="linenos">11</span>   Abstract = the geographic data to run geographipc operation
+<span class="linenos">12</span>   minOccurs = 1
+<span class="linenos">13</span>   maxOccurs = 1
+<span class="linenos">14</span> &lt;/DataInputs&gt;
+<span class="linenos">15</span> &lt;DataOutputs&gt;
+<span class="linenos">16</span>  [Result]
+<span class="linenos">17</span>   Title = the resulting data
+<span class="linenos">18</span>   Abstract = the resulting data after processing the operation
+<span class="linenos">19</span> &lt;/DataOutputs&gt;
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>if you need to reference more than one concept, you should
+separate their names with a comma (ie. concept = GO,GB),</p>
+</div>
+</section>
+<section id="process-implementation-profile">
+<h2>Process Implementation Profile<a class="headerlink" href="#process-implementation-profile" title="Permalink to this heading">¶</a></h2>
+<p>A Process Implementation Profile is similar to a <a class="reference external" href="zcfg-reference.html">ZCFG file</a> located in the <cite>implementation</cite>
+sub-directory, it defines (or inherit from its parent) all the
+properties of a <a class="reference external" href="#generic-process-profile">Generic Process Profile</a>
+and specify <a class="reference external" href="zcfg-reference.html#type-of-data-nodes">Data Format</a>
+for both inputs and outputs. It can make reference to a concept by
+defining a <code class="docutils literal notranslate"><span class="pre">concept</span></code> key in the <a class="reference external" href="zcfg-reference.html#main-metadata-information">main metadata information</a> part.</p>
+<p>You can find below the <cite>VectorOperation.zcfg</cite> file, a typical Process
+Implementation Profile for Vector Geographic Operation, it inherit
+from the <a class="reference external" href="#generic-process-profile">GP generic profile</a>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>[VectorOperation]
+<span class="linenos"> 2</span> Title = Vector Geographic Operation
+<span class="linenos"> 3</span> Abstract = Apply a Vector Geographic Operation on a features collection and return the resulting features collection
+<span class="linenos"> 4</span> extend = GO
+<span class="linenos"> 5</span> level = profile
+<span class="linenos"> 6</span> &lt;DataInputs&gt;
+<span class="linenos"> 7</span>  [InputPolygon]
+<span class="linenos"> 8</span>   Title = the vector data
+<span class="linenos"> 9</span>   Abstract = the vector data to run geographic operation
+<span class="linenos">10</span>   &lt;ComplexData&gt;
+<span class="linenos">11</span>    &lt;Default&gt;
+<span class="linenos">12</span>     mimeType = text/xml
+<span class="linenos">13</span>     encoding = UTF-8
+<span class="linenos">14</span>     schema = http://fooa/gml/3.1.0/polygon.xsd
+<span class="linenos">15</span>    &lt;/Default&gt;
+<span class="linenos">16</span>    &lt;Supported&gt;
+<span class="linenos">17</span>     mimeType = application/json
+<span class="linenos">18</span>     encoding = UTF-8
+<span class="linenos">19</span>     extension = js
+<span class="linenos">20</span>    &lt;/Supported&gt;
+<span class="linenos">21</span> &lt;/DataInputs&gt;
+<span class="linenos">22</span> &lt;DataOutputs&gt;
+<span class="linenos">23</span>  [Result]
+<span class="linenos">24</span>   Title = the resulting data
+<span class="linenos">25</span>   Abstract = the resulting geographic data after processing the operation
+<span class="linenos">26</span>   &lt;ComplexData&gt;
+<span class="linenos">27</span>    &lt;Default&gt;
+<span class="linenos">28</span>     mimeType = text/xml
+<span class="linenos">29</span>     encoding = UTF-8
+<span class="linenos">30</span>     schema = http://fooa/gml/3.1.0/polygon.xsd
+<span class="linenos">31</span>    &lt;/Default&gt;
+<span class="linenos">32</span>    &lt;Supported&gt;
+<span class="linenos">33</span>     mimeType = application/json
+<span class="linenos">34</span>     encoding = UTF-8
+<span class="linenos">35</span>     extension = js
+<span class="linenos">36</span>    &lt;/Supported&gt;
+<span class="linenos">37</span>   &lt;/ComplexData&gt;
+<span class="linenos">38</span> &lt;/DataOutputs&gt;
+</pre></div>
+</div>
+</section>
+<section id="zcfg-inheritance">
+<h2>ZCFG inheritance<a class="headerlink" href="#zcfg-inheritance" title="Permalink to this heading">¶</a></h2>
+<p>For the ZCFG files at the service level, you can inherit the metadata
+from a Process Implementation Profile available in the registry. As
+before, you simply need to add a <code class="docutils literal notranslate"><span class="pre">extend</span></code> key refering the ZCFG you
+want to inherit from and a <code class="docutils literal notranslate"><span class="pre">level</span></code> key taking the <cite>ìmplementation`</cite>
+value to your main metadata informations.</p>
+<p>So, for example, the original <a class="reference external" href="http://www.zoo-project.org/trac/browser/trunk/zoo-project/zoo-services/ogr/base-vect-ops/cgi-env/ConvexHull.zcfg?rev=491">ConvexHull.zcfg</a>
+may be rewritten as:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>[ConvexHull]
+<span class="linenos">2</span> Title = Compute convex hull.
+<span class="linenos">3</span> Abstract = Return a feature collection that represents the convex hull of each geometry from the input collection.
+<span class="linenos">4</span> serviceProvider = ogr_service.zo
+<span class="linenos">5</span> serviceType = C
+<span class="linenos">6</span> extend = VectorOperation
+<span class="linenos">7</span> level = implementation
+</pre></div>
+</div>
+<p>Now, suppose that your service is able to return the result in KML
+format, then you may write the following:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>[ConvexHull]
+<span class="linenos"> 2</span> Title = Compute convex hull.
+<span class="linenos"> 3</span> Abstract = Return a feature collection that represents the convex hull of each geometry from the input collection.
+<span class="linenos"> 4</span> serviceProvider = ogr_service.zo
+<span class="linenos"> 5</span> serviceType = C
+<span class="linenos"> 6</span> extend = VectorOperation
+<span class="linenos"> 7</span> level = implementation
+<span class="linenos"> 8</span> &lt;DataOutputs&gt;
+<span class="linenos"> 9</span>  [Result]
+<span class="linenos">10</span>     &lt;Supported&gt;
+<span class="linenos">11</span>      mimeType = application/vnd.google-earth.kml+xml
+<span class="linenos">12</span>      encoding = utf-8
+<span class="linenos">13</span>     &lt;/Supported&gt;
+<span class="linenos">14</span> &lt;/DataOutputs&gt;
+</pre></div>
+</div>
+</section>
+<section id="setup-registry-browser">
+<span id="install-gfr"></span><h2>Setup registry browser<a class="headerlink" href="#setup-registry-browser" title="Permalink to this heading">¶</a></h2>
+<p>In the <code class="docutils literal notranslate"><span class="pre">zoo-project/zoo-services/utils/registry</span></code>  you can find the
+source code and the <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> required to build the Registry Browser
+Services Provider. To build and install this service, use the
+following comands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">zoo</span><span class="o">-</span><span class="n">project</span><span class="o">/</span><span class="n">zoo</span><span class="o">-</span><span class="n">services</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">registry</span>
+<span class="n">make</span>
+<span class="n">cp</span> <span class="n">cgi</span><span class="o">-</span><span class="n">env</span><span class="o">/*</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="nb">bin</span>
+</pre></div>
+</div>
+<p>To have valid
+<code class="docutils literal notranslate"><span class="pre">href</span></code> in the metadata children of a <code class="docutils literal notranslate"><span class="pre">wps:Process</span></code>, you have to
+define the <code class="docutils literal notranslate"><span class="pre">registryUrl</span></code> to point to the path to browse the
+registry. For this you have two different options, the first one is to
+install the <code class="docutils literal notranslate"><span class="pre">GetFromRegistry</span></code> ZOO-Service and to use a WPS 1.0.0
+Execute request as <code class="docutils literal notranslate"><span class="pre">registryUrl</span></code> to dynamically generate <a class="reference external" href="http://docs.opengeospatial.org/is/14-065/14-065.html#33">Process
+Concept</a>,
+<a class="reference external" href="http://docs.opengeospatial.org/is/14-065/14-065.html#34">Generic Process Profile</a> and
+<a class="reference external" href="http://docs.opengeospatial.org/is/14-065/14-065.html#35">Process Implementation Profile</a>.
+You also have to add a <code class="docutils literal notranslate"><span class="pre">registryUrl</span></code> to the <code class="docutils literal notranslate"><span class="pre">[main]</span></code> section to
+inform the ZOO-Kernel that it should use the Registry Browser to
+create the href attribute of Metadata nodes. So by adding the
+following line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>registryUrl = http://localhost/cgi-bin/zoo_loader.cgi?request=Execute&amp;service=WPS&amp;version=1.0.0&amp;Identifier=GetFromRegistry&amp;RawDataOutput=Result&amp;DataInputs=id=
+</pre></div>
+</div>
+<p>The second option is to pre-generate each level of the hierarchy by
+running shell commands then set <code class="docutils literal notranslate"><span class="pre">registryUrl</span></code> to the URL to browse
+the generated files. In such a case, you will also have to define the
+<code class="docutils literal notranslate"><span class="pre">registryExt</span></code> and set it to the file extension you used to generate
+your registry cache.</p>
+<p>To generate the cache in <code class="docutils literal notranslate"><span class="pre">/opt/zoo/registry/</span></code>, use the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd /usr/lib/cgi-bin
+mkdir /opt/zoo/regcache/{concept,generic,implementation}
+for i in $(find /opt/zoo/registry/ -name &quot;*.*&quot;) ;
+do
+    j=$(echo $i | sed &quot;s:../registry//::g;s:.zcfg::g;s:.txt::g&quot;) ;
+   if [ -z &quot;$(echo $j | grep concept)&quot; ];
+   then
+       ext=&quot;xml&quot; ;
+   else
+       ext=&quot;txt&quot;;
+   fi
+    ./zoo_loader.cgi &quot;request=Execute&amp;service=wps&amp;version=1.0.0&amp;Identifier=GetFromRegistry&amp;RawDataOutput=Result&amp;DataInputs=id=$j&quot; | grep &quot;&lt;&quot; &gt; /opt/zoo/regcache/$j.$ext;
+done
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="howtos.html" class="btn btn-neutral float-right" title="Create your own ZOO-Services">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="zcfg-reference.html" class="btn btn-neutral" title="ZOO-Service configuration file"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+  <div class="pfoot">
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2024, ZOO-Project team. This work is released under a Creative Commons Attribution-ShareAlike 4.0 International Public License.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> inspired by <a href="https://readthedocs.org">Read the Docs</a>.
+</div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+</body>
+</html>

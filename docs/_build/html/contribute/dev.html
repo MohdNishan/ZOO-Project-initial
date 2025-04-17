@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Committer guidelines &mdash; ZOO-Project 2.0.0 documentation</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet" type="text/css">
+  
+  
+
+  
+
+  
+  
+    
+      <link rel="search" type="application/opensearchdescription+xml" title="Search within ZOO-Project 2.0.0 documentation" href="../_static/opensearch.xml"/>
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ZOO-Project 2.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Contributor Guide" href="index.html"/>
+        <link rel="next" title="Release Procedure" href="release.html"/>
+        <link rel="prev" title="Contribute documentation" href="doc.html"/> 
+
+  <script src="../_static/jquery.js"></script>
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'2.0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/documentation_options.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/sphinx_highlight.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+  
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+	  <a class="shrink" href="http://zoo-project.org"><img src="/docs/_static/zoo-sun-logo.png" class="img-responsive sun" style="display: inline;"> ZOO</a>
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#what-is-zoo-project">What is ZOO-Project ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#zoo-project-components">ZOO-Project components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro.html#open-source">Open Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">ZOO-Project installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install/prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/download.html">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/installation.html">Installation on Unix/Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/debian.html">Installation on Debian / Ubuntu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/opensuse.html">Install on OpenSUSE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/centos.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/windows.html">Installation on Windows ™</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install/docker.html">Installation using Docker ™</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kernel/index.html">ZOO-Kernel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/what.html">What is ZOO-Kernel ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/configuration.html">ZOO-Kernel configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/mapserver.html">Optional MapServer support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/orfeotoolbox.html">Optional Orfeo Toolbox support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/sagagis.html">Optional SAGA GIS support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/hpc.html">Optional HPC support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel/dru.html">Optional DRU support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../services/index.html">ZOO-Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../services/what.html">What are ZOO-Services ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zcfg-reference.html">ZOO-Service configuration file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/process-profiles.html">Process profiles registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/howtos.html">Create your own ZOO-Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/translation.html">Translation Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/status.html">ZOO Status Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/debug.html">Debugging ZOO Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/zoo-services.html">Available ZOO-Services</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">ZOO-API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/what.html">What is ZOO-API ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/howto.html">Using ZOO-API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/classes.html">ZOO-API Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../client/index.html">ZOO-Client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../client/what.html">What is ZOO-Client ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/howto.html">Using ZOO-Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../client/example.html">Example application</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Contributor Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="howto.html">How to contribute ?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="service_providers.html">Service Providers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html">Contribute code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html">Contribute documentation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Committer guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release.html">Release Procedure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="translate.html">Contribute translation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributors.html">List of contributors</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ZOO-Project</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html"> Documentation</a> &#8725; &#160;</li>
+      
+          <li><a href="index.html">Contributor Guide</a> &#8725; &#160;</li>
+      
+    <li>Committer guidelines</li>
+      <li class="wy-breadcrumbs-aside">
+       $Date$
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <section id="committer-guidelines">
+<span id="contribute-dev"></span><h1>Committer guidelines<a class="headerlink" href="#committer-guidelines" title="Permalink to this heading">¶</a></h1>
+<p>This section gathers information to the registered ZOO-Project developers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since March 2021, ZOO-Project’s source code is under GitHub control
+(<a class="reference external" href="https://github.com/ZOO-Project">https://github.com/ZOO-Project</a>).  In the past, ZOO-Project has also used
+Subversion for version control.</p>
+</div>
+<section id="election-to-git-commit-access">
+<h2>Election to Git Commit Access<a class="headerlink" href="#election-to-git-commit-access" title="Permalink to this heading">¶</a></h2>
+<p>Permission for git commit access shall be provided to new developers only if accepted by the <a class="reference internal" href="contributors.html#zoo-psc"><span class="std std-ref">ZOO-Project Project Steering Commitee</span></a>. A proposal should be written to the PSC for new committers and voted.</p>
+<p>Removal of git commit access should be handled by the same process.</p>
+<p>The new committer should have demonstrated commitment to ZOO-Project and knowledge of the ZOO-Project source code and processes to the committee’s satisfaction, usually by reporting bugs, submitting patches, and/or actively participating in the ZOO-Project mailing list(s).</p>
+<p>The new committer should also be prepared to support any new feature or changes that he/she commits to the ZOO-Project source tree in future releases, or to find someone to which to delegate responsibility for them if he/she stops being available to support the portions of code that he/she is responsible for.</p>
+<p>All committers should also be a member of the zoo-discuss mailing list so they can stay informed on policies, technical developments and release preparation.</p>
+<p>New commiters are responsible for having read, and understood this document.</p>
+</section>
+<section id="committer-tracking">
+<h2>Committer Tracking<a class="headerlink" href="#committer-tracking" title="Permalink to this heading">¶</a></h2>
+<p>A list of all project committers will be kept in the main zoo-project directory (called <a class="reference external" href="https://github.com/ZOO-Project/ZOO-Project/blob/main/zoo-project/COMMITTERS">COMMITTERS</a>) listing for each committer:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Userid: the id that will appear in the git logs for this person.</p></li>
+<li><p>Full name: the users actual name.</p></li>
+<li><p>Email address: A current email address at which the committer can be reached. It may be altered in normal ways to make it harder to auto-harvest.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="git-administrators">
+<h2>Git Administrators<a class="headerlink" href="#git-administrators" title="Permalink to this heading">¶</a></h2>
+<p>One member of the Project Steering Committee will be designed the Git Administrator. That person will be responsible for giving git commit access to folks, updating the COMMITTERS file, and other git related management. That person will need a user account to access GitHub of course.</p>
+</section>
+<section id="git-commit-practices">
+<h2>Git Commit Practices<a class="headerlink" href="#git-commit-practices" title="Permalink to this heading">¶</a></h2>
+<p>The following are considered good git commit practices for the ZOO-Project project.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Use meaningful descriptions for SVN commit log entries.</p></li>
+<li><p>Add an issue reference like “(#1234)” at the end of git commit log entries when committing changes related to an issue. The ‘#’ character enables GitHub to create a hyperlink from the changeset to the mentionned ticket.</p></li>
+<li><p>After commiting changes related to an issue, write the tree and revision in which it was fixed in the issue description. Such as “Fixed in master (<a class="reference external" href="mailto:ZOO-Project&#37;&#52;&#48;o0o00o0o">ZOO-Project<span>&#64;</span>o0o00o0o</a>) and in branches/1.7 (<a class="reference external" href="mailto:ZOO-Project&#37;&#52;&#48;o0o00o0o">ZOO-Project<span>&#64;</span>o0o00o0o</a>)”. The ‘ZOO-Project&#64;’ prefix enables GitHub to create a hyperlink from the issue to the corresponding commit (using the 8 first letters of the commit sha hash, ‘o0o00o0o’ in the example).</p></li>
+<li><p>Changes should not be committed in stable branches without a corresponding bug id. Any change worth pushing into the stable version is worth a bug entry.</p></li>
+<li><p>Never commit new features to a stable branch without permission of the PSC or release manager. Normally only fixes should go into stable branches.</p></li>
+<li><p>New features go in the main development main branch.</p></li>
+<li><p>Only bug fixes should be committed to the code during pre-release code freeze, without permission from the PSC or release manager.</p></li>
+<li><p>Significant changes to the main development version should be discussed on the zoo-discuss list before you make them, and larger changes will require to be discussed and approved on zoo-psc list by the PSC.</p></li>
+<li><p>Do not create new branches without the approval of the PSC. Release managers are assumed to have permission to create a branch.</p></li>
+<li><p>All source code in git should be in Unix text format as opposed to DOS text mode.</p></li>
+<li><p>When committing new features or significant changes to existing source code, the committer should take reasonable measures to insure that the source code continues to build and work on the most commonly supported platforms (currently Linux and Windows), either by testing on those platforms directly, running Buildbot tests, or by getting help from other developers working on those platforms. If new files or library dependencies are added, then the configure.in, Makefile.in, Makefile.vc and related documentations should be kept up to date.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="legal">
+<h2>Legal<a class="headerlink" href="#legal" title="Permalink to this heading">¶</a></h2>
+<p>Committers are the front line gatekeepers to keep the code base clear of improperly contributed code. It is important to the ZOO-Project users, developers and the OSGeo foundation to avoid contributing any code to the project without it being clearly licensed under the project license.</p>
+<p>Generally speaking the key issues are that those providing code to be included in the repository understand that the code will be released under the MIT/X license, and that the person providing the code has the right to contribute the code. For the commiter themselves understanding about the license is hopefully clear. For other contributors, the commiter should verify the understanding unless the commiter is very comfortable that the contributor understands the license (for instance frequent contributors).</p>
+<p>If the contribution was developed on behalf of an employer (on work time, as part of a work project, etc) then it is important that an appropriate representative of the employer understand that the code will be contributed under the MIT/X license. The arrangement should be cleared with an authorized supervisor/manager, etc.</p>
+<p>The code should be developed by the contributor, or the code should be from a source which can be rightfully contributed such as from the public domain, or from an open source project under a compatible license.</p>
+<p>All unusual situations need to be discussed and/or documented.</p>
+<p>Committers should adhere to the following guidelines, and may be personally legally liable for improperly contributing code to the source repository:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Make sure the contributor (and possibly employer) is aware of the contribution terms.</p></li>
+<li><p>Code coming from a source other than the contributor (such as adapted from another project) should be clearly marked as to the original source, copyright holders, license terms and so forth. This information can be in the file headers, but should also be added to the project licensing file if not exactly matching normal project licensing (zoo-project/zoo-kernel/LICENSE).</p></li>
+<li><p>Existing copyright headers and license text should never be stripped from a file. If a copyright holder wishes to give up copyright they must do so in writing to the foundation before copyright messages are removed. If license terms are changed it has to be by agreement (written in email is ok) of the copyright holders.</p></li>
+<li><p>Code with licenses requiring credit, or disclosure to users should be added to /trunk/zoo-project/zoo-kernel/LICENSE.</p></li>
+<li><p>When substantial contributions are added to a file (such as substantial patches) the author/contributor should be added to the list of copyright holders for the file.</p></li>
+<li><p>If there is uncertainty about whether a change it proper to contribute to the code base, please seek more information from the project steering committee, or the foundation legal counsel.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="release.html" class="btn btn-neutral float-right" title="Release Procedure">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="doc.html" class="btn btn-neutral" title="Contribute documentation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+  <div class="pfoot">
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2009-2024, ZOO-Project team. This work is released under a Creative Commons Attribution-ShareAlike 4.0 International Public License.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> inspired by <a href="https://readthedocs.org">Read the Docs</a>.
+</div>
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+ 
+
+</body>
+</html>
