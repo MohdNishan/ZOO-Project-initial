@@ -16,6 +16,7 @@ operating systems.
    opensuse
    centos
    windows
+   docker
 
 
 

@@ -3,7 +3,7 @@
 
 .. _install-ondocker:
 
-Installation using Docker |trade|
+Installation using Docker 
 =================================
 
 This guide provides step-by-step instructions to install and run the ZOO-Project using Docker. It utilizes the official ZOO-Project Docker images and configurations.
