@@ -1,30 +1,51 @@
-Please use the following syntaxe:
 
-  ./run.sh <WPSInstance> <ServiceName>
+## Documentation of Adding a New Test
 
-where <WPSInstance> should be the url to a WPS Server and <ServiceName> should 
-be the service name you want to run tests with.
+### 1. Identify the API request type (GET or POST)
+Determine whether the new test requires a GET or POST request based on the API's expected input and response structure. Ensure that the correct request method is used to communicate with the API.
 
-For instance to test the Buffer service on a localhost WPS server, use the 
-following command:
+### 2. Create a new file in `requests/` for storing XML requests
+For tests requiring XML payloads, store the request data in a separate file within the `requests/` directory. This approach keeps the test data organized, reusable, and easy to modify.
 
-  ./run.sh http://localhost/cgi-bin/zoo_loader.cgi Buffer
+### 3. Modify XML dynamically if needed
+If the XML request requires customization, use the `modify_xml` function. This function allows dynamic updates to XML elements, making tests flexible and adaptable to different scenarios. Example usage:
+```python
+replacements = {".//ows:Identifier": "NewProcess", ".//wps:LiteralData": "UpdatedValue"}
+modified_xml = modify_xml("requests/execute_template.xml", replacements)
+```
 
+### 4. Implement the test function in `test_zoo.py`
+Write a structured test function in `test_zoo.py` that sends the request, verifies the response, and includes assertions to check expected results. Example:
+```python
+def test_new_api_functionality(self):
+    response = requests.get(f"{URL}?request=NewRequestType&service=WPS")
+    self.assertEqual(response.status_code, 200, "Unexpected status code")
+    self.assertIn("ExpectedResponseTag", response.text, "Expected content not found")
+    logger.success("✅ Test Passed: New API functionality works correctly")
+```
 
-Important note:  sometimes XML validation failed because xmllint is unable to download
-a file required to validate. In such case, you can use the file /etc/xml/catalog on your
-local machine to use a local copy of the missing file.
+### 5. Log important details
+Use `logger.info()` to record key details such as request parameters, response status, and error messages. This enhances traceability and debugging. Example:
+```python
+logger.info(f"Sending request: {URL}?request=NewRequestType&service=WPS")
+logger.debug(f"Response received: {response.text[:500]}")
+```
 
-For instance, in case xml.xsd can't be downloaded, then you can download a copy using
-this url http://www.w3.org/2001/xml.xsd, store it in /etc/schemas directory and then 
-use the following /etc/xml/catalog file:
+### 6. Run the test and validate the response
+Execute the test script using:
+```sh
+python -m unittest test_zoo.py
+```
+Analyze the response and confirm that it meets the expected success or failure conditions. If the test fails, refine the logic or update the request parameters.
 
-<?xml version="1.0"?>
-<!DOCTYPE catalog PUBLIC "-//OASIS//DTD Entity Resolution XML Catalog V1.0//EN" "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-<rewriteSystem systemIdStartString="http://www.w3.org/2001/xml.xsd"
-                rewritePrefix="file:///etc/schemas/xml.xsd" />
-</catalog>
+### 7. Debug using Loguru if needed
+If errors occur, leverage Loguru for debugging by capturing response content and failure reasons. Example:
+```python
+except Exception as e:
+    logger.error(f"❌ Test Failed: {e}")
+    self.fail(f"Unexpected error: {e}")
+```
 
-Obviously, you can do similar manipulation for the OGC schemas to use local files 
-rather than downloading them for each tests.
+### 8. Commit successful tests to the repository
+Once the test passes, document any necessary changes and commit the updated test files to the repository.
+
