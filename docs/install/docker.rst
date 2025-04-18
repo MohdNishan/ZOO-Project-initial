@@ -60,19 +60,6 @@ Once the containers are running, you can access the ZOO-Project services:
 
   This demo showcases various capabilities and services provided by the ZOO-Project.
 
-Additional Configuration
-------------------------
-
-For specific workshop setups, you may need to add additional volume mappings in the `docker-compose.yml` file. For instance, to include workshop-specific services and data:
-
-.. code-block:: yaml
-
-    volumes:
-      - ./docker/ws2024:/usr/lib/cgi-bin/ws2024
-      - ./zoows2024/zoo-demo:/var/www/html/zoows-2024/
-      - ./zoows2024/data:/var/data
-
-Ensure these paths correspond to the actual directories in your setup.
 
 Stopping the Services
 ---------------------
