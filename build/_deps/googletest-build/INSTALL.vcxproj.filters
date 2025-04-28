@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\CMakeFiles\fa389863f9591e1aafaf2eb63000a96d\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{6C70FAF1-23F8-389B-87E7-691617C3057B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

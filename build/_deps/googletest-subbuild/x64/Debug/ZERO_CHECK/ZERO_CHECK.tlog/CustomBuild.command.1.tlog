@@ -1,0 +1,10 @@
+^C:\USERS\MHD NISHAN\DESKTOP\ZOO-PROJECT\ZOO-PROJECT\BUILD\_DEPS\GOOGLETEST-SUBBUILD\CMAKEFILES\1313B0D29031994E4C697DD696933472\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/Mhd Nishan/Desktop/zoo-project/ZOO-Project/build/_deps/googletest-subbuild" "-BC:/Users/Mhd Nishan/Desktop/zoo-project/ZOO-Project/build/_deps/googletest-subbuild" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/Mhd Nishan/Desktop/zoo-project/ZOO-Project/build/_deps/googletest-subbuild/googletest-populate.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

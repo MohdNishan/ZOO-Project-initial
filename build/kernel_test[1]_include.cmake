@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/Mhd Nishan/Desktop/zoo-project/ZOO-Project/build/kernel_test[1]_tests.cmake")
+  include("C:/Users/Mhd Nishan/Desktop/zoo-project/ZOO-Project/build/kernel_test[1]_tests.cmake")
+else()
+  add_test(kernel_test_NOT_BUILT kernel_test_NOT_BUILT)
+endif()

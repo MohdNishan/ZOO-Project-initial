@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\78472ab106d232676cad2bde125fdc10\googletest-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\78472ab106d232676cad2bde125fdc10\googletest-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\78472ab106d232676cad2bde125fdc10\googletest-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\78472ab106d232676cad2bde125fdc10\googletest-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\78472ab106d232676cad2bde125fdc10\googletest-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\78472ab106d232676cad2bde125fdc10\googletest-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\78472ab106d232676cad2bde125fdc10\googletest-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\78472ab106d232676cad2bde125fdc10\googletest-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\5919f9dbda2d880441389df27857b95e\googletest-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\1313b0d29031994e4c697dd696933472\googletest-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Mhd Nishan\Desktop\zoo-project\ZOO-Project\build\_deps\googletest-subbuild\CMakeFiles\googletest-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1F1C5AC4-73B2-3538-B766-2E89BC3A5D56}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
