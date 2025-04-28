@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-// Sample function to test (replace with actual ZOO-Kernel function)
+// Sample function to test
 int add(int a, int b) {
     return a + b;
 }
@@ -18,7 +18,6 @@ int divide(int a, int b) {
     return a / b;
 }
 
-// Tests
 TEST(ZooKernelTest, Addition) {
     EXPECT_EQ(add(2, 3), 5);
     EXPECT_EQ(add(-1, 1), 0);
@@ -36,5 +35,5 @@ TEST(ZooKernelTest, Multiplication) {
 
 TEST(ZooKernelTest, Division) {
     EXPECT_EQ(divide(10, 2), 5);
-    EXPECT_THROW(divide(5, 0), std::invalid_argument);  // Testing division by zero
+    EXPECT_THROW(divide(5, 0), std::invalid_argument);
 }
