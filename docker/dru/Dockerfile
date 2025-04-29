@@ -50,65 +50,6 @@ ARG BUILD_DEPS="libfcgi-dev\
     build-essential\
     librabbitmq-dev"
 
-ARG DEPS_TO_REMOVE="\
-    dpkg-dev\
-    unixodbc-dev\
-    python3.8-dev\
-    libzstd-dev\
-    libxerces-c-dev\
-    liburiparser-dev\
-    libwebp-dev\
-    libsuperlu-dev\
-    libstdc++-9-dev\
-    libsctp-dev\
-    librttopo-dev\
-    libpython3-dev\
-    libpython3.8-dev\
-    libqhull-dev\
-    libpoppler-dev\
-    libpoppler-private-dev\
-    libpq-dev\
-    libpng-dev\
-    libpcre2-dev\
-    libnetcdf-dev\
-    libnspr4-dev\
-    libogdi-dev\
-    libopenjp2-7-dev\
-    libminizip-dev\
-    liblapack-dev\
-    libldap2-dev\
-    libltdl-dev\
-    liblz4-dev\
-    libkml-dev\
-    libhdf5-dev\
-    libheif-dev\
-    libicu-dev\
-    libhdf4-alt-dev\
-    libgeos-dev\
-    libgeotiff-dev\
-    libgif-dev\
-    libfyba-dev\
-    libffi-dev\
-    libfreexl-dev\
-    libexpat1-dev\
-    libdeflate-dev\
-    libcfitsio-dev\
-    libcharls-dev\
-    libarmadillo-dev\
-    libarpack2-dev\
-    libblas-dev\
-    libblosc-dev\
-    libboost-dev\
-    libapr1-dev\
-    libaec-dev\
-    g++\
-    g++-9\
-    zlib1g-dev\
-    libjpeg-turbo8-dev \
-    libjpeg8-dev\
-    libcurl4-gnutls-dev\
-"
-
 RUN apt-get update -qqy  --no-install-recommends  && \
 apt-get install -qqy --no-install-recommends  software-properties-common && \
 add-apt-repository ppa:ubuntugis/ubuntugis-unstable && \
@@ -233,20 +174,19 @@ COPY docker/dru/requirements.txt /tmp/
 # (branch: feature/access-log-status-failed)
 RUN date && mkdir /tmp/cookiecutter-templates && \
     pip install --upgrade pip && \
-    # Using the latest version of pycalrissian with the fix for the RBAC
-    cd /tmp && \
-    git clone -b feature/v1subject-fix https://github.com/Terradue/pycalrissian.git && \
-    cd pycalrissian && \
-    python3 setup.py install && \
-    cd .. && \
     pip install -r /tmp/requirements.txt && \
     cd /tmp && \
     #pip install -i https://test.pypi.org/simple/ zoo-argowf-runner && \
-    git clone https://github.com/ZOO-Project/zoo-wes-runner.git && \
-    cd zoo-wes-runner && \
+    git clone -b develop https://github.com/gfenoy/eoepca-zoo-wes-runner.git && \
+    cd eoepca-zoo-wes-runner && \
     poetry build && \
     ls dist && \
     pip install dist/zoo_wes_runner-0.1.0-py3-none-any.whl && \
+    cd .. && \
+    git clone https://github.com/Terradue/pycalrissian.git && \
+    cd pycalrissian && \
+    sed "s:V1Subject:RbacV1Subject:g" -i pycalrissian/context.py && \
+    python3 setup.py install && \
     cd .. && \
     git clone https://github.com/EOEPCA/cwl-wrapper.git && \
     cd cwl-wrapper/ && \
@@ -268,10 +208,7 @@ RUN date && mkdir /tmp/cookiecutter-templates && \
     rm /var/log/apache2/error.log && \
     ln -s /dev/stdout /var/log/apache2/error.log && \
     #apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $BUILD_DEPS && \
-    apt-get purge -y $DEPS_TO_REMOVE $BUILD_DEPS && \
     rm -rf /var/lib/apt/lists/*
-
-
 
 COPY docker/dru/index.html /var/www/html/index.html
 
