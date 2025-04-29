@@ -1,0 +1,12 @@
+
+FROM python:3.10
+
+WORKDIR /app
+
+COPY testing/ /app/testing/
+
+RUN pip install requests loguru &&\
+apt-get update &&\
+apt-get install -y libxml2-utils 
+
+CMD ["python", "/app/testing/test_zoo.py"]

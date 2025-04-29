@@ -1,18 +1,17 @@
 #
 # Base: Ubuntu 18.04 with updates and external packages
 #
-FROM ubuntu:22.04 AS base
+FROM ubuntu:18.04 AS base
 ARG DEBIAN_FRONTEND=noninteractive
 ARG BUILD_DEPS=" \
     dirmngr \
     gpg-agent \
     software-properties-common \
-    wget \
+    #wget \
 "
 ARG RUN_DEPS=" \
     libcurl3-gnutls \
-    libfcgi-dev \
-    libfcgi-bin \
+    libfcgi \
     libmapserver-dev \
     curl \
     \
@@ -22,53 +21,38 @@ ARG RUN_DEPS=" \
     otb-bin \
     \
     libpq5 \
-    libpython3.10 \
+    libpython3.6 \
     libxslt1.1 \
     gdal-bin \
-    libcgal-dev \
-    libcgal-qt5-dev \
+    libcgal13 \
     librabbitmq4 \
-    nlohmann-json3-dev \
+    nlohmann-json-dev \
     python3 \
     r-base \
-    python3-pip \
+    python3-pip\
     libnode93 \
-    libhdf5-openmpi-103-1 libnetcdf-c++4 libvtk7.1p libvtkgdcm3.0 libvtkgdcm-cil libgdcm-dev libgdcm-java libgdcm-tools libvtkgdcm-dev libvtkgdcm-java libvtkgdcm-tools python3-vtkgdcm python3-gdcm \
 "
 RUN set -ex \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends $BUILD_DEPS software-properties-common gnupg wget curl \
+    && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS  \
     \
-    # Añadir el repositorio de UbuntuGIS
+    #&& add-apt-repository ppa:osgeolive/nightly \
+    #&& add-apt-repository ppa:ubuntugis/ubuntugis-unstable \
     && add-apt-repository ppa:ubuntugis/ppa \
-    \
-    # Crear directorio para claves modernas y deshabilitar IPv6 en GPG
-    && mkdir -p /etc/apt/keyrings \
-    && mkdir -p ~/.gnupg \
+    && mkdir ~/.gnupg \
     && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
-    \
-    # Añadir clave pública de CRAN
-    && curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc \
-       | gpg --dearmor -o /etc/apt/keyrings/cran-archive-keyring.gpg \
-    \
-    # Añadir el repositorio de CRAN
-    && echo "deb [signed-by=/etc/apt/keyrings/cran-archive-keyring.gpg] https://cloud.r-project.org/bin/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME")-cran40/" \
-       | tee /etc/apt/sources.list.d/cran.list \
-    \
-    # Actualizar repositorios
-    && apt-get update \
+    && echo "OK " \
+    && apt-key adv --homedir ~/.gnupg --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 \
+    && add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' \
     && add-apt-repository ppa:mmomtchev/libnode \
     \
     && apt-get install -y $RUN_DEPS \
     \
-    && curl -LO http://archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8_amd64.deb \
-    && dpkg -i libffi6_3.2.1-8_amd64.deb \
-    && wget http://launchpadlibrarian.net/309343863/libmozjs185-1.0_1.8.5-1.0.0+dfsg-7_amd64.deb \
-    && wget http://launchpadlibrarian.net/309343864/libmozjs185-dev_1.8.5-1.0.0+dfsg-7_amd64.deb \
+    && curl -o libmozjs185-1.0_1.8.5-1.0.0+dfsg-7_amd64.deb http://launchpadlibrarian.net/309343863/libmozjs185-1.0_1.8.5-1.0.0+dfsg-7_amd64.deb \
+    && curl -o libmozjs185-dev_1.8.5-1.0.0+dfsg-7_amd64.deb http://launchpadlibrarian.net/309343864/libmozjs185-dev_1.8.5-1.0.0+dfsg-7_amd64.deb \
     && dpkg --force-depends -i libmozjs185-1.0_1.8.5-1.0.0+dfsg-7_amd64.deb \
     && dpkg --force-depends -i libmozjs185-dev_1.8.5-1.0.0+dfsg-7_amd64.deb \
-    && apt -y --fix-broken install \
-    && rm libmozjs185*.deb libffi6*.deb \
+    && apt  -y --fix-broken install \
+    && rm /libmozjs185*.deb \
     \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $BUILD_DEPS \
     && rm -rf /var/lib/apt/lists/*
@@ -79,7 +63,6 @@ RUN set -ex \
 FROM base AS builder1
 ARG DEBIAN_FRONTEND=noninteractive
 ARG BUILD_DEPS=" \
-    build-essential \
     bison \
     flex \
     make \
@@ -102,9 +85,8 @@ ARG BUILD_DEPS=" \
     # Comment lines before this one if nor OTB nor SAGA \
     git \
     libfcgi-dev \
-    libfcgi-bin \
     libgdal-dev \
-    libwxgtk3.0-gtk3-dev \
+    libwxgtk3.0-dev \
     libjson-c-dev \
     libssh2-1-dev \
     libssl-dev \
@@ -116,19 +98,17 @@ ARG BUILD_DEPS=" \
     r-base-dev \
     librabbitmq-dev \
     libkrb5-dev \
-    nlohmann-json3-dev \
+    nlohmann-json-dev \
     libnode-dev \
     node-addon-api \
     nodejs \
-    libaprutil1-dev \
-    libxslt-dev \
-    libopengl-dev \
+    libaprutil1-dev\
 "
 WORKDIR /zoo-project
 COPY . .
 
 RUN set -ex \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS \
     \
     && make -C ./thirds/cgic206 libcgic.a \
@@ -142,14 +122,13 @@ RUN set -ex \
     #&& cd .. \
     #&& sed "s:-ljson-c:-Wl,-rpath,/usr/local/lib /usr/local/lib/libjson-c.so.5 :g" -i configure.ac \
     && autoconf \
-    && autoreconf --install \
-    # && find /usr -name otbWrapperApplication.h  # TODO: remove (cesarbenjamindotnet) \
-    && ./configure --with-rabbitmq=yes --with-python=/usr --with-pyvers=3.10 \
+    && find /usr -name otbWrapperApplication.h \
+    && ./configure --with-rabbitmq=yes --with-python=/usr --with-pyvers=3.6 \
               --with-nodejs=/usr --with-mapserver=/usr --with-ms-version=7  \
               --with-json=/usr --with-r=/usr --with-db-backend --prefix=/usr \
-              --with-otb=/usr --with-itk=/usr --with-otb-version=8.1 \
-              --with-itk-version=4.13 --with-saga=/usr \
-              --with-saga-version=7.3 --with-wx-config=/usr/bin/wx-config \
+              --with-otb=/usr/ --with-itk=/usr --with-otb-version=6.6 \
+              --with-itk-version=4.12 --with-saga=/usr \
+              --with-saga-version=7.2 --with-wx-config=/usr/bin/wx-config \
     && make -j4 \
     && make install \
     \
@@ -233,11 +212,6 @@ RUN set -ex \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $BUILD_DEPS \
     && rm -rf /var/lib/apt/lists/*
 
-# The originally Generated TrainRegression.zcfg file have issues and it don't allow the processes to run
-# This file is a quick and dirty fix, and this is for override the generated file
-# When it is fixed, this file and this line should be removed
-# COPY ./docker/TrainRegression.zcfg /usr/lib/cgi-bin/OTB/
-
 #
 # Optional zoo modules build.
 #
@@ -252,12 +226,10 @@ ARG BUILD_DEPS=" \
     gcc \
     libc-dev \
     libfcgi-dev \
-    libfcgi-bin \
     libgdal-dev \
     libxml2-dev \
     libxslt1-dev \
     libcgal-dev \
-    libcgal-qt5-dev \
     libnode-dev \
     node-addon-api \
 "
@@ -335,12 +307,7 @@ RUN set -ex \
 FROM base AS runtime
 ARG DEBIAN_FRONTEND=noninteractive
 ARG RUN_DEPS=" \
-    # se eliminó apache2 # TODO: remove (cesarbenjamindotnet) \
-    # apache2 \
-    # se agregó nginx \
-    nginx \
-    fcgiwrap \
-    spawn-fcgi \
+    apache2 \
     curl \
     cgi-mapserver \
     mapserver-bin \
@@ -348,11 +315,10 @@ ARG RUN_DEPS=" \
     libxml2-utils \
     gnuplot \
     locales \
-    # se eliminó libapache2-mod-fcgid # TODO: remove (cesarbenjamindotnet) \
-    # libapache2-mod-fcgid \
+    libapache2-mod-fcgid \
     python3-setuptools \
     #Uncomment the line below to add vi editor \
-    vim \
+    #vim \
     #Uncomment the lines below to add debuging \
     #valgrind \
     #gdb \
@@ -371,7 +337,6 @@ ARG BUILD_DEPS=" \
 #ARG SERVER_URL="http://zooprojectdemo.azurewebsites.net/"
 #ARG WS_SERVER_URL="ws://zooprojectdemo.azurewebsites.net"
 # For basic usage
-ARG SERVER_HOST="localhost"
 ARG SERVER_URL="http://localhost/"
 ARG WS_SERVER_URL="ws://localhost"
 
@@ -381,7 +346,6 @@ ARG WS_SERVER_URL="ws://localhost"
 
 WORKDIR /zoo-project
 COPY ./docker/startUp.sh /
-COPY ./docker/nginx-start.sh /
 
 # From zoo-kernel
 COPY --from=builder1 /usr/lib/cgi-bin/ /usr/lib/cgi-bin/
@@ -398,10 +362,8 @@ COPY --from=builder1 /zoo-project/zoo-project/zoo-services/utils/open-api/static
 COPY --from=builder1 /zoo-project/zoo-project/zoo-services/echo-py/cgi-env/ /usr/lib/cgi-bin/
 COPY --from=builder1 /zoo-project/zoo-project/zoo-services/deploy-py/cgi-env/ /usr/lib/cgi-bin/
 COPY --from=builder1 /zoo-project/zoo-project/zoo-services/undeploy-py/cgi-env/ /usr/lib/cgi-bin/
-# se eliminó la copia de .htaccess y default.conf de apache2 # TODO: remove (cesarbenjamindotnet)
-# COPY --from=builder1 /zoo-project/docker/.htaccess /var/www/html/.htaccess # TODO: remove (cesarbenjamindotnet)
-# COPY --from=builder1 /zoo-project/docker/default.conf /000-default.conf # TODO: remove (cesarbenjamindotnet)
-COPY --from=builder1 /zoo-project/docker/nginx-default.conf /etc/nginx/sites-available/zooproject
+COPY --from=builder1 /zoo-project/docker/.htaccess /var/www/html/.htaccess
+COPY --from=builder1 /zoo-project/docker/default.conf /000-default.conf
 COPY --from=builder1 /zoo-project/zoo-project/zoo-services/utils/open-api/server/publish.py /usr/lib/cgi-bin/publish.py
 
 # Node.js global node_modules
@@ -425,10 +387,7 @@ RUN set -ex \
     && apt-get update && apt-get install -y --no-install-recommends $RUN_DEPS $BUILD_DEPS \
     \
     && sed "s=https://petstore.swagger.io/v2/swagger.json=${SERVER_URL}/ogc-api/api=g" -i /var/www/html/swagger-ui/dist/* \
-    # se eliminó la configuración de apache2  # TODO: remove (cesarbenjamindotnet) \
-    # && sed "s=http://localhost=$SERVER_URL=g" -i /var/www/html/.htaccess  # TODO: remove (cesarbenjamindotnet) \
-    && sed "s=localhost=$SERVER_HOST=g" -i /etc/nginx/sites-available/zooproject \
-    && cp /etc/nginx/sites-available/zooproject /etc/nginx/sites-available/default \
+    && sed "s=http://localhost=$SERVER_URL=g" -i /var/www/html/.htaccess \
     && sed "s=http://localhost=$SERVER_URL=g;s=publisherUr\=$SERVER_URL=publisherUrl\=http://localhost=g;s=ws://localhost=$WS_SERVER_URL=g" -i /usr/lib/cgi-bin/oas.cfg \
     && sed "s=http://localhost=$SERVER_URL=g" -i /usr/lib/cgi-bin/main.cfg \
     && for i in $(find /usr/share/locale/ -name "zoo-kernel.mo"); do \
@@ -436,52 +395,49 @@ RUN set -ex \
          locale-gen $j ; \
          localedef -i $j -c -f UTF-8 -A /usr/share/locale/locale.alias ${j}.UTF-8; \
        done \
-    && mv /var/www/html/swagger-ui/dist  /var/www/html/swagger-ui/oapip \
+    && mv  /var/www/html/swagger-ui/dist  /var/www/html/swagger-ui/oapip \
     && mkdir /tmp/zTmp \
     && ln -s /tmp/zTmp /var/www/html/temp \
     && ln -s /usr/lib/x86_64-linux-gnu/saga/ /usr/lib/saga \
     && ln -s /testing /var/www/html/cptesting \
     && rm -rf /var/lib/apt/lists/* \
-    # && cp /000-default.conf /etc/apache2/sites-available/  # TODO: remove (cesarbenjamindotnet) \
+    && cp /000-default.conf /etc/apache2/sites-available/ \
     && export CPLUS_INCLUDE_PATH=/usr/include/gdal \
     && export C_INCLUDE_PATH=/usr/include/gdal \
     && pip3 install --upgrade pip setuptools wheel \
     # see various issue reported about _2to3 invocation and setuptools < 58.0 \
     && python3 -m pip install --upgrade --no-cache-dir setuptools==57.5.0 \
-    && pip3 install GDAL==3.6.4 \
+    && pip3 install GDAL==2.4.2 \
     && pip3 install Cheetah3 redis spython \
-    # se eliminó la modificación de apache2.conf  # TODO: remove (cesarbenjamindotnet) \
-    # && sed "s:AllowOverride None:AllowOverride All:g" -i /etc/apache2/apache2.conf   # TODO: remove (cesarbenjamindotnet) \
+    && sed "s:AllowOverride None:AllowOverride All:g" -i /etc/apache2/apache2.conf \
     \
-    # For using another port than 80, uncomment below.  # TODO: remove (cesarbenjamindotnet) \
-    # remember to also change the ports in docker-compose.yml  # TODO: remove (cesarbenjamindotnet) \
-    # && sed "s:Listen 80:Listen $PORT:g" -i /etc/apache2/ports.conf  # TODO: remove (cesarbenjamindotnet) \
+    # For using another port than 80, uncomment below. \
+    # remember to also change the ports in docker-compose.yml \
+    # && sed "s:Listen 80:Listen $PORT:g" -i /etc/apache2/ports.conf \
     \
     && mkdir -p /tmp/zTmp/statusInfos \
-    && chown www-data:www-data -R /tmp/zTmp /usr/com/zoo-project /usr/lib/cgi-bin/ \
+    && chown www-data:www-data -R /tmp/zTmp /usr/com/zoo-project \
     && chmod 755 /startUp.sh \
-    && chmod +x /nginx-start.sh \
     \
     # remove invalid zcfgs \
     && rm /usr/lib/cgi-bin/SAGA/db_pgsql/6.zcfg /usr/lib/cgi-bin/SAGA/imagery_tools/8.zcfg /usr/lib/cgi-bin/SAGA/grid_calculus_bsl/0.zcfg /usr/lib/cgi-bin/SAGA/grids_tools/1.zcfg /usr/lib/cgi-bin/SAGA/grid_visualisation/1.zcfg /usr/lib/cgi-bin/SAGA/ta_lighting/2.zcfg /usr/lib/cgi-bin/OTB/TestApplication.zcfg /usr/lib/cgi-bin/OTB/StereoFramework.zcfg \
     # Update SAGA zcfg
     && sed "s:AllowedValues =    <Default>:AllowedValues =\n    <Default>:g" -i /usr/lib/cgi-bin/SAGA/*/*zcfg \
     && sed "s:Title = $:Title = No title found:g" -i /usr/lib/cgi-bin/SAGA/*/*.zcfg \
-    # Enable apache modules  # TODO: remove (cesarbenjamindotnet) \
-    # se eliminó la habilitación de mod_fcgid  # TODO: remove (cesarbenjamindotnet) \
+    # Enable apache modules
     \
-    # && a2enmod cgi rewrite  # TODO: remove (cesarbenjamindotnet) \
+    && a2enmod cgi rewrite \
     \
     # Cleanup \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $BUILD_DEPS \
     && rm -rf /var/lib/apt/lists/*
 
+
 # service namespaces parent folder
 RUN mkdir -p /opt/zooservices_namespaces && chmod -R 700 /opt/zooservices_namespaces && chown -R www-data /opt/zooservices_namespaces
+
 
 # For using another port than 80, change the value below.
 # remember to also change the ports in docker-compose.yml
 EXPOSE 80
-# se eliminó el arranque con apache2   # TODO: remove (cesarbenjamindotnet)
-# CMD /usr/sbin/apache2ctl -D FOREGROUND   # TODO: remove (cesarbenjamindotnet)
-CMD ["/nginx-start.sh"]
+CMD /usr/sbin/apache2ctl -D FOREGROUND
