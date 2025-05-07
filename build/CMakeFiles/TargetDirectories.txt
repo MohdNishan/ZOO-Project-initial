@@ -1,8 +1,0 @@
-C:/Users/Mhd Nishan/Desktop/zoo-project1/ZOO-Project-initial/build/CMakeFiles/INSTALL.dir
-C:/Users/Mhd Nishan/Desktop/zoo-project1/ZOO-Project-initial/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/Mhd Nishan/Desktop/zoo-project1/ZOO-Project-initial/build/CMakeFiles/ZERO_CHECK.dir
-C:/Users/Mhd Nishan/Desktop/zoo-project1/ZOO-Project-initial/build/thirds/cgic206/CMakeFiles/cgic.dir
-C:/Users/Mhd Nishan/Desktop/zoo-project1/ZOO-Project-initial/build/thirds/cgic206/CMakeFiles/cgictest.cgi.dir
-C:/Users/Mhd Nishan/Desktop/zoo-project1/ZOO-Project-initial/build/thirds/cgic206/CMakeFiles/capture.dir
-C:/Users/Mhd Nishan/Desktop/zoo-project1/ZOO-Project-initial/build/thirds/cgic206/CMakeFiles/INSTALL.dir
-C:/Users/Mhd Nishan/Desktop/zoo-project1/ZOO-Project-initial/build/thirds/cgic206/CMakeFiles/ALL_BUILD.dir
