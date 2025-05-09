@@ -485,3 +485,13 @@ EXPOSE 80
 # se eliminó el arranque con apache2   # TODO: remove (cesarbenjamindotnet)
 # CMD /usr/sbin/apache2ctl -D FOREGROUND   # TODO: remove (cesarbenjamindotnet)
 CMD ["/nginx-start.sh"]
+
+
+FROM debian:bullseye
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    libfcgi-dev \
+    git
+
+WORKDIR /app
