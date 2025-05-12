@@ -1,4 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
+
+set(CMAKE_C_STANDARD 99)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/../../cmake/modules")
+
+include_directories(${FCGI_INCLUDE_DIRS})
+
+cmake_minimum_required(VERSION 3.10)
 project(cgic206 C)
 
 find_package(Fcgi REQUIRED)
@@ -20,3 +28,4 @@ target_link_libraries(capture PRIVATE cgic ${FCGI_LIBRARIES})
 
 install(TARGETS cgic ARCHIVE DESTINATION ../../dist/lib)
 install(FILES cgic.h DESTINATION ../../dist/include)
+
