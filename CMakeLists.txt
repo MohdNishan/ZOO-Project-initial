@@ -10,3 +10,4 @@ find_package(Fcgi REQUIRED)
 include_directories(${FCGI_INCLUDE_DIRS})
 
 add_subdirectory(thirds/cgic206)
+add_subdirectory(zoo-project/zoo-kernel)
