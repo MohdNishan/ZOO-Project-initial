@@ -35,3 +35,6 @@
 *.app
 
 # End of c++
+
+tmp
+/testing/__pycache__
