@@ -7,9 +7,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # List source files
 set(SOURCES
-    service.c
-    service_internal.c
-    zoo_service_loader.c
+    service.cpp
 )
 
 # Detect required programs (optional, can be expanded as needed)

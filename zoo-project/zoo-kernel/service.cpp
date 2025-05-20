@@ -25,7 +25,7 @@
 #include "service.h"
 
 // knut: time utilities required for new log function (logMessage)
-#include <time.h>
+#include <ctime>
 #include <chrono>
 #ifdef WIN32
 #include <process.h>
