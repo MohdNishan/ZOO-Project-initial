@@ -488,10 +488,24 @@ CMD ["/nginx-start.sh"]
 
 
 FROM debian:bullseye
+
 RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    bison \
+    flex \
     build-essential \
+    libssl-dev \
     cmake \
     libfcgi-dev \
-    git
+    libgdal-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libpq-dev \
+    libyaml-dev \
+    libtool \
+    pkg-config \
+    uuid-dev \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

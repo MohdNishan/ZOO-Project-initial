@@ -9,7 +9,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(SOURCES
     service.c
     service_internal.c
-    # zoo_service_loader.c
+    zoo_service_loader.c
 )
 
 # Detect required programs (optional, can be expanded as needed)
