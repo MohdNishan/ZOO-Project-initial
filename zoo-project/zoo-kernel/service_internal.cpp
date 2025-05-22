@@ -101,7 +101,7 @@ struct zooLock* lockFile(maps* conf,const char* filename,const char mode){
   int s;
   struct zooLock* myLock=(struct zooLock*)malloc(sizeof(struct flock)+sizeof(FILE*)+sizeof(char*));
   int len=6;
-  char *myTemplate="%s.lock";
+  const char *myTemplate="%s.lock";
   int res=-1;
  retryLockFile:
   myLock->filename=(char*)malloc((strlen(filename)+len)*sizeof(char));
@@ -174,7 +174,7 @@ struct zooLock* lockFile(maps* conf,const char* filename,const char mode){
 	   break;
     }
     if(res<0){
-      char *tmp;
+      const char *tmp;
       if(errno==EBADF)
 	tmp="Either: the filedes argument is invalid; you requested a read lock but the filedes is not open for read access; or, you requested a write lock but the filedes is not open for write access.";
       else
@@ -377,7 +377,7 @@ char* _getStatus(maps* conf,char* lid){
   sprintf (pcaStatusFile, "%s/%s.status", pmInputs->value, lid);
   FILE* f0 = fopen (pcaStatusFile, "r");
   if(f0!=NULL){
-    semid lockid = NULL;
+    semid lockid = 0;
     char* stat;
     long flen;
     stat=getStatusId(conf,lid);
@@ -461,7 +461,7 @@ int _updateStatus(maps *conf){
   if(status!=NULL && msg!=NULL &&
      status->value!=NULL && msg->value!=NULL && 
      strlen(status->value)>0 && strlen(msg->value)>1){    
-    semid lockid = NULL;
+    semid lockid = 0;
     char* stat=getStatusId(conf,pmSid->value);
     if(stat!=NULL){
       lockid=acquireLock(conf);
@@ -922,6 +922,7 @@ bool validateVRT(maps* pmsConf,const char* pccVRTName){
     }
     return true;
   }
+  return false;
 }
 
 /**
