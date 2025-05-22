@@ -27,8 +27,8 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# Create static library
-add_library(zookernel STATIC ${SOURCES})
+# Create shared library
+add_library(zookernel SHARED ${SOURCES})
 
 # Link required libraries
 target_link_libraries(zookernel
