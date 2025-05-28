@@ -1,0 +1,27 @@
+FROM ubuntu:22.04 AS base
+
+# Install deps
+RUN apt-get update && \
+    apt-get install -y \
+        build-essential cmake git libpq-dev libsqlite3-dev libxslt1-dev \
+        libfcgi-dev libjson-c-dev libgdal-dev uuid-dev bison flex && \
+    find /usr/include -name ogr_api.h && \
+    apt-get clean
+
+
+# Create working dir
+WORKDIR /zoo-project
+
+# Copy source code
+COPY . .
+
+# Build
+RUN rm -rf build && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make -j4 && \
+    ./zoo-project/tests/ZOO_Service_Shared_Library
+
+# Run tests
+CMD ["/zoo-project/build/ZOO_Service_Shared_Library"]
