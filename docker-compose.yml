@@ -1,4 +1,3 @@
-version: '3'
 services:
   zookernel:
     platform: linux/amd64
@@ -6,7 +5,7 @@ services:
     #build: .
     networks:
       front-tier:
-        ipv4_address: 172.16.238.10
+        ipv4_address: 172.16.231.10
     ports:
       - "80:80"
     volumes:
@@ -42,7 +41,7 @@ services:
     image: zooproject/zoo-project:latest
     networks:
       front-tier:
-        ipv4_address: 172.16.238.11
+        ipv4_address: 172.16.231.11
     volumes:
       - ./docker/main.cfg:/usr/lib/cgi-bin/main.cfg
       - ./docker/oas.cfg:/usr/lib/cgi-bin/oas.cfg
@@ -63,7 +62,7 @@ services:
     command: [ "/startUp.sh" ]
     extra_hosts:
       #- "localhost:zookernel"
-      - "localhost:172.16.238.10"
+      - "localhost:172.16.231.10"
   websocketd:
     #platform: linux/amd64
     build:
@@ -71,7 +70,7 @@ services:
       dockerfile: docker/websocketd/Dockerfile
     networks:
       front-tier:
-        ipv4_address: 172.16.238.12
+        ipv4_address: 172.16.231.12
     depends_on:
       - redis
     ports:
@@ -87,7 +86,7 @@ services:
     restart: always
     networks:
       front-tier:
-        ipv4_address: 172.16.238.13
+        ipv4_address: 172.16.231.13
     environment:
       POSTGRES_USER: zoo
       POSTGRES_PASSWORD: zoo
@@ -104,25 +103,27 @@ services:
     image: edoburu/pgbouncer:1.12.0
     networks:
       front-tier:
-        ipv4_address: 172.16.238.14
+        ipv4_address: 172.16.231.14
     environment:
       DATABASE_URL: "postgres://zoo:zoo@pg/zoo"
       MAX_CLIENT_CONN: 1000
       MAX_DB_CONNECTIONS: 100
       DEFAULT_POOL_SIZE: 100
       POOL_MODE: transaction
+    ports:
+      - 192.168.49.1:5432:5432
     depends_on:
       - pg
   redis:
     image: redis:6.0.9
     networks:
       front-tier:
-        ipv4_address: 172.16.238.15
+        ipv4_address: 172.16.231.15
   rabbitmq:
     image: rabbitmq:3.8.9-management-alpine
     networks:
       front-tier:
-        ipv4_address: 172.16.238.16
+        ipv4_address: 172.16.231.16
     volumes:
       - ./docker/definitions.json:/etc/rabbitmq/definitions.json
 
@@ -131,4 +132,4 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: "172.16.238.0/24"
+        - subnet: "172.16.231.0/24"
