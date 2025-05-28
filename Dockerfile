@@ -485,3 +485,27 @@ EXPOSE 80
 # se eliminó el arranque con apache2   # TODO: remove (cesarbenjamindotnet)
 # CMD /usr/sbin/apache2ctl -D FOREGROUND   # TODO: remove (cesarbenjamindotnet)
 CMD ["/nginx-start.sh"]
+
+
+FROM debian:bullseye
+
+# Install deps
+RUN apt-get update && \
+    apt-get install -y \
+        build-essential cmake git libpq-dev libsqlite3-dev libmariadb-dev \
+        libfcgi-dev libjson-c-dev libgdal-dev \
+        libxslt1-dev bison && \
+    apt-get clean
+
+
+# Create working dir
+WORKDIR /zoo-project
+
+# Copy source code
+COPY . .
+
+# Build
+RUN mkdir build && cd build && find /usr/ -name fcgi_stdio.h && cmake .. && make -j4
+
+# Run tests
+CMD ["/zoo-project/build/sqlapi_test"]
