@@ -35,3 +35,5 @@
 *.app
 
 # End of c++
+
+tmp
