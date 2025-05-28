@@ -1,0 +1,1 @@
+/usr/bin/cc  -g -Wall CMakeFiles/cgictest.cgi.dir/cgictest.c.o -o cgictest.cgi  libcgic.a /usr/lib/x86_64-linux-gnu/libfcgi.so 

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -shared -Wl,-soname,libzookernel.so -o libzookernel.so CMakeFiles/zookernel.dir/service.cpp.o CMakeFiles/zookernel.dir/service_internal.cpp.o CMakeFiles/zookernel.dir/service_yaml.c.o CMakeFiles/zookernel.dir/service_json.c.o  /usr/lib/x86_64-linux-gnu/libcurl.so /usr/lib/libgdal.so /usr/lib/x86_64-linux-gnu/libxml2.so 

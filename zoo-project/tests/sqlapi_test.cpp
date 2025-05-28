@@ -1,13 +1,20 @@
 #include <gtest/gtest.h>
 
-// Manually declare the internal functions
 extern "C" {
+    // Include the API header
+    #include "sqlapi.h"
+
+    // Declare missing internal testable functions
     void* sqlInit();
-    void sqlFree(void* handle);
+    void sqlFree(void*);
 }
 
-TEST(SqlApiTest, SqlInitFree) {
+TEST(SqlApiTest, InitAndFreeHandle) {
     void* sqlHandle = sqlInit();
-    ASSERT_NE(sqlHandle, nullptr);
+
+    // Ensure initialization was successful
+    ASSERT_NE(sqlHandle, nullptr) << "sqlInit() returned null — expected a valid SQLite handle.";
+
+    // Cleanup
     sqlFree(sqlHandle);
 }

@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/app/thirds/cgic206/capture.c
+cgic.h
+/app/thirds/cgic206/cgic.h
+
+/app/thirds/cgic206/cgic.h
+fcgi_stdio.h
+/app/thirds/cgic206/fcgi_stdio.h
+

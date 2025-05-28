@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/app/thirds/cgic206/cgic.c
+fcgi_stdio.h
+-
+stdio.h
+-
+string.h
+-
+ctype.h
+-
+stdlib.h
+-
+time.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+io.h
+-
+fcntl.h
+-
+unistd.h
+-
+cgic.h
+/app/thirds/cgic206/cgic.h
+
+/app/thirds/cgic206/cgic.h
+fcgi_stdio.h
+/app/thirds/cgic206/fcgi_stdio.h
+

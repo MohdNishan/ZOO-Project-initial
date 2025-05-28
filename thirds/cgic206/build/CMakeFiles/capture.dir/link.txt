@@ -1,0 +1,1 @@
+/usr/bin/cc  -g -Wall CMakeFiles/capture.dir/capture.c.o -o capture  libcgic.a /usr/lib/x86_64-linux-gnu/libfcgi.so 

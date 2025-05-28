@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcgic.a CMakeFiles/cgic.dir/cgic.c.o
+/usr/bin/ranlib libcgic.a

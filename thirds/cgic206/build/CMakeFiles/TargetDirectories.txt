@@ -1,0 +1,9 @@
+/app/thirds/cgic206/build/CMakeFiles/install/strip.dir
+/app/thirds/cgic206/build/CMakeFiles/install/local.dir
+/app/thirds/cgic206/build/CMakeFiles/install.dir
+/app/thirds/cgic206/build/CMakeFiles/list_install_components.dir
+/app/thirds/cgic206/build/CMakeFiles/rebuild_cache.dir
+/app/thirds/cgic206/build/CMakeFiles/edit_cache.dir
+/app/thirds/cgic206/build/CMakeFiles/capture.dir
+/app/thirds/cgic206/build/CMakeFiles/cgictest.cgi.dir
+/app/thirds/cgic206/build/CMakeFiles/cgic.dir

@@ -1,0 +1,3 @@
+/app/zoo-project/zoo-kernel/build/CMakeFiles/rebuild_cache.dir
+/app/zoo-project/zoo-kernel/build/CMakeFiles/edit_cache.dir
+/app/zoo-project/zoo-kernel/build/CMakeFiles/zookernel.dir
