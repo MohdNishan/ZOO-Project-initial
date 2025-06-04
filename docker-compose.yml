@@ -103,7 +103,7 @@ services:
     image: edoburu/pgbouncer:1.12.0
     networks:
       front-tier:
-        ipv4_address: 172.16.231.14
+        ipv4_address: 192.168.1.2
     environment:
       DATABASE_URL: "postgres://zoo:zoo@pg/zoo"
       MAX_CLIENT_CONN: 1000
