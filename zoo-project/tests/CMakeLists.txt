@@ -141,7 +141,7 @@ add_executable(ZOO_Service_Shared_Library sqlapi_test.cpp
   ../zoo-kernel/service_internal_gdal.cpp 
   ../zoo-kernel/sqlapi.cpp 
   ../zoo-kernel/service_internal.c
-  ../zoo-kernel/request_parser.c
+  ../zoo-kernel/request_parser.cpp
   ../zoo-kernel/caching.cpp
   sqlapi_test.cpp
   ${CONF_SRC}
