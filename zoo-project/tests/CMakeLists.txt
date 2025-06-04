@@ -136,32 +136,58 @@ enable_testing()
 
 # Add your test executable
 #add_executable(ZOO_Service_Shared_Library sqlapi_test.cpp ../zoo-kernel/service.cpp ../zoo-kernel/service_internal_gdal.cpp ../zoo-kernel/sqlapi.cpp )
-add_executable(ZOO_Service_Shared_Library sqlapi_test.cpp ../zoo-kernel/service.cpp ../zoo-kernel/service_internal_gdal.cpp ../zoo-kernel/sqlapi.cpp )
+add_executable(ZOO_Service_Shared_Library sqlapi_test.cpp 
+  ../zoo-kernel/service.cpp 
+  ../zoo-kernel/service_internal_gdal.cpp 
+  ../zoo-kernel/sqlapi.cpp 
+  ../zoo-kernel/service_internal.c
+  ../zoo-kernel/request_parser.c
+  ../zoo-kernel/caching.cpp
+  sqlapi_test.cpp
+  ${CONF_SRC}
+)
 
 
 add_definitions(-DUSE_AMQP=1)
 add_definitions(-DMETA_DB=1)
 add_definitions(-DRELY_ON_DB=1)
-add_definitions(-DUSE_MS=1)
 add_definitions(-DDRU_ENABLED=1)
 add_definitions(-DPROJ_VERSION_MAJOR=8)
 
 # Link it with GoogleTest and your zoo-kernel library (zoo_service)
 #target_link_libraries(zoo_service PRIVATE fcgi xml2 gdal curl crypto uuid json-c)
 
-target_link_libraries(ZOO_Service_Shared_Library PRIVATE gtest gtest_main fcgi xml2 gdal curl crypto uuid json-c)
+target_link_libraries(ZOO_Service_Shared_Library PRIVATE gtest gtest_main fcgi xml2 gdal curl crypto uuid json-c ${CMAKE_THREAD_LIBS_INIT} ${CURL_LIBRARIES}
+    ${LIBXML2_LIBRARIES}
+    pthread )
 
-find_package(BISON)
-#bison_target(MyParser main_conf_read.y ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp
-#             DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/parser.h)
-#add_executable(Foo main.cpp ${BISON_MyParser_OUTPUTS})
+find_package(BISON REQUIRED)
+find_package(FLEX REQUIRED)
 
+# Process main_conf_read.l and main_conf_read.y from zoo-kernel directory
+BISON_TARGET(MainConfReadParser
+    ../zoo-kernel/main_conf_read.y
+    ${CMAKE_CURRENT_BINARY_DIR}/main_conf_read.tab.c
+)
+FLEX_TARGET(MainConfReadScanner
+    ../zoo-kernel/main_conf_read.l
+    ${CMAKE_CURRENT_BINARY_DIR}/main_conf_read.yy.c
+)
+ADD_FLEX_BISON_DEPENDENCY(MainConfReadScanner MainConfReadParser)
 
 # Make sure it can find the headers from zoo-kernel
 target_include_directories(ZOO_Service_Shared_Library PRIVATE
     ${CMAKE_SOURCE_DIR}/thirds/cgic206
     ${CMAKE_SOURCE_DIR}/zoo-project/zoo-kernel
     ${PROJECT_SOURCE_DIR}/zoo-kernel/usr/include/gdal 
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+# Add the parser+scanner source files and your config loader
+set(CONF_SRC
+    ${BISON_MainConfReadParser_OUTPUTS}
+    ${FLEX_MainConfReadScanner_OUTPUTS}
+    loadLocalCfg.cpp
 )
 
 # Discover tests

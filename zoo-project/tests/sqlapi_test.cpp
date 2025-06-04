@@ -1,8 +1,20 @@
 #include <gtest/gtest.h>
-#include "service.h"
+#include <string>
 #include "sqlapi.h"
 #define USE_AMQP 1
 #define META_DB 1
+
+extern "C" {
+#include "service.h"
+#include "service_internal.h"
+}
+
+int loadLocalCfg(const char*);
+
+TEST(ConfigTest, LoadMainCfg) {
+    int result = loadLocalCfg("main.cfg");
+    EXPECT_EQ(result, 0);
+}
 
 maps* loadCfg() {
     maps* pmsConf = createMaps("database");
@@ -11,7 +23,7 @@ maps* loadCfg() {
     EXPECT_FALSE(pmsConf->content == NULLMAP);
     addToMap(pmsConf->content, "user","zoo");
     addToMap(pmsConf->content, "password","zoo");
-    addToMap(pmsConf->content, "host","gf-Precision-3591.local");
+    addToMap(pmsConf->content, "host","192.168.1.5");
     addToMap(pmsConf->content, "type","PG");
     addToMap(pmsConf->content, "schema","public");
     maps* pmsConf1 = createMaps("auth_env");
@@ -68,4 +80,3 @@ TEST(sqlapi_test, init_sql) {
 //     freeMaps(&pmsConf);
 //     free(pmsConf);
 // }
-

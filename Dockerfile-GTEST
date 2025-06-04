@@ -15,13 +15,14 @@ WORKDIR /zoo-project
 # Copy source code
 COPY . .
 
+COPY main.cfg /zoo-project/tests/main.cfg
+
 # Build
 RUN rm -rf build && \
     mkdir build && \
     cd build && \
     cmake .. && \
-    make -j4 && \
-    ./zoo-project/tests/ZOO_Service_Shared_Library
+    make -j4 
 
 # Run tests
-CMD ["/zoo-project/build/ZOO_Service_Shared_Library"]
+CMD ["./build/zoo-project/tests/ZOO_Service_Shared_Library"]
