@@ -147,6 +147,7 @@ add_executable(ZOO_Service_Shared_Library sqlapi_test.cpp
   ../zoo-kernel/server_internal.cpp
   ../zoo-kernel/service_callback.cpp
   ../zoo-kernel/ulinet.c
+  ../zoo-kernel/service_json.cpp
   ${CONF_SRC}
 )
 
@@ -156,6 +157,7 @@ add_definitions(-DMETA_DB=1)
 add_definitions(-DRELY_ON_DB=1)
 add_definitions(-DDRU_ENABLED=1)
 add_definitions(-DPROJ_VERSION_MAJOR=8)
+add_definitions(-DZOO_VERSION="1.8.0")
 
 # Link it with GoogleTest and your zoo-kernel library (zoo_service)
 #target_link_libraries(zoo_service PRIVATE fcgi xml2 gdal curl crypto uuid json-c)
