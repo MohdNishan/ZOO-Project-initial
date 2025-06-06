@@ -134,9 +134,12 @@ set( ZOO_LOG_FORMAT "%d | %l | %p %f:%u:%i - %m")
 
 enable_testing()
 
+include_directories(../../../thirds/cgic206)
+
 # Add your test executable
 #add_executable(ZOO_Service_Shared_Library sqlapi_test.cpp ../zoo-kernel/service.cpp ../zoo-kernel/service_internal_gdal.cpp ../zoo-kernel/sqlapi.cpp )
-add_executable(ZOO_Service_Shared_Library sqlapi_test.cpp 
+add_executable(ZOO_Service_Shared_Library 
+  sqlapi_test.cpp 
   ../zoo-kernel/service.cpp 
   ../zoo-kernel/service_internal_gdal.cpp 
   ../zoo-kernel/sqlapi.cpp 
@@ -148,7 +151,8 @@ add_executable(ZOO_Service_Shared_Library sqlapi_test.cpp
   ../zoo-kernel/service_callback.cpp
   ../zoo-kernel/ulinet.c
   ../zoo-kernel/service_json.cpp
-  ${CONF_SRC}
+  ../zoo-kernel/zoo_loader.cpp
+  ../../../thirds/cgic206/cgic.c
 )
 
 
@@ -163,7 +167,7 @@ add_definitions(-DZOO_VERSION="1.8.0")
 #target_link_libraries(zoo_service PRIVATE fcgi xml2 gdal curl crypto uuid json-c)
 
 target_link_libraries(ZOO_Service_Shared_Library PRIVATE gtest gtest_main fcgi xml2 gdal curl crypto uuid json-c ${CMAKE_THREAD_LIBS_INIT} ${CURL_LIBRARIES}
-    ${LIBXML2_LIBRARIES}
+    ${LIBXML2_LIBRARIES} ${CGIC_LIBRARY}
     pthread )
 
 find_package(BISON REQUIRED)
@@ -179,6 +183,8 @@ FLEX_TARGET(MainConfReadScanner
     ${CMAKE_CURRENT_BINARY_DIR}/main_conf_read.yy.c
 )
 ADD_FLEX_BISON_DEPENDENCY(MainConfReadScanner MainConfReadParser)
+
+
 
 # Make sure it can find the headers from zoo-kernel
 target_include_directories(ZOO_Service_Shared_Library PRIVATE
