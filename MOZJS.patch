@@ -1,0 +1,87 @@
+diff --git a/Dockerfile-MOZJS b/Dockerfile-MOZJS
+index 92db916..da7494f 100644
+--- a/Dockerfile-MOZJS
++++ b/Dockerfile-MOZJS
+@@ -297,6 +297,7 @@ ARG RUN_DEPS=" \
+     gnuplot \
+     locales \
+     libapache2-mod-fcgid \
++    libapache2-mod-auth-openidc \
+     python3-setuptools \
+     #Uncomment the line below to add vi editor \
+     #vim \
+@@ -399,7 +400,7 @@ RUN set -ex \
+     && sed "s:Title = $:Title = No title found:g" -i /usr/lib/cgi-bin/SAGA/*/*.zcfg \
+     # Enable apache modules
+     \
+-    && a2enmod cgi rewrite \
++    && a2enmod cgi rewrite headers auth_openidc proxy proxy_http \
+     \
+     # Cleanup \
+     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $BUILD_DEPS \
+diff --git a/docker/main.cfg b/docker/main.cfg
+index b4d3d9f..e248196 100644
+--- a/docker/main.cfg
++++ b/docker/main.cfg
+@@ -1,15 +1,15 @@
+ [main]
+ encoding = utf-8
+ version = 1.0.0
+-serverAddress = http://localhost/cgi-bin/zoo_loader.cgi
++serverAddress = http://192.168.1.47/cgi-bin/zoo_loader.cgi
+ language = en-US
+ lang = fr-FR,en-CA,en-US
+ tmpPath=/tmp/zTmp/
+-tmpUrl = http://localhost/temp/
++tmpUrl = http://192.168.1.47/temp/
+ dataPath = /usr/com/zoo-project
+ cacheDir = /tmp/zTmp/
+ templatesPath = /var/www/
+-mapserverAddress = http://localhost/cgi-bin/mapserv
++mapserverAddress = http://192.168.1.47/cgi-bin/mapserv
+ msOgcVersion=1.0.0
+ cors=true
+ memory=load
+@@ -40,6 +40,10 @@ phoneFacsimile=False
+ [headers]
+ X-Powered-By=ZOO-Project
+ Content-Security-Policy=default-src 'self'; script-src 'self'; style-src 'self';
++Access-Control-Allow-Origin=*
++Access-Control-Allow-Methods=GET, POST, PUT, PATCH, OPTIONS, DELETE, HEAD
++Access-Control-Allow-Headers=Content-Type, Accept, Authorization, Origin
++Access-Control-Allow-Credentials=true
+ 
+ [database]
+ dbname=zoo
+diff --git a/docker/oas.cfg b/docker/oas.cfg
+index 0a6ef77..238d0d5 100644
+--- a/docker/oas.cfg
++++ b/docker/oas.cfg
+@@ -1,7 +1,7 @@
+ [openapi]
+ use_content=false
+-rootUrl=http://localhost/ogc-api
+-rootHost=http://localhost
++rootUrl=http://192.168.1.47/ogc-api
++rootHost=http://192.168.1.47
+ rootPath=ogc-api
+ links=/,/api,/conformance,/processes,/jobs
+ paths=/root,/api,/conformance,/processes,/processes/{processID},/processes/SAGA.shapes_points.12/execution,/processes/OTB.BandMath/execution,/processes/{processID}/execution,/jobs,/jobs/{jobID},/jobs/{jobID}/results
+@@ -17,7 +17,7 @@ publisherUrl=http://zookernel/cgi-bin/publish.py?jobid=
+ link_href=http://zoo-project.org/dl/link.json
+ tags=Home,API,Conformance,GetCapabilities,ProcessDescription,ExecuteEndpoint,JobList,GetStatus,GetResult,Dismiss
+ examplesPath=/var/www/html/examples/
+-examplesUrl=http://localhost/examples/
++examplesUrl=http://192.168.1.47/examples/
+ exceptionsUrl=http://www.opengis.net/def/exceptions/ogcapi-processes-1/1.0
+ sensure_type_validation=true
+ sensure_type_validation_but_ets=true
+@@ -93,7 +93,7 @@ rel=service-doc
+ type=text/html
+ 
+ [api.html]
+-href=http://localhost/swagger-ui/oapip/
++href=http://192.168.1.47/swagger-ui/oapip/
+ 
+ [api]
+ method=get

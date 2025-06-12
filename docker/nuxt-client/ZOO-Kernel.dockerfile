@@ -1,6 +1,7 @@
 #
 # Base: Ubuntu 18.04 with updates and external packages
 #
+
 FROM ubuntu:bionic-20230308 AS base
 ARG DEBIAN_FRONTEND=noninteractive
 ARG BUILD_DEPS=" \
@@ -23,7 +24,6 @@ ARG RUN_DEPS=" \
     libpq5 \
     libpython3.6 \
     libxslt1.1 \
-    libgdal26 \
     gdal-bin \
     libcgal13 \
     librabbitmq4 \
@@ -31,6 +31,7 @@ ARG RUN_DEPS=" \
     python3 \
     r-base \
     python3-pip\
+    libnode93 \
 "
 RUN set -ex \
     && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS  \
@@ -43,6 +44,7 @@ RUN set -ex \
     && echo "OK " \
     && apt-key adv --homedir ~/.gnupg --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 \
     && add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/' \
+    && add-apt-repository ppa:mmomtchev/libnode \
     \
     && apt-get install -y $RUN_DEPS \
     \
@@ -51,7 +53,7 @@ RUN set -ex \
     && dpkg --force-depends -i libmozjs185-1.0_1.8.5-1.0.0+dfsg-7_amd64.deb \
     && dpkg --force-depends -i libmozjs185-dev_1.8.5-1.0.0+dfsg-7_amd64.deb \
     && apt  -y --fix-broken install \
-    && rm libmozjs185*.deb \
+    && rm /libmozjs185*.deb \
     \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $BUILD_DEPS \
     && rm -rf /var/lib/apt/lists/*
@@ -98,13 +100,19 @@ ARG BUILD_DEPS=" \
     librabbitmq-dev \
     libkrb5-dev \
     nlohmann-json-dev \
+    libnode-dev \
+    node-addon-api \
+    nodejs \
     libaprutil1-dev\
 "
 WORKDIR /zoo-project
-COPY . .
+COPY ./zoo-project /zoo-project/zoo-project
+COPY ./thirds /zoo-project/thirds
+COPY ./docker /zoo-project/docker
 
 RUN set -ex \
-    && apt-get update && apt-cache search libotb-dev && apt-get install -y --no-install-recommends $BUILD_DEPS \
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS \
     \
     && make -C ./thirds/cgic206 libcgic.a \
     \
@@ -118,10 +126,12 @@ RUN set -ex \
     #&& sed "s:-ljson-c:-Wl,-rpath,/usr/local/lib /usr/local/lib/libjson-c.so.5 :g" -i configure.ac \
     && autoconf \
     && find /usr -name otbWrapperApplication.h \
-    # Comment the line bellow if you don't want to use rabbitmq
-    && ./configure --with-rabbitmq=yes --with-python=/usr --with-pyvers=3.6 --with-js=/usr --with-mapserver=/usr --with-ms-version=7 --with-json=/usr --with-r=/usr --with-db-backend --prefix=/usr --with-otb=/usr/ --with-itk=/usr --with-otb-version=7.0 --with-itk-version=4.12 --with-saga=/usr --with-saga-version=7.2 --with-wx-config=/usr/bin/wx-config \
-    # Uncomment the line bellow if you don't want to use rabbitmq
-    #&& ./configure --with-python=/usr --with-pyvers=3.6 --with-js=/usr --with-mapserver=/usr --with-ms-version=7 --with-json=/usr --with-r=/usr --prefix=/usr --with-otb=/usr/ --with-itk=/usr --with-otb-version=6.6 --with-itk-version=4.12 --with-saga=/usr --with-saga-version=7.2 --with-wx-config=/usr/bin/wx-config \
+    && ./configure --with-rabbitmq=yes --with-python=/usr --with-pyvers=3.6 \
+              --with-nodejs=/usr --with-mapserver=/usr --with-ms-version=7  \
+              --with-json=/usr --with-r=/usr --with-db-backend --prefix=/usr \
+              --with-otb=/usr/ --with-itk=/usr --with-otb-version=7.0 \
+              --with-itk-version=4.12 --with-saga=/usr \
+              --with-saga-version=7.2 --with-wx-config=/usr/bin/wx-config \
     && make -j4 \
     && make install \
     \
@@ -132,6 +142,8 @@ RUN set -ex \
     && cp ../zoo-services/utils/open-api/cgi-env/* /usr/lib/cgi-bin/ \
     && cp ../zoo-services/hello-py/cgi-env/* /usr/lib/cgi-bin/ \
     && cp ../zoo-services/hello-js/cgi-env/* /usr/lib/cgi-bin/ \
+    && cp -r ../zoo-services/hello-nodejs/cgi-env/* /usr/lib/cgi-bin/ \
+    && cp ../zoo-services/linestringDem/* /usr/lib/cgi-bin/ \
     && cp ../zoo-services/hello-r/cgi-env/* /usr/lib/cgi-bin/ \
     && cp ../zoo-api/js/* /usr/lib/cgi-bin/ \
     && cp ../zoo-api/r/minimal.r /usr/lib/cgi-bin/ \
@@ -149,6 +161,11 @@ RUN set -ex \
          msgfmt  $i -o /usr/local/share/locale/$(echo $i| sed "s:./locale/po/::g;s:.po::g")/LC_MESSAGES/zoo-kernel.mo ; \
        done  \
     \
+    && npm -g install gdal-async --build-from-source --shared_gdal \
+    && npm -g install proj4 \
+    && npm -g install bower \
+    && npm -g install wps-js-52-north \
+    && ( cd /usr/lib/cgi-bin/hello-nodejs && npm install ) \
     #&& for lang in fr_FR ; do msgcat $(find ../zoo-services/ -name "${lang}.po") -o ${lang}.po ; done \
     && for lang in fr_FR ; do\
        find ../zoo-services/ -name "${lang}*" ; \
@@ -216,6 +233,8 @@ ARG BUILD_DEPS=" \
     libxml2-dev \
     libxslt1-dev \
     libcgal-dev \
+    libnode-dev \
+    node-addon-api \
 "
 WORKDIR /zoo-project
 COPY ./zoo-project/zoo-services ./zoo-project/zoo-services
@@ -233,6 +252,9 @@ COPY --from=builder1 /zoo-project/zoo-project/zoo-kernel/sqlapi.h /zoo-project/z
 COPY --from=builder1 /zoo-project/zoo-project/zoo-kernel/service.h /zoo-project/zoo-project/zoo-kernel/service.h
 COPY --from=builder1 /zoo-project/zoo-project/zoo-kernel/service_internal.h /zoo-project/zoo-project/zoo-kernel/service_internal.h
 COPY --from=builder1 /zoo-project/zoo-project/zoo-kernel/version.h /zoo-project/zoo-project/zoo-kernel/version.h
+
+# Node.js global node_modules
+COPY --from=builder1 /usr/lib/node_modules/ /usr/lib/node_modules/
 
 RUN set -ex \
     && apt-get update && apt-get install -y --no-install-recommends $BUILD_DEPS \
@@ -300,10 +322,11 @@ ARG RUN_DEPS=" \
     libapache2-mod-auth-openidc \
     python3-setuptools \
     #Uncomment the line below to add vi editor \
-    #vim \
+    vim \
     #Uncomment the lines below to add debuging \
     #valgrind \
     #gdb \
+    libnode93 \
 "
 ARG BUILD_DEPS=" \
     make \
@@ -311,13 +334,23 @@ ARG BUILD_DEPS=" \
     gcc \
     libgdal-dev \
     python3-dev \
+    libnode-dev \
+    node-addon-api \
 "
 # For Azure use, uncomment bellow
 #ARG SERVER_URL="http://zooprojectdemo.azurewebsites.net/"
 #ARG WS_SERVER_URL="ws://zooprojectdemo.azurewebsites.net"
+
 # For basic usage
-ARG SERVER_URL="http://localhost/"
-ARG WS_SERVER_URL="ws://localhost"
+# Define ARG variables with default values
+# ARG SERVER_URL_DEFAULT="http://34.27.140.206/"
+# ARG WS_SERVER_URL_DEFAULT="ws://34.27.140.206"
+# Use ENV to set the environment variables, allowing them to be overridden by existing environment variables
+# ENV SERVER_URL=${SERVER_URL:-$SERVER_URL_DEFAULT}
+# ENV WS_SERVER_URL=${WS_SERVER_URL:-$WS_SERVER_URL_DEFAULT}
+
+ARG SERVER_URL=http://localhost
+ARG WS_SERVER_URL=ws://localhost
 
 # For using another port than 80, uncomment below.
 # remember to also change the ports in docker-compose.yml
@@ -339,9 +372,15 @@ COPY --from=builder1 /zoo-project/zoo-project/zoo-services/cgal/examples/ /var/w
 COPY --from=builder1 /zoo-project/zoo-project/zoo-services/utils/open-api/templates/index.html /var/www/index.html
 COPY --from=builder1 /zoo-project/zoo-project/zoo-services/utils/open-api/static /var/www/html/static
 COPY --from=builder1 /zoo-project/zoo-project/zoo-services/echo-py/cgi-env/ /usr/lib/cgi-bin/
+COPY --from=builder1 /zoo-project/zoo-project/zoo-services/utils/open-api/dru/ /usr/lib/cgi-bin/
 COPY --from=builder1 /zoo-project/docker/.htaccess /var/www/html/.htaccess
 COPY --from=builder1 /zoo-project/docker/default.conf /000-default.conf
+COPY --from=builder1 /zoo-project/docker/nuxt-client/nuxtclient.conf /000-nuxtclient.conf
 COPY --from=builder1 /zoo-project/zoo-project/zoo-services/utils/open-api/server/publish.py /usr/lib/cgi-bin/publish.py
+COPY --from=builder1 /zoo-project/zoo-project/zoo-services/utils/security/jwt/cgi-env/security_service.py /usr/lib/cgi-bin/
+
+# Node.js global node_modules
+COPY --from=builder1 /usr/lib/node_modules/ /usr/lib/node_modules/
 
 # From optional zoo modules
 COPY --from=builder2 /usr/lib/cgi-bin/ /usr/lib/cgi-bin/
@@ -364,6 +403,7 @@ RUN set -ex \
     && sed "s=http://localhost=$SERVER_URL=g" -i /var/www/html/.htaccess \
     && sed "s=http://localhost=$SERVER_URL=g;s=publisherUr\=$SERVER_URL=publisherUrl\=http://localhost=g;s=ws://localhost=$WS_SERVER_URL=g" -i /usr/lib/cgi-bin/oas.cfg \
     && sed "s=http://localhost=$SERVER_URL=g" -i /usr/lib/cgi-bin/main.cfg \
+    && sed "s=http://localhost=$SERVER_URL=g" -i /usr/lib/cgi-bin/oas.cfg \
     && for i in $(find /usr/share/locale/ -name "zoo-kernel.mo"); do \
          j=$(echo $i | sed "s:/usr/share/locale/::g;s:/LC_MESSAGES/zoo-kernel.mo::g"); \
          locale-gen $j ; \
@@ -376,6 +416,9 @@ RUN set -ex \
     && ln -s /testing /var/www/html/cptesting \
     && rm -rf /var/lib/apt/lists/* \
     && cp /000-default.conf /etc/apache2/sites-available/ \
+    && cp /000-nuxtclient.conf /etc/apache2/sites-available/ \
+    && a2ensite 000-default 000-nuxtclient \
+    && echo "Listen 8000" >> /etc/apache2/ports.conf \
     && export CPLUS_INCLUDE_PATH=/usr/include/gdal \
     && export C_INCLUDE_PATH=/usr/include/gdal \
     && pip3 install --upgrade pip setuptools wheel \
@@ -390,7 +433,7 @@ RUN set -ex \
     # && sed "s:Listen 80:Listen $PORT:g" -i /etc/apache2/ports.conf \
     \
     && mkdir -p /tmp/zTmp/statusInfos \
-    && chown www-data:www-data -R /tmp/zTmp /usr/com/zoo-project /usr/lib/cgi-bin \
+    && chown www-data:www-data -R /tmp/zTmp /usr/com/zoo-project \
     && chmod 755 /startUp.sh \
     \
     # remove invalid zcfgs \
@@ -398,6 +441,8 @@ RUN set -ex \
     # Update SAGA zcfg
     && sed "s:AllowedValues =    <Default>:AllowedValues =\n    <Default>:g" -i /usr/lib/cgi-bin/SAGA/*/*zcfg \
     && sed "s:Title = $:Title = No title found:g" -i /usr/lib/cgi-bin/SAGA/*/*.zcfg \
+    # Update Security Service \
+    && sed "s#serviceType = C#serviceType = Python#g;s#serviceProvider = security_service.zo#serviceProvider = security_service#g" -i /usr/lib/cgi-bin/securityIn.zcfg \
     # Enable apache modules
     \
     && a2enmod cgi rewrite headers auth_openidc proxy proxy_http \
@@ -408,9 +453,11 @@ RUN set -ex \
 
 
 # service namespaces parent folder
-RUN mkdir -p /opt/zooservices_namespaces && chmod -R 700 /opt/zooservices_namespaces && chown -R www-data /opt/zooservices_namespaces && chmod 755 -R /usr/lib/cgi-bin
+RUN mkdir -p /opt/zooservices_namespaces && chmod -R 700 /opt/zooservices_namespaces && chown -R www-data /opt/zooservices_namespaces
+
 
 # For using another port than 80, change the value below.
 # remember to also change the ports in docker-compose.yml
 EXPOSE 80
+EXPOSE 8000
 CMD /usr/sbin/apache2ctl -D FOREGROUND

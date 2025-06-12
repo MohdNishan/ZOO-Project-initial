@@ -1,0 +1,21 @@
+# Copy this file to env_nuxt and fill in the values for your environment
+
+#NUXT_OIDC_ISSUER = http://testbed19.geolabs.fr:8099/realms/zooproject
+#NUXT_OIDC_ISSUER = http://192.168.1.3:8099/realms/zooproject
+#NUXT_OIDC_ISSUER = https://keycloak:8091/realms/zooproject
+#NUXT_OIDC_ISSUER = https://geolabs.fr/keycloak/realms/zooproject
+NUXT_OIDC_ISSUER = https://auth.geolabs.fr/realms/zooproject
+NUXT_OIDC_CLIENT_ID = webapp
+#NUXT_OIDC_CLIENT_SECRET = 50uZ6cJfSapnjp6rSFubRZjUL49Kksp0
+NUXT_OIDC_CLIENT_SECRET = bCOYEx0S73V0OmefQwWMvsy2AvpixuRm
+NUXT_ZOO_BASEURL = http://192.168.1.3
+NUXT_BASE_URL = http://192.168.1.3:3000
+AUTH_ORIGIN = http://192.168.1.3:3000
+NUXT_AUTH_SECRET = client_secret_basic
+
+#NODE_ENV = production
+# Uncomment NODE_ENV for production
+NEXTAUTH_URL = http://192.168.1.3:3000
+ZOO_OGCAPI_REQUIRES_BEARER_TOKEN = true
+
+NODE_TLS_REJECT_UNAUTHORIZED=0
