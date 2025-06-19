@@ -100,7 +100,7 @@ services:
     depends_on:
       - rabbitmq
   pgbouncer:
-    #platform: linux/amd64
+    platform: linux/amd64
     image: edoburu/pgbouncer:1.12.0
     networks:
       front-tier-1:
@@ -127,7 +127,8 @@ services:
       - ./docker/definitions.json:/etc/rabbitmq/definitions.json
 
   nuxtclient:
-    #image: zooproject/nuxt-client-test:latest
+    platform: linux/amd64
+    image: zooproject/nuxt-client-test:latest
     build:
       context: .
       dockerfile: docker/nuxt-client/Dockerfile
