@@ -1,4 +1,7 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
+
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+ENV PIP_ROOT_USER_ACTION=ignore
 
 # to build:
 # docker build --rm -t ades:latest .
@@ -6,7 +9,7 @@ FROM ubuntu:22.04
 # docker run --rm -ti -p 80:80  ades:latest
 
 # procadesdev:latest
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 ########################################
 ### DEV TOOLS
@@ -14,18 +17,23 @@ RUN apt-get update -qqy --no-install-recommends \
     # Required for security fixes
     && apt-get upgrade -y \
     # Various cli tools
-    && apt-get install -qqy --no-install-recommends wget mlocate tree \
+    && apt-get install -qqy --no-install-recommends wget plocate tree \
     # C++ and CMAKE
     gcc cmake build-essential \
-    #Install Docker CE CLI
+    # Install Docker CE CLI
     curl apt-transport-https ca-certificates gnupg2 lsb-release \
-    && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
-    && echo "deb [arch=amd64] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
-    && apt-get update -qqy --no-install-recommends \
-    && apt-get install -qqy --no-install-recommends docker-ce-cli && \
-    apt-get clean -qqy
+    && mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+        gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
+    && chmod a+r /etc/apt/keyrings/docker.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+    https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" \
+    > /etc/apt/sources.list.d/docker.list \
+    && apt-get update -qqy \
+    && apt-get install -qqy --no-install-recommends docker-ce-cli \
+    && apt-get clean -qqy
 
-ARG PY_VER=3.10
+ARG PY_VER=3.12
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
     install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
@@ -76,7 +84,7 @@ ARG BUILD_DEPS="libfcgi-dev\
 RUN apt-get update -qqy  --no-install-recommends  && \
     apt-get install -qqy --no-install-recommends  software-properties-common && \
     add-apt-repository ppa:ubuntugis/ubuntugis-unstable && \
-    add-apt-repository ppa:ubuntugis/ppa && \
+    # add-apt-repository ppa:ubuntugis/ppa && \
     apt-get update -qqy  --no-install-recommends && \
     apt-get install -qqy  --no-install-recommends software-properties-common\
         ${RUN_DEPS}\
@@ -179,16 +187,16 @@ ARG DEPS_TO_REMOVE="\
     libcrypt-dev\
     icu-devtools\
     libc-dev-bin\
-    libgcc-11-dev\
+    # libgcc-11-dev\
     libglib2.0-dev-bin\
-    libnsl-dev\
-    libtirpc-dev\
+    # libnsl-dev\
+    # libtirpc-dev\
     linux-libc-dev\
-    python3-zipp\
+    # python3-zipp\
     python3-pip\
     dpkg-dev\
     unixodbc-dev\
-    python3.10-dev\
+    python3.12-dev\
     libzstd-dev\
     libxerces-c-dev\
     liburiparser-dev\
@@ -196,8 +204,8 @@ ARG DEPS_TO_REMOVE="\
     libsuperlu-dev\
     libsctp-dev\
     librttopo-dev\
-    libpython3-dev\
-    libpython3.10-dev\
+    # libpython3-dev\
+    # libpython3.10-dev\
     libqhull-dev\
     libpoppler-dev\
     libpoppler-private-dev\
@@ -205,7 +213,7 @@ ARG DEPS_TO_REMOVE="\
     libpng-dev\
     libpcre2-dev\
     libnetcdf-dev\
-    libogdi-dev\
+    # libogdi-dev\
     libopenjp2-7-dev\
     libminizip-dev\
     liblapack-dev\
@@ -233,7 +241,7 @@ ARG DEPS_TO_REMOVE="\
     libapr1-dev\
     libaec-dev\
     g++\
-    g++-11\
+    # g++-11\
     zlib1g-dev\
     libjpeg-turbo8-dev \
     libjpeg8-dev\
@@ -248,7 +256,7 @@ ARG DEPS_TO_REMOVE="\
     libxau-dev \
     libx265-dev \
     libx11-dev \
-    libstdc++-11-dev \
+    # libstdc++-11-dev \
     libsqlite3-dev \
     libsm-dev \
     libsepol-dev \
@@ -276,7 +284,7 @@ COPY docker/dru/requirements.txt /tmp/
 COPY zoo-project/zoo-kernel/locale /tmp/locale
 
 RUN date && mkdir /tmp/cookiecutter-templates && \
-    pip install --upgrade pip && \
+    # pip install --upgrade pip && \
     pip install hatch && \
     # Using the latest version of pycalrissian with the fix for the RBAC
     cd /tmp && \
@@ -294,7 +302,7 @@ RUN date && mkdir /tmp/cookiecutter-templates && \
     pip uninstall -y chardet || true && \
     pip install --force-reinstall --no-binary charset-normalizer charset-normalizer==3.4.9 && \
     # cd .. && \
-    rm -r pycalrissian /tmp/requirements.txt && \
+    rm -rf /tmp/pycalrissian /tmp/requirements.txt && \
     chmod -R 777 /tmp/cookiecutter-templates && \
     rm /var/log/apache2/error.log && \
     ln -s /dev/stdout /var/log/apache2/error.log && \
